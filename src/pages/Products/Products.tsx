@@ -10,6 +10,7 @@ type Product = {
   description: string;
   price: number;
   thumbnail: string;
+  rating: number;
 };
 
 const Products = () => {
@@ -34,6 +35,7 @@ const Products = () => {
               </Link>
               <h3>{product.name}</h3>
               <p>{TruncateText(product.description, 70)}</p>
+              <p>{product.rating}</p>
               <span className="price">${product.price.toFixed(2)}</span>
             </div>
           ))}
