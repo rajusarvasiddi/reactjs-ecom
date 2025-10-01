@@ -1,0 +1,51 @@
+.pagination-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.pagination button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+  min-width: 2.5rem;
+}
+
+.pagination button.active {
+  background-color: #000000;
+  color: white;
+}
+
+.pagination button.nav-button:disabled {
+  background-color: #ddd;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.pagination .ellipsis {
+  padding: 0.4rem 0.8rem;
+  color: #999;
+}
+
+.total-count {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: #666;
+  text-align: center;
+}
+
+.nav-button {
+  font-weight: bold;
+  background-color: #eee;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}
+
+.nav-button:disabled {
+  background-color: #ddd;
+  color: #999;
+  cursor: not-allowed;
+}

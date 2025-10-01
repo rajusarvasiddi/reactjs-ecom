@@ -23,10 +23,9 @@ const ProductCard = ({ product }: { product: Product }) => {
       <h3>{product.name}</h3>
       <p>{TruncateText(product.description, 70)}</p>
       <p className="price">${product.price.toFixed(2)}</p>
-      <div className="rating">
-        Rating {product.rating}
-        {/* You can plug in renderStars(product.rating) here */}
-      </div>
+      {/* <div className="rating">
+          Rating {product.rating}
+        </div> */}
     </div>
   );
 };
