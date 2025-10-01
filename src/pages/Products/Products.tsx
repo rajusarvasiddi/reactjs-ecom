@@ -18,7 +18,7 @@ const Products = () => {
 
   useEffect(() => {
     axios
-      .get("https://dummyjson.com/products?limit=10")
+      .get("https://dummyjson.com/products?limit=100")
       .then((res) => setProducts(res.data.products))
       .catch((error) => {});
   }, []);
