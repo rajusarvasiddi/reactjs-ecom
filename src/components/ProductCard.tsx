@@ -14,7 +14,10 @@ type Product = {
 const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div className="product-card">
-      <Link to={`/products/${product.id}`}>
+      <Link
+        to={`/products/${product.id}`}
+        aria-label={`View details of ${product.name}`}
+      >
         <img src={product.thumbnail} alt={product.name} />
       </Link>
       <h3>{product.name}</h3>
