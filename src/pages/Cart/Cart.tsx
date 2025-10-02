@@ -24,7 +24,7 @@ const Cart = () => {
             <div key={item.id} className="cart-item">
               <img src={item.thumbnail} alt={item.name} />
               <div>
-                <h3>{item.name}</h3>
+                <h3>{item.title}</h3>
                 <p>₹{item.price}</p>
                 <p>⭐ {item.rating}</p>
                 <p>Quantity: {item.quantity}</p>

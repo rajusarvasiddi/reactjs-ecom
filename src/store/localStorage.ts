@@ -1,7 +1,7 @@
 // src/store/localStorage.ts
 type CartItem = {
   id: number;
-  name: string;
+  title: string;
   price: number;
   thumbnail: string;
   rating: number;

@@ -7,7 +7,7 @@ import "./Products.css";
 
 type Product = {
   id: number;
-  name: string;
+  title: string;
   description: string;
   price: number;
   thumbnail: string;
@@ -16,7 +16,7 @@ type Product = {
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [maxLoadedPage, setMaxLoadedPage] = useState(1);
+  // const [maxLoadedPage, setMaxLoadedPage] = useState(1);
   const [batchIndex, setBatchIndex] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
