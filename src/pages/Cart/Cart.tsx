@@ -1,3 +1,4 @@
+// src/pages/Cart.tsx
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import "./Cart.css";
@@ -5,9 +6,14 @@ import "./Cart.css";
 const Cart = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
 
+  const totalCount = cartItems.reduce(
+    (sum: any, item: any) => sum + item.quantity,
+    0
+  );
+
   return (
     <div className="cart-page">
-      <h2>Your Cart ({cartItems.length} items)</h2>
+      <h2>Your Cart ({totalCount} items)</h2>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -19,6 +25,7 @@ const Cart = () => {
                 <h3>{item.name}</h3>
                 <p>₹{item.price}</p>
                 <p>⭐ {item.rating}</p>
+                <p>Quantity: {item.quantity}</p>
               </div>
             </div>
           ))}

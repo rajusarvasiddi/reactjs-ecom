@@ -1,11 +1,15 @@
+// src/store/localStorage.ts
+type CartItem = {
+  id: number;
+  name: string;
+  price: number;
+  thumbnail: string;
+  rating: number;
+  quantity: number;
+};
+
 type CartState = {
-  items: {
-    id: number;
-    name: string;
-    price: number;
-    thumbnail: string;
-    rating: number;
-  }[];
+  items: CartItem[];
 };
 
 type PersistedState = {
@@ -15,7 +19,7 @@ type PersistedState = {
 export const loadState = (): Partial<PersistedState> | undefined => {
   try {
     const serializedState = localStorage.getItem("reduxState");
-    if (serializedState === null) return undefined;
+    if (!serializedState) return undefined;
     return JSON.parse(serializedState) as Partial<PersistedState>;
   } catch {
     return undefined;
