@@ -12,8 +12,8 @@ const Header = () => {
         <nav>
           <Link to="/">Home</Link>&nbsp;
           <Link to="/products">Products</Link> &nbsp;
+          <Link to="/cart">Cart ({cartCount})</Link>
           <Link to="/about">About</Link> &nbsp;
-          <Link to="/login">Login</Link> &nbsp; (Cart Products: {cartCount})
         </nav>
       </header>
     </>
