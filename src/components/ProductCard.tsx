@@ -11,7 +11,6 @@ type Props = {
 const ProductCard = ({ product }: Props) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
-
   const cartItem = cartItems.find((item) => item.id === product.id);
   const quantity = cartItem?.quantity ?? 0;
 

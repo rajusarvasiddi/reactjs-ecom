@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./ProductDetails.css";
 import renderStars from "../../utils/RenderStars";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { addToCart, removeFromCart } from "../../store/cartSlice";
 
 type Product = {
   id: number;
@@ -17,9 +20,14 @@ type Product = {
 };
 
 const ProductDetails = () => {
+  const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const cartItem = cartItems.find((item) => item.id === product?.id);
+  const quantity = cartItem?.quantity ?? 0;
 
   useEffect(() => {
     if (id) {
@@ -62,6 +70,22 @@ const ProductDetails = () => {
             {product.images.map((img, index) => (
               <img key={index} src={img} alt={`Gallery ${index}`} />
             ))}
+          </div>
+          <div className="product-details-actions">
+            <button
+              className="remove-btn"
+              onClick={() => dispatch(removeFromCart(product.id))}
+              disabled={quantity === 0}
+            >
+              –
+            </button>
+            <span>{quantity}</span>
+            <button
+              className="add-to-cart-btn"
+              onClick={() => dispatch(addToCart(product))}
+            >
+              +
+            </button>
           </div>
         </div>
       }
