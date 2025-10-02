@@ -49,8 +49,12 @@ const cartSlice = createSlice({
     replaceCart: (state, action: PayloadAction<CartState>) => {
       return action.payload;
     },
+    clearCart: (state) => {
+      state.items = [];
+    },
   },
 });
 
-export const { addToCart, removeFromCart, replaceCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, replaceCart, clearCart } =
+  cartSlice.actions;
 export default cartSlice.reducer;

@@ -1,10 +1,12 @@
 // src/pages/Cart.tsx
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/store";
+import { clearCart } from "../../store/cartSlice";
 import "./Cart.css";
 
 const Cart = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
+  const dispatch = useDispatch();
 
   const totalCount = cartItems.reduce(
     (sum: any, item: any) => sum + item.quantity,
@@ -29,6 +31,14 @@ const Cart = () => {
               </div>
             </div>
           ))}
+          <div>
+            <button
+              className="clear-cart-btn"
+              onClick={() => dispatch(clearCart())}
+            >
+              Clear Cart
+            </button>
+          </div>
         </div>
       )}
     </div>
