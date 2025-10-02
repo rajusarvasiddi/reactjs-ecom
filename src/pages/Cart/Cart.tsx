@@ -1,7 +1,7 @@
 // src/pages/Cart.tsx
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/store";
-import { clearCart, updateQuantity } from "../../store/cartSlice";
+import { clearCart, removeItem, updateQuantity } from "../../store/cartSlice";
 import "./Cart.css";
 import { Link } from "react-router-dom";
 
@@ -38,6 +38,10 @@ const Cart = () => {
                 <p>₹{item.price}</p>
                 <p>⭐ {item.rating}</p>
                 <p>Quantity: {item.quantity}</p>
+                <p>
+                  Total{" "}
+                  <strong>₹{(item.quantity * item.price).toFixed(2)}</strong>
+                </p>
               </div>
               <div className="quantity-controls">
                 <button
@@ -64,6 +68,14 @@ const Cart = () => {
                   }
                 >
                   +
+                </button>
+              </div>
+              <div>
+                <button
+                  className="remove-item-btn"
+                  onClick={() => dispatch(removeItem(item.id))}
+                >
+                  Remove Item
                 </button>
               </div>
             </div>

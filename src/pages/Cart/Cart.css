@@ -62,3 +62,18 @@
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.remove-item-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.remove-item-btn:hover {
+  background-color: #c82333;
+}
