@@ -2,6 +2,7 @@
 import { useDispatch } from "react-redux";
 import { addToCart, Product } from "../store/cartSlice";
 import "./ProductCard.css";
+import { Link } from "react-router-dom";
 
 type Props = {
   product: Product;
@@ -12,7 +13,12 @@ const ProductCard = ({ product }: Props) => {
 
   return (
     <div className="product-card">
-      <img src={product.thumbnail} alt={product.name} />
+      <Link
+        to={`/products/${product.id}`}
+        aria-label={`View details of ${product.name}`}
+      >
+        <img src={product.thumbnail} alt={product.name} />
+      </Link>
       <h3>{product.name}</h3>
       <p>₹{product.price}</p>
       <p>⭐ {product.rating}</p>
