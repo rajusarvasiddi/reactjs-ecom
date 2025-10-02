@@ -7,6 +7,7 @@ export type Product = {
   price: number;
   thumbnail: string;
   rating: number;
+  quantity?: number;
 };
 
 export type CartItem = Product & {
@@ -26,7 +27,9 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<Product>) => {
-      const existing = state.items.find((item) => item.id === action.payload.id);
+      const existing = state.items.find(
+        (item) => item.id === action.payload.id
+      );
       if (existing) {
         existing.quantity += 1;
       } else {
@@ -34,10 +37,20 @@ const cartSlice = createSlice({
       }
     },
     removeFromCart: (state, action: PayloadAction<number>) => {
-      state.items = state.items.filter((item) => item.id !== action.payload);
+      const item = state.items.find((i) => i.id === action.payload);
+      if (item) {
+        if (item.quantity > 1) {
+          item.quantity -= 1;
+        } else {
+          state.items = state.items.filter((i) => i.id !== action.payload);
+        }
+      }
+    },
+    replaceCart: (state, action: PayloadAction<CartState>) => {
+      return action.payload;
     },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, replaceCart } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -100,3 +100,35 @@
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.remove-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+  background-color: #c82333;
+}
+
+.remove-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.inCart {
+  border-radius: 4px;
+  cursor: default;
+  display: inline-block;
+  margin: 0 0.1em;
+  padding: 0.4em 0.1em;
+  text-align: center;
+  width: 50px;
+}
