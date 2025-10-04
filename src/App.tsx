@@ -14,6 +14,7 @@ const Products = lazy(() => import("./pages/Products/Products"));
 const ProductDetails = lazy(
   () => import("./pages/ProductDetails/ProductDetails")
 );
+const Contact = lazy(() => import("./pages/Contact/Contact"));
 const Cart = lazy(() => import("./pages/Cart/Cart"));
 
 // Mock auth check
@@ -27,6 +28,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route element={<PublicLayout />}>
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
         </Route>
 
         {/* Protected routes */}

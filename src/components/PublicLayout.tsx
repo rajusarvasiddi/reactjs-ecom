@@ -18,6 +18,7 @@ const NavLinkBehavior = React.forwardRef<HTMLAnchorElement, RouterLinkProps>(
 const PublicLayout = () => {
   const navLinks = [
     { label: "About", path: "about" },
+    { label: "Contact", path: "contact" },
     { label: "Login", path: "login" },
   ];
 
