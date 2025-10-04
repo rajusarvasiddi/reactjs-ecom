@@ -23,13 +23,15 @@ const GarageCreate = () => {
 
   return (
     <>
-      <h1>Create Garage</h1>
       <Box
         component="form"
         onSubmit={handleSubmit}
         sx={{ maxWidth: 400, mt: 2, p: 2 }}
         gap={1}
       >
+        <Typography variant="h4" fontWeight={"bold"} gutterBottom>
+          Create Garage
+        </Typography>
         <TextField fullWidth label="Garage Name" margin="dense" size="small" />
         <TextField fullWidth label="Email" margin="dense" size="small" />
         <TextField fullWidth label="Phone" margin="dense" size="small" />

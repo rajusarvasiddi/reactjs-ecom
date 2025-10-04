@@ -5,33 +5,52 @@ const theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#111111", // black text/buttons
+      main: "#111111",
       contrastText: "#ffffff",
     },
     background: {
-      default: "#ffffff", // page background
-      paper: "#ffffff", // AppBar & Paper background
+      default: "#ffffff",
+      paper: "#ffffff",
     },
     text: {
       primary: "#111111",
       secondary: "#444444",
     },
+    custom: {
+      lightGray: "#c3b9b9",
+    },
   },
   typography: {
     fontFamily: "Roboto, Arial, sans-serif",
     h6: {
-      fontSize: "1.25rem", // Header title font-size
+      fontSize: "1.25rem",
       fontWeight: 600,
     },
     body1: {
-      fontSize: "0.9rem", // regular text
+      fontSize: "0.85rem",
     },
     button: {
-      fontSize: "0.95rem", // buttons font-size
-      textTransform: "none", // keep normal case
+      fontSize: "0.95rem",
+      textTransform: "none",
     },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: "#ffffff",
+          color: "#111111",
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#ffffff",
+          boxShadow: "none",
+        },
+      },
+    },
     MuiToolbar: {
       styleOverrides: {
         root: {
@@ -39,56 +58,106 @@ const theme = createTheme({
         },
       },
     },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          borderRight: "none",
+          backgroundColor: "#ffffff",
+          paddingTop: "1rem",
+        },
+      },
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          paddingTop: 0,
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          paddingTop: 0,
+          paddingBottom: 0,
+        },
+      },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: "5px",
+          margin: "1px 6px",
+          padding: "4px 12px",
+          minHeight: "32px",
+          transition: "background-color 0.2s ease-in-out",
+          color: "#111111",
+          "&:hover": {
+            backgroundColor: "#f5f5f5",
+          },
+          "&.Mui-selected": {
+            backgroundColor: "#f0f0f0",
+            color: "#111111",
+            "& .MuiListItemText-root": {
+              fontWeight: 600,
+            },
+          },
+        },
+      },
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          fontSize: "0.875rem",
+          color: "#111111",
+        },
+      },
+    },
     MuiLink: {
       defaultProps: {
-        component: RouterLink, // automatically use react-router-dom Link
+        component: RouterLink,
       },
       styleOverrides: {
         root: {
-          color: "#111",
+          color: "#111111",
           textDecoration: "none",
           padding: "6px 12px",
           borderRadius: "5px",
           fontWeight: 500,
           transition: "background-color 0.2s",
-          "&:hover": { backgroundColor: "#f5f5f5" },
-          "&.active": {
-            backgroundColor: "#111",
-            color: "#fff",
-            "&:hover": { backgroundColor: "#000" },
+          "&:hover": {
+            backgroundColor: "#f5f5f5",
           },
-        },
-      },
-    },
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          backgroundColor: "#ffffff", // make all AppBars white by default
-          boxShadow: "none",
+          "&.active": {
+            backgroundColor: "#111111",
+            color: "#ffffff",
+            "&:hover": {
+              backgroundColor: "#000000",
+            },
+          },
         },
       },
     },
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: "none", // keep normal case
+          textTransform: "none",
         },
         containedPrimary: {
-          backgroundColor: "#111111", // black background
-          color: "#ffffff", // white text
+          backgroundColor: "#111111",
+          color: "#ffffff",
           "&:hover": {
             backgroundColor: "#000000",
           },
         },
         text: {
-          color: "#111111", // black text for text buttons (nav links)
+          color: "#111111",
         },
       },
     },
     MuiTypography: {
       styleOverrides: {
         root: {
-          color: "#111111", // default black text
+          color: "#111111",
         },
       },
     },
