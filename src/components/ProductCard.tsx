@@ -16,7 +16,8 @@ const ProductCard = ({ product }: Props) => {
 
   return (
     <div className="product-card">
-      <Link to={`/products/${product.id}`} className="product-link">
+      {/* <Link to={`app/products/${product.id}`} className="product-link"> */}
+      <Link to={`/app/products/${product.id}`} className="product-link">
         <img src={product.thumbnail} alt={product.title} />
       </Link>
       <h3>{product.title}</h3>

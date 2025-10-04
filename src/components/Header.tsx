@@ -24,11 +24,8 @@ const Header = () => {
   const location = window.location.pathname;
 
   const navLinks = [
-    { label: "Home", path: "/" },
-    { label: "Garage Create", path: "/garage-create" },
-    { label: "Products", path: "/products" },
-    { label: "About", path: "/about" },
-    { label: "Login", path: "/login" },
+    { label: "Garage Create", path: "/app/garage-create" },
+    { label: "Products", path: "/app/products" },
   ];
 
   return (
