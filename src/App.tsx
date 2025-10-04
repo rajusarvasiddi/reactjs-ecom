@@ -1,7 +1,7 @@
 // src/App.tsx
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import MainLayout from "./components/PrivateLayout";
+import PrivateLayout from "./components/PrivateLayout";
 import PrivateRoute from "./PrivateRoute";
 import PublicLayout from "./components/PublicLayout";
 
@@ -34,7 +34,7 @@ function App() {
           path="/app/*"
           element={
             <PrivateRoute isAuthenticated={isAuthenticated}>
-              <MainLayout />
+              <PrivateLayout />
             </PrivateRoute>
           }
         >
