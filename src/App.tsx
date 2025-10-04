@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import GarageCreate from "./pages/Garage/Create/CreateGarage";
 
 const Login = lazy(() => import("./pages/Login/Login"));
 const Home = lazy(() => import("./pages/Home"));
@@ -24,6 +25,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/garage-create" element={<GarageCreate />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
