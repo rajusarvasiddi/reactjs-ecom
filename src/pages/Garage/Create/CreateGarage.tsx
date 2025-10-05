@@ -1,62 +1,17 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
-import axios from "axios";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
-import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import {
-  COUNTRIES_LIST,
   COUNTRY_PINCODE,
   VALIDATION_MESSAGES,
   VALIDATION_REGEX,
 } from "../../../constants";
 import GarageAddress from "./GarageAddress";
 import { useCountries } from "./hooks/useCountries";
-
-interface Country {
-  code: string;
-  name: string;
-}
-
-interface FormValues {
-  garageName: string;
-  email: string;
-  phone: string;
-  whatsapp: string;
-  owner: string;
-  description: string;
-  address: {
-    flatPlot: string;
-    buildingName: string;
-    street: string;
-    city: string;
-    state: string;
-    country: string;
-    pinCode: string;
-  };
-}
+import { FormValues } from "./types";
 
 const GarageCreate = () => {
-  // const [countries, setCountries] = useState<Country[]>([]);
-
   const { countries, loading, error } = useCountries();
-
-  // useEffect(() => {
-  //   axios
-  //     .get(COUNTRIES_LIST)
-  //     .then((res) => {
-  //       setCountries(res.data);
-  //     })
-  //     .catch((err) => console.log("Unable to fetch data from API :: ", err));
-  // }, []);
 
   const initialValues: FormValues = {
     garageName: "",

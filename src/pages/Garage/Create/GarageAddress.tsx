@@ -22,11 +22,6 @@ const GarageAddress = ({ countries }: GarageAddressProps) => {
   const { values, errors, touched, handleChange } =
     useFormikContext<FormValues>();
 
-  const states = [
-    { code: "AP", name: "Andhra Pradesh" },
-    { code: "TG", name: "Telangana" },
-  ];
-
   return (
     <>
       <Box
@@ -78,6 +73,32 @@ const GarageAddress = ({ countries }: GarageAddressProps) => {
         />
 
         <FormControl fullWidth size="small" margin="dense">
+          <InputLabel id="country-select-label">Country</InputLabel>
+          <Select
+            labelId="country-select-label"
+            name="address.country"
+            value={values.address.country}
+            onChange={handleChange}
+            displayEmpty
+            label="Country"
+            renderValue={(selected) => {
+              if (!selected) return "-Select-";
+              const country = countries.find((c) => c.code === selected);
+              return country ? country.name : "";
+            }}
+          >
+            <MenuItem value="">
+              <em>-Select-</em>
+            </MenuItem>
+            {countries.map((c) => (
+              <MenuItem key={c.code} value={c.code}>
+                {c.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth size="small" margin="dense">
           <InputLabel id="state-select-label">State</InputLabel>
           <Select
             labelId="state-select-label"
@@ -101,32 +122,6 @@ const GarageAddress = ({ countries }: GarageAddressProps) => {
             </MenuItem>
             <MenuItem value="AP">Andhra Pradesh</MenuItem>
             <MenuItem value="TG">Telangana</MenuItem>
-          </Select>
-        </FormControl>
-
-        <FormControl fullWidth size="small" margin="dense">
-          <InputLabel id="country-select-label">Country</InputLabel>
-          <Select
-            labelId="country-select-label"
-            name="address.country"
-            value={values.address.country}
-            onChange={handleChange}
-            displayEmpty
-            label="Country" // important for floating label
-            renderValue={(selected) => {
-              if (!selected) return "-Select-"; // placeholder text
-              const country = countries.find((c) => c.code === selected);
-              return country ? country.name : "";
-            }}
-          >
-            <MenuItem value="">
-              <em>-Select-</em>
-            </MenuItem>
-            {countries.map((c) => (
-              <MenuItem key={c.code} value={c.code}>
-                {c.name}
-              </MenuItem>
-            ))}
           </Select>
         </FormControl>
 
