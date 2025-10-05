@@ -24,11 +24,6 @@ interface Country {
   name: string;
 }
 
-// interface State {
-//   code: string;
-//   name: string;
-// }
-
 interface FormValues {
   garageName: string;
   email: string;
@@ -38,6 +33,7 @@ interface FormValues {
   description: string;
   address: {
     flatPlot: string;
+    buildingName: string;
     street: string;
     city: string;
     state: string;
@@ -55,7 +51,6 @@ const GarageCreate = () => {
     axios
       .get(COUNTRIES_LIST)
       .then((res) => {
-        console.log("res", res);
         setCountries(res.data);
       })
       .catch((err) => console.log("Unable to fetch data from API :: ", err));
@@ -70,6 +65,7 @@ const GarageCreate = () => {
     description: "",
     address: {
       flatPlot: "",
+      buildingName: "",
       street: "",
       city: "",
       state: "",
@@ -155,14 +151,7 @@ const GarageCreate = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleReset,
-          setFieldValue,
-        }) => (
+        {({ values, errors, touched, handleChange, handleReset }) => (
           <Form autoComplete="off" noValidate>
             <Box
               sx={{ maxWidth: 400, display: "flex", flexDirection: "column" }}
@@ -249,9 +238,19 @@ const GarageCreate = () => {
 
                 <TextField
                   fullWidth
-                  label="Flat/Plot"
+                  label="Flat/Plot #"
                   name="address.flatPlot"
                   value={values.address.flatPlot}
+                  onChange={handleChange}
+                  margin="dense"
+                  size="small"
+                />
+
+                <TextField
+                  fullWidth
+                  label="Building Name"
+                  name="address.buildingName"
+                  value={values.address.buildingName}
                   onChange={handleChange}
                   margin="dense"
                   size="small"
