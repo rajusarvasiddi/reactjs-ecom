@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../../components/ProductCard";
 import Pagination from "../../components/Pagination";
-import { TOTAL_NO_OF_PAGES } from "../../constants";
+import { PRODUCTS_LIST, TOTAL_NO_OF_PAGES } from "../../constants";
 import "./Products.css";
 
 type Product = {
@@ -16,7 +16,6 @@ type Product = {
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  // const [maxLoadedPage, setMaxLoadedPage] = useState(1);
   const [batchIndex, setBatchIndex] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +25,7 @@ const Products = () => {
     const fetchProducts = async () => {
       const skip = batchIndex * 100;
       try {
-        const res = await axios.get("https://dummyjson.com/products", {
+        const res = await axios.get(PRODUCTS_LIST, {
           params: { limit: 100, skip },
         });
         setProducts((prev) => [...prev, ...res.data.products]);

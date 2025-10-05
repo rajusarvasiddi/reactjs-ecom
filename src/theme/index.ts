@@ -1,3 +1,5 @@
+// Custom styling material UI - look like shadCN
+
 import { createTheme } from "@mui/material/styles";
 import { Link as RouterLink } from "react-router-dom";
 
@@ -45,6 +47,22 @@ const theme = createTheme({
         body: {
           backgroundColor: "#ffffff",
           color: "#111111",
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: "#c9c7c7",
+          "&.Mui-focused": {
+            color: "#000000",
+            "& .MuiInputLabel-asterisk": {
+              color: "#ff1744",
+            },
+          },
+        },
+        asterisk: {
+          color: "#c9c7c7",
         },
       },
     },
@@ -152,6 +170,15 @@ const theme = createTheme({
             backgroundColor: "#000000",
           },
         },
+        outlinedSecondary: {
+          border: "1px solid #e0e0e0",
+          backgroundColor: "#ffffff",
+          color: "#111111",
+          "&:hover": {
+            backgroundColor: "#f9f9f9",
+            borderColor: "#d0d0d0",
+          },
+        },
         text: {
           color: "#111111",
         },
@@ -161,16 +188,6 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           color: "#111111",
-        },
-      },
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root: {
-          color: "#c9c7c7",
-          "&.Mui-focused": {
-            color: "#000000",
-          },
         },
       },
     },

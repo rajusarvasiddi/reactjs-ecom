@@ -27,7 +27,7 @@ const navItems = [
   {
     section: "Customers",
     items: [
-      { label: "Create", path: "/app/garage-create" },
+      { label: "Create", path: "/app/customer-create" },
       { label: "Cart", path: "/app/cart" },
     ],
   },
@@ -98,7 +98,7 @@ const Sidebar = () => {
                   </ListItem>
                 ))}
               </List>
-              {index < navItems.length - 1 && <Divider sx={{ my: 1.5 }} />}
+              {/* {index < navItems.length - 1 && <Divider sx={{ my: 1.5 }} />} */}
             </Box>
           ))}
         </List>
