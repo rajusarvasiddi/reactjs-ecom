@@ -216,74 +216,84 @@ const GarageCreate = () => {
                 margin="dense"
                 size="small"
               />
-              <Typography component="legend" sx={{ fontWeight: "bold" }}>
-                Address
-              </Typography>
+              <Box
+                component="fieldset"
+                sx={{ border: "1px solid #ccc", borderRadius: 2, px: 2, mt: 2 }}
+              >
+                <Typography component="legend" sx={{ fontWeight: "bold" }}>
+                  Address
+                </Typography>
 
-              <TextField
-                fullWidth
-                label="Flat/Plot"
-                margin="dense"
-                size="small"
-              />
-              <TextField fullWidth label="Street" margin="dense" size="small" />
-              <TextField fullWidth label="City" margin="dense" size="small" />
-              <FormControl fullWidth size="small" margin="dense">
-                <InputLabel id="state-select-label">State</InputLabel>
-                <Select
-                  labelId="state-select-label"
-                  id="state-select"
-                  value={values.address.state}
+                <TextField
+                  fullWidth
+                  label="Flat/Plot"
+                  margin="dense"
+                  size="small"
+                />
+                <TextField
+                  fullWidth
+                  label="Street"
+                  margin="dense"
+                  size="small"
+                />
+                <TextField fullWidth label="City" margin="dense" size="small" />
+                <FormControl fullWidth size="small" margin="dense">
+                  <InputLabel id="state-select-label">State</InputLabel>
+                  <Select
+                    labelId="state-select-label"
+                    id="state-select"
+                    value={values.address.state}
+                    onChange={handleChange}
+                    label="State"
+                  >
+                    <MenuItem value="AP">Andhra Pradesh</MenuItem>
+                    <MenuItem value="TG">Telangana</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl fullWidth size="small" margin="dense">
+                  <InputLabel id="country-select-label">Country</InputLabel>
+                  <Select
+                    value={values.address.country}
+                    onChange={handleChange}
+                    label="country"
+                    name="address.country"
+                    displayEmpty
+                  >
+                    <MenuItem value="">-Select-</MenuItem>
+                    {countries.map((c) => {
+                      return (
+                        <MenuItem key={c.code} value={c.code}>
+                          {c.name}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+                <TextField
+                  fullWidth
+                  label={
+                    COUNTRY_PINCODE[values.address.country]?.label || "PIN/ZIP"
+                  }
+                  name="address.pinCode"
+                  value={values.address.pinCode}
                   onChange={handleChange}
-                  label="State"
-                >
-                  <MenuItem value="AP">Andhra Pradesh</MenuItem>
-                  <MenuItem value="TG">Telangana</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl fullWidth size="small" margin="dense">
-                <InputLabel id="country-select-label">Country</InputLabel>
-                <Select
-                  value={values.address.country}
-                  onChange={handleChange}
-                  label="country"
-                  name="address.country"
-                  displayEmpty
-                >
-                  <MenuItem value="">-Select-</MenuItem>
-                  {countries.map((c) => {
-                    return (
-                      <MenuItem key={c.code} value={c.code}>
-                        {c.name}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-              <TextField
-                fullWidth
-                label={
-                  COUNTRY_PINCODE[values.address.country]?.label || "PIN/ZIP"
-                }
-                name="address.pinCode"
-                value={values.address.pinCode}
-                onChange={handleChange}
-                error={
-                  touched.address?.pinCode && Boolean(errors.address?.pinCode)
-                }
-                helperText={
-                  touched.address?.pinCode
-                    ? // Use dynamic label in error message
-                      errors.address?.pinCode?.replace(
-                        "PIN/ZIP",
-                        COUNTRY_PINCODE[values.address.country]?.label ||
-                          "PIN/ZIP"
-                      )
-                    : ""
-                }
-                margin="dense"
-                size="small"
-              />
+                  error={
+                    touched.address?.pinCode && Boolean(errors.address?.pinCode)
+                  }
+                  helperText={
+                    touched.address?.pinCode
+                      ? // Use dynamic label in error message
+                        errors.address?.pinCode?.replace(
+                          "PIN/ZIP",
+                          COUNTRY_PINCODE[values.address.country]?.label ||
+                            "PIN/ZIP"
+                        )
+                      : ""
+                  }
+                  margin="dense"
+                  size="small"
+                />
+              </Box>
             </Box>
             <Box sx={{ mt: 1 }}>
               <Button
