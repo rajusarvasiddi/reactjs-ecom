@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
 import GarageAddress from "./GarageAddress";
-import { useCountries } from "./hooks/useCountries";
+import { useCountries } from "../../../shared/hooks/useCountries";
 import { garageInitialValues } from "./initialValues";
 import { FormValues } from "./types";
 import { garageValidationSchema } from "./validationSchema";

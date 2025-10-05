@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { COUNTRIES_LIST } from "../../../../constants";
+import { COUNTRIES_LIST } from "../../constants";
 import axios from "axios";
 
 interface Country {
