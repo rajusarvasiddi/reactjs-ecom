@@ -46,10 +46,6 @@ interface FormValues {
   };
 }
 
-const handleSubmit = () => {
-  return;
-};
-
 const GarageCreate = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   // const [states, setStates] = useState<State[]>([]);
