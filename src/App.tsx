@@ -2,7 +2,7 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import PrivateLayout from "./components/PrivateLayout";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 import PublicLayout from "./components/PublicLayout";
 
 // Lazy-loaded pages
