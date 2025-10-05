@@ -281,12 +281,24 @@ const GarageCreate = () => {
                   <InputLabel id="state-select-label">State</InputLabel>
                   <Select
                     labelId="state-select-label"
+                    name="address.state"
                     value={values.address.state}
-                    onChange={(e) =>
-                      setFieldValue("address.state", e.target.value)
-                    }
+                    onChange={handleChange}
+                    displayEmpty
+                    label="State"
+                    renderValue={(selected) => {
+                      if (!selected) return "-Select-";
+                      const states = [
+                        { code: "AP", name: "Andhra Pradesh" },
+                        { code: "TG", name: "Telangana" },
+                      ];
+                      const state = states.find((s) => s.code === selected);
+                      return state ? state.name : "";
+                    }}
                   >
-                    <MenuItem value="">-Select-</MenuItem>
+                    <MenuItem value="">
+                      <em>-Select-</em>
+                    </MenuItem>
                     <MenuItem value="AP">Andhra Pradesh</MenuItem>
                     <MenuItem value="TG">Telangana</MenuItem>
                   </Select>
@@ -296,12 +308,22 @@ const GarageCreate = () => {
                   <InputLabel id="country-select-label">Country</InputLabel>
                   <Select
                     labelId="country-select-label"
+                    name="address.country"
                     value={values.address.country}
-                    onChange={(e) =>
-                      setFieldValue("address.country", e.target.value)
-                    }
+                    onChange={handleChange}
+                    displayEmpty
+                    label="Country" // important for floating label
+                    renderValue={(selected) => {
+                      if (!selected) return "-Select-"; // placeholder text
+                      const country = countries.find(
+                        (c) => c.code === selected
+                      );
+                      return country ? country.name : "";
+                    }}
                   >
-                    <MenuItem value="">-Select-</MenuItem>
+                    <MenuItem value="">
+                      <em>-Select-</em>
+                    </MenuItem>
                     {countries.map((c) => (
                       <MenuItem key={c.code} value={c.code}>
                         {c.name}
