@@ -16,10 +16,24 @@ import {
 const drawerWidth = 220;
 
 const navItems = [
-  { label: "Dashboard", path: "/app/dashboard" },
-  { label: "Garage Create", path: "/app/garage-create" },
-  { label: "Products", path: "/app/products" },
-  { label: "Cart", path: "/app/cart" },
+  {
+    items: [{ label: "Dashboard", path: "/app/dashboard" }],
+  },
+  {
+    section: "Garage",
+    items: [
+      { label: "Garage Create", path: "/app/garage-create" },
+      { label: "Products", path: "/app/products" },
+      { label: "Cart", path: "/app/cart" },
+    ],
+  },
+  {
+    section: "Admin",
+    items: [
+      { label: "Users", path: "/app/users" },
+      { label: "Settings", path: "/app/settings" },
+    ],
+  },
 ];
 
 const PrivateLayout = () => {
@@ -57,50 +71,39 @@ const PrivateLayout = () => {
           </Toolbar>
 
           <Box sx={{ px: 1.5, pt: 1 }}>
-            <Typography
-              variant="caption"
-              sx={{ px: 2, pb: 1, color: "custom.lightGray" }}
-            >
-              Getting Started
-            </Typography>
             <List>
-              {navItems.map((item) => (
-                <ListItem key={item.path} disablePadding>
-                  <Box sx={{ width: "100%" }}>
-                    <NavLink to={item.path} style={{ textDecoration: "none" }}>
-                      {({ isActive }) => (
-                        <ListItemButton selected={isActive}>
-                          <ListItemText primary={item.label} />
-                        </ListItemButton>
-                      )}
-                    </NavLink>
-                  </Box>
-                </ListItem>
-              ))}
-            </List>
-            <Divider sx={{ my: 1.5 }} />
-            <Typography
-              variant="caption"
-              sx={{ px: 2, pb: 1, color: "text.secondary" }}
-            >
-              Shop
-            </Typography>
-            <List>
-              {[
-                { label: "Products", path: "/app/products" },
-                { label: "Cart", path: "/app/cart" },
-              ].map((item) => (
-                <ListItem key={item.path} disablePadding>
-                  <Box sx={{ width: "100%" }}>
-                    <NavLink to={item.path} style={{ textDecoration: "none" }}>
-                      {({ isActive }) => (
-                        <ListItemButton selected={isActive}>
-                          <ListItemText primary={item.label} />
-                        </ListItemButton>
-                      )}
-                    </NavLink>
-                  </Box>
-                </ListItem>
+              {navItems.map((group, index) => (
+                <Box key={index} sx={{ mb: 2 }}>
+                  {group.section && (
+                    <Typography
+                      variant="caption"
+                      sx={{ px: 2, pb: 1, color: "custom.lightGray" }}
+                    >
+                      {group.section}
+                    </Typography>
+                  )}
+
+                  <List>
+                    {group.items.map((item) => (
+                      <ListItem key={item.path} disablePadding>
+                        <Box sx={{ width: "100%" }}>
+                          <NavLink
+                            to={item.path}
+                            style={{ textDecoration: "none" }}
+                          >
+                            {({ isActive }) => (
+                              <ListItemButton selected={isActive}>
+                                <ListItemText primary={item.label} />
+                              </ListItemButton>
+                            )}
+                          </NavLink>
+                        </Box>
+                      </ListItem>
+                    ))}
+                  </List>
+
+                  {index < navItems.length - 1 && <Divider sx={{ my: 1.5 }} />}
+                </Box>
               ))}
             </List>
           </Box>
