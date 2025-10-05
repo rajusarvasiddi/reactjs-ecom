@@ -87,8 +87,8 @@ const theme = createTheme({
         root: {
           borderRadius: "5px",
           margin: "1px 6px",
-          padding: "4px 12px",
-          minHeight: "32px",
+          padding: "2px 12px",
+          minHeight: "28px",
           transition: "background-color 0.2s ease-in-out",
           color: "#111111",
           "&:hover": {
@@ -108,7 +108,6 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           fontSize: "0.875rem",
-          color: "#111111",
         },
       },
     },
@@ -158,6 +157,26 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           color: "#111111",
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: "#c9c7c7",
+          "&.Mui-focused": {
+            color: "#000000",
+          },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        input: {
+          "&::placeholder": {
+            color: "#f0ebeb",
+            opacity: 1,
+          },
         },
       },
     },

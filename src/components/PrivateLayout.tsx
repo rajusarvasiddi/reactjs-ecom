@@ -28,6 +28,10 @@ const navItems = [
     ],
   },
   {
+    section: "Customers",
+    items: [{ label: "Create", path: "/app/garage-create" }],
+  },
+  {
     section: "Admin",
     items: [
       { label: "Users", path: "/app/users" },

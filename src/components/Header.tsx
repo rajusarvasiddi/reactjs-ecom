@@ -56,12 +56,16 @@ const Header = () => {
           {/* Button-style link */}
           <Button
             component={NavLink}
-            to="/cart"
-            variant={location === "/cart" ? "contained" : "text"}
+            to="/app/cart"
+            variant={location === "/app/cart" ? "contained" : "text"}
             color="primary"
           >
             Cart ({cartCount})
           </Button>
+
+          <MuiLink component={NavLinkBehavior} to={"/login"}>
+            Logout
+          </MuiLink>
         </Box>
       </Toolbar>
     </AppBar>

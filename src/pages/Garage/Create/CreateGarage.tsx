@@ -28,6 +28,7 @@ const GarageCreate = () => {
         onSubmit={handleSubmit}
         sx={{ maxWidth: 400, mt: 2, p: 2 }}
         gap={1}
+        autoComplete="off"
       >
         <Typography variant="h4" fontWeight={"bold"} gutterBottom>
           Create Garage
