@@ -155,67 +155,90 @@ const GarageCreate = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, errors, touched, handleChange, handleReset }) => (
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleReset,
+          setFieldValue,
+        }) => (
           <Form autoComplete="off" noValidate>
             <Box
-              sx={{
-                maxWidth: 400,
-                display: "flex",
-                flexDirection: "column",
-              }}
+              sx={{ maxWidth: 400, display: "flex", flexDirection: "column" }}
             >
               <Typography variant="h4" fontWeight="bold" gutterBottom>
                 Create Garage
               </Typography>
+
               <TextField
                 fullWidth
                 label="Garage Name"
                 name="garageName"
                 value={values.garageName}
                 onChange={handleChange}
-                required
                 error={touched.garageName && Boolean(errors.garageName)}
                 helperText={touched.garageName && errors.garageName}
-                size="small"
                 margin="dense"
+                size="small"
               />
+
               <TextField
                 fullWidth
                 label="Email"
                 name="email"
                 value={values.email}
                 onChange={handleChange}
-                required
                 error={touched.email && Boolean(errors.email)}
                 helperText={touched.email && errors.email}
                 margin="dense"
                 size="small"
               />
+
               <TextField
                 fullWidth
                 label="Phone"
                 name="phone"
                 value={values.phone}
                 onChange={handleChange}
-                required
                 error={touched.phone && Boolean(errors.phone)}
                 helperText={touched.phone && errors.phone}
                 margin="dense"
                 size="small"
               />
+
               <TextField
                 fullWidth
                 label="WhatsApp"
+                name="whatsapp"
+                value={values.whatsapp}
+                onChange={handleChange}
                 margin="dense"
                 size="small"
               />
-              <TextField fullWidth label="Owner" margin="dense" size="small" />
+
+              <TextField
+                fullWidth
+                label="Owner"
+                name="owner"
+                value={values.owner}
+                onChange={handleChange}
+                error={touched.owner && Boolean(errors.owner)}
+                helperText={touched.owner && errors.owner}
+                margin="dense"
+                size="small"
+              />
+
               <TextField
                 fullWidth
                 label="Description"
+                name="description"
+                value={values.description}
+                onChange={handleChange}
                 margin="dense"
                 size="small"
               />
+
               <Box
                 component="fieldset"
                 sx={{ border: "1px solid #ccc", borderRadius: 2, px: 2, mt: 2 }}
@@ -227,48 +250,66 @@ const GarageCreate = () => {
                 <TextField
                   fullWidth
                   label="Flat/Plot"
+                  name="address.flatPlot"
+                  value={values.address.flatPlot}
+                  onChange={handleChange}
                   margin="dense"
                   size="small"
                 />
+
                 <TextField
                   fullWidth
                   label="Street"
+                  name="address.street"
+                  value={values.address.street}
+                  onChange={handleChange}
                   margin="dense"
                   size="small"
                 />
-                <TextField fullWidth label="City" margin="dense" size="small" />
+
+                <TextField
+                  fullWidth
+                  label="City"
+                  name="address.city"
+                  value={values.address.city}
+                  onChange={handleChange}
+                  margin="dense"
+                  size="small"
+                />
+
                 <FormControl fullWidth size="small" margin="dense">
                   <InputLabel id="state-select-label">State</InputLabel>
                   <Select
                     labelId="state-select-label"
-                    id="state-select"
                     value={values.address.state}
-                    onChange={handleChange}
-                    label="State"
+                    onChange={(e) =>
+                      setFieldValue("address.state", e.target.value)
+                    }
                   >
+                    <MenuItem value="">-Select-</MenuItem>
                     <MenuItem value="AP">Andhra Pradesh</MenuItem>
                     <MenuItem value="TG">Telangana</MenuItem>
                   </Select>
                 </FormControl>
+
                 <FormControl fullWidth size="small" margin="dense">
                   <InputLabel id="country-select-label">Country</InputLabel>
                   <Select
+                    labelId="country-select-label"
                     value={values.address.country}
-                    onChange={handleChange}
-                    label="country"
-                    name="address.country"
-                    displayEmpty
+                    onChange={(e) =>
+                      setFieldValue("address.country", e.target.value)
+                    }
                   >
                     <MenuItem value="">-Select-</MenuItem>
-                    {countries.map((c) => {
-                      return (
-                        <MenuItem key={c.code} value={c.code}>
-                          {c.name}
-                        </MenuItem>
-                      );
-                    })}
+                    {countries.map((c) => (
+                      <MenuItem key={c.code} value={c.code}>
+                        {c.name}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
+
                 <TextField
                   fullWidth
                   label={
@@ -281,119 +322,34 @@ const GarageCreate = () => {
                     touched.address?.pinCode && Boolean(errors.address?.pinCode)
                   }
                   helperText={
-                    touched.address?.pinCode
-                      ? // Use dynamic label in error message
-                        errors.address?.pinCode?.replace(
-                          "PIN/ZIP",
-                          COUNTRY_PINCODE[values.address.country]?.label ||
-                            "PIN/ZIP"
-                        )
-                      : ""
+                    touched.address?.pinCode && errors.address?.pinCode
                   }
                   margin="dense"
                   size="small"
                 />
               </Box>
-            </Box>
-            <Box sx={{ mt: 1 }}>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                sx={{ mr: 1 }}
-              >
-                Submit
-              </Button>
-              <Button
-                variant="outlined"
-                color="secondary"
-                onClick={handleReset}
-              >
-                Reset
-              </Button>
+
+              <Box sx={{ mt: 1 }}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  sx={{ mr: 1 }}
+                >
+                  Submit
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={handleReset}
+                >
+                  Reset
+                </Button>
+              </Box>
             </Box>
           </Form>
         )}
       </Formik>
-
-      {/* <Box
-        sx={{ maxWidth: 400, pl: 2 }}
-        gap={1}
-      >
-        <Typography variant="h4" fontWeight={"bold"} gutterBottom>
-          Create Garage
-        </Typography>
-        <TextField
-          fullWidth
-          label="Garage Name"
-          margin="dense"
-          size="small"
-          required
-        />
-        <TextField fullWidth label="Email" margin="dense" size="small" />
-        <TextField fullWidth label="Phone" margin="dense" size="small" />
-        <TextField fullWidth label="WhatsApp" margin="dense" size="small" />
-        <TextField fullWidth label="Owner" margin="dense" size="small" />
-        <TextField fullWidth label="Description" margin="dense" size="small" />
-
-        <Box
-          component="fieldset"
-          sx={{ border: "1px solid #ccc", borderRadius: 2, px: 2, mt: 2 }}
-        >
-          <Typography component="legend" sx={{ fontWeight: "bold" }}>
-            Address
-          </Typography>
-
-          <TextField fullWidth label="Flat/Plot" margin="dense" size="small" />
-          <TextField fullWidth label="Street" margin="dense" size="small" />
-          <TextField fullWidth label="City" margin="dense" size="small" />
-          <FormControl fullWidth size="small" margin="dense">
-            <InputLabel id="state-select-label">State</InputLabel>
-            <Select
-              labelId="state-select-label"
-              id="state-select"
-              value={state}
-              onChange={handleStateChange}
-              label="State"
-            >
-              <MenuItem value="AP">Andhra Pradesh</MenuItem>
-              <MenuItem value="TG">Telangana</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl fullWidth size="small" margin="dense">
-            <InputLabel id="country-select-label">Country</InputLabel>
-            <Select
-              labelId="country-select-label"
-              id="country-select"
-              value={country}
-              onChange={handleCountryChange}
-              label="Country"
-            >
-              {countries.map((c) => {
-                return (
-                  <MenuItem key={c.code} value={c.code}>
-                    {c.name}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-          <TextField fullWidth label="PIN Code" margin="dense" size="small" />
-        </Box>
-      </Box>
-      <Box sx={{ m: 2 }}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleSubmit}
-          sx={{ mr: 1 }}
-        >
-          Submit
-        </Button>
-        <Button variant="outlined" color="secondary">
-          Reset
-        </Button>
-      </Box> */}
     </>
   );
 };
