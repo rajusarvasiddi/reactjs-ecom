@@ -50,18 +50,17 @@ const Sidebar = () => {
         [`& .MuiDrawer-paper`]: {
           width: drawerWidth,
           boxSizing: "border-box",
-          paddingTop: "1rem",
           backgroundColor: "#ffffff",
           borderRight: "1px solid #e0e0e0",
         },
       }}
     >
-      <Toolbar>
+      <Toolbar sx={{ minHeight: 64, display: "flex", alignItems: "center" }}>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, px: 2 }}>
           <img
             src="/logo192.png"
             alt="GMS Logo"
-            style={{ width: 30, height: 30, objectFit: "contain" }}
+            style={{ width: 30, height: 30 }}
           />
           <Typography variant="h6" sx={{ fontWeight: 600 }}>
             GMS

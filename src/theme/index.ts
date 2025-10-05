@@ -22,6 +22,11 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "Roboto, Arial, sans-serif",
+    h4: {
+      fontSize: "1.75rem",
+      fontWeight: 700,
+      lineHeight: 1.3,
+    },
     h6: {
       fontSize: "1.25rem",
       fontWeight: 600,
@@ -63,7 +68,6 @@ const theme = createTheme({
         paper: {
           borderRight: "none",
           backgroundColor: "#ffffff",
-          paddingTop: "1rem",
         },
       },
     },

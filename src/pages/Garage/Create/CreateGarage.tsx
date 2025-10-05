@@ -17,8 +17,12 @@ const handleSubmit = () => {
 
 const GarageCreate = () => {
   const [state, setState] = useState("");
-  const handleChange = (event: SelectChangeEvent) => {
+  const [country, setCountry] = useState("");
+  const handleStateChange = (event: SelectChangeEvent) => {
     setState(event.target.value as string);
+  };
+  const handleCountryChange = (event: SelectChangeEvent) => {
+    setCountry(event.target.value as string);
   };
 
   return (
@@ -26,7 +30,7 @@ const GarageCreate = () => {
       <Box
         component="form"
         onSubmit={handleSubmit}
-        sx={{ maxWidth: 400, mt: 2, p: 2 }}
+        sx={{ maxWidth: 400, pl: 2 }}
         gap={1}
         autoComplete="off"
       >
@@ -51,7 +55,7 @@ const GarageCreate = () => {
             labelId="state-select-label"
             id="state-select"
             value={state}
-            onChange={handleChange}
+            onChange={handleStateChange}
             label="State"
           >
             <MenuItem value="AP">Andhra Pradesh</MenuItem>
@@ -59,7 +63,19 @@ const GarageCreate = () => {
           </Select>
         </FormControl>
 
-        <TextField fullWidth label="Country" margin="dense" size="small" />
+        <FormControl fullWidth size="small" margin="dense">
+          <InputLabel id="country-select-label">Country</InputLabel>
+          <Select
+            labelId="country-select-label"
+            id="country-select"
+            value={country}
+            onChange={handleCountryChange}
+            label="Country"
+          >
+            <MenuItem value="IN">India</MenuItem>
+          </Select>
+        </FormControl>
+
         <TextField fullWidth label="PIN Code" margin="dense" size="small" />
         <Button
           variant="contained"
