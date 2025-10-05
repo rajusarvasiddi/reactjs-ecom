@@ -7,7 +7,7 @@ import { FormValues } from "./types";
 import { garageValidationSchema } from "./validationSchema";
 
 const GarageCreate = () => {
-  const { countries, loading, error } = useCountries();
+  const { countries, loading, error, retry } = useCountries();
   const handleSubmit = (values: FormValues) => {
     console.log("Form submitted : ", values);
   };
@@ -31,7 +31,12 @@ const GarageCreate = () => {
               {loading ? (
                 <Typography>Loading countries...</Typography>
               ) : error ? (
-                <Typography color="error">{error}</Typography>
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                  <Typography color="error">{error}</Typography>
+                  <Button variant="outlined" onClick={retry}>
+                    Retry
+                  </Button>
+                </Box>
               ) : (
                 <>
                   <TextField
