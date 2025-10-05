@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
 import {
   Box,
   Button,
-  TextField,
-  Typography,
   FormControl,
   InputLabel,
-  Select,
   MenuItem,
+  Select,
+  TextField,
+  Typography,
 } from "@mui/material";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import axios from "axios";
+import { Form, Formik } from "formik";
+import { useEffect, useState } from "react";
+import * as Yup from "yup";
 import {
   COUNTRIES_LIST,
+  COUNTRY_PINCODE,
   VALIDATION_MESSAGES,
   VALIDATION_REGEX,
-  COUNTRY_PINCODE,
 } from "../../../constants";
 
 interface Country {
@@ -44,9 +44,7 @@ interface FormValues {
 
 const GarageCreate = () => {
   const [countries, setCountries] = useState<Country[]>([]);
-  // const [states, setStates] = useState<State[]>([]);
 
-  // Fetch countries from data API
   useEffect(() => {
     axios
       .get(COUNTRIES_LIST)
@@ -100,19 +98,11 @@ const GarageCreate = () => {
       city: Yup.string(),
       state: Yup.string(),
       country: Yup.string(),
-      // pinCode: Yup.string()
-      //   .required("PIN/ZIP Code is required")
-      //   .test("pincode-validation", "Invalid PIN/ZIP code", function (value) {
-      //     const { country } = this.parent;
-      //     if (!country || !value) return true; // skip if country not selected
-      //     const regex = COUNTRY_PINCODE[country]?.regex;
-      //     return regex ? regex.test(value) : true;
-      //   }),
       pinCode: Yup.string().test(
         "pincode-validation",
         "Invalid PIN/ZIP code",
         function (value) {
-          const address = this.parent; // this.parent is the address object
+          const address = this.parent;
           const country = address.country;
 
           // Not required if no country is selected
@@ -134,7 +124,7 @@ const GarageCreate = () => {
             });
           }
 
-          return true; // valid
+          return true;
         }
       ),
     }),
