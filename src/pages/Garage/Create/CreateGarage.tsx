@@ -18,6 +18,8 @@ import {
   VALIDATION_MESSAGES,
   VALIDATION_REGEX,
 } from "../../../constants";
+import GarageAddress from "./GarageAddress";
+import { useCountries } from "./hooks/useCountries";
 
 interface Country {
   code: string;
@@ -43,16 +45,18 @@ interface FormValues {
 }
 
 const GarageCreate = () => {
-  const [countries, setCountries] = useState<Country[]>([]);
+  // const [countries, setCountries] = useState<Country[]>([]);
 
-  useEffect(() => {
-    axios
-      .get(COUNTRIES_LIST)
-      .then((res) => {
-        setCountries(res.data);
-      })
-      .catch((err) => console.log("Unable to fetch data from API :: ", err));
-  }, []);
+  const { countries, loading, error } = useCountries();
+
+  // useEffect(() => {
+  //   axios
+  //     .get(COUNTRIES_LIST)
+  //     .then((res) => {
+  //       setCountries(res.data);
+  //     })
+  //     .catch((err) => console.log("Unable to fetch data from API :: ", err));
+  // }, []);
 
   const initialValues: FormValues = {
     garageName: "",
@@ -150,213 +154,101 @@ const GarageCreate = () => {
                 Create Garage
               </Typography>
 
-              <TextField
-                fullWidth
-                label="Garage Name"
-                name="garageName"
-                value={values.garageName}
-                onChange={handleChange}
-                error={touched.garageName && Boolean(errors.garageName)}
-                helperText={touched.garageName && errors.garageName}
-                margin="dense"
-                size="small"
-              />
-
-              <TextField
-                fullWidth
-                label="Email"
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-                error={touched.email && Boolean(errors.email)}
-                helperText={touched.email && errors.email}
-                margin="dense"
-                size="small"
-              />
-
-              <TextField
-                fullWidth
-                label="Phone"
-                name="phone"
-                value={values.phone}
-                onChange={handleChange}
-                error={touched.phone && Boolean(errors.phone)}
-                helperText={touched.phone && errors.phone}
-                margin="dense"
-                size="small"
-              />
-
-              <TextField
-                fullWidth
-                label="WhatsApp"
-                name="whatsapp"
-                value={values.whatsapp}
-                onChange={handleChange}
-                margin="dense"
-                size="small"
-              />
-
-              <TextField
-                fullWidth
-                label="Owner"
-                name="owner"
-                value={values.owner}
-                onChange={handleChange}
-                error={touched.owner && Boolean(errors.owner)}
-                helperText={touched.owner && errors.owner}
-                margin="dense"
-                size="small"
-              />
-
-              <TextField
-                fullWidth
-                label="Description"
-                name="description"
-                value={values.description}
-                onChange={handleChange}
-                margin="dense"
-                size="small"
-              />
-
-              <Box
-                component="fieldset"
-                sx={{ border: "1px solid #ccc", borderRadius: 2, px: 2, mt: 2 }}
-              >
-                <Typography component="legend" sx={{ fontWeight: "bold" }}>
-                  Address
-                </Typography>
-
-                <TextField
-                  fullWidth
-                  label="Flat/Plot #"
-                  name="address.flatPlot"
-                  value={values.address.flatPlot}
-                  onChange={handleChange}
-                  margin="dense"
-                  size="small"
-                />
-
-                <TextField
-                  fullWidth
-                  label="Building Name"
-                  name="address.buildingName"
-                  value={values.address.buildingName}
-                  onChange={handleChange}
-                  margin="dense"
-                  size="small"
-                />
-
-                <TextField
-                  fullWidth
-                  label="Street"
-                  name="address.street"
-                  value={values.address.street}
-                  onChange={handleChange}
-                  margin="dense"
-                  size="small"
-                />
-
-                <TextField
-                  fullWidth
-                  label="City"
-                  name="address.city"
-                  value={values.address.city}
-                  onChange={handleChange}
-                  margin="dense"
-                  size="small"
-                />
-
-                <FormControl fullWidth size="small" margin="dense">
-                  <InputLabel id="state-select-label">State</InputLabel>
-                  <Select
-                    labelId="state-select-label"
-                    name="address.state"
-                    value={values.address.state}
+              {loading ? (
+                <Typography>Loading countries...</Typography>
+              ) : error ? (
+                <Typography color="error">{error}</Typography>
+              ) : (
+                <>
+                  <TextField
+                    fullWidth
+                    label="Garage Name"
+                    name="garageName"
+                    value={values.garageName}
                     onChange={handleChange}
-                    displayEmpty
-                    label="State"
-                    renderValue={(selected) => {
-                      if (!selected) return "-Select-";
-                      const states = [
-                        { code: "AP", name: "Andhra Pradesh" },
-                        { code: "TG", name: "Telangana" },
-                      ];
-                      const state = states.find((s) => s.code === selected);
-                      return state ? state.name : "";
-                    }}
-                  >
-                    <MenuItem value="">
-                      <em>-Select-</em>
-                    </MenuItem>
-                    <MenuItem value="AP">Andhra Pradesh</MenuItem>
-                    <MenuItem value="TG">Telangana</MenuItem>
-                  </Select>
-                </FormControl>
+                    error={touched.garageName && Boolean(errors.garageName)}
+                    helperText={touched.garageName && errors.garageName}
+                    margin="dense"
+                    size="small"
+                  />
 
-                <FormControl fullWidth size="small" margin="dense">
-                  <InputLabel id="country-select-label">Country</InputLabel>
-                  <Select
-                    labelId="country-select-label"
-                    name="address.country"
-                    value={values.address.country}
+                  <TextField
+                    fullWidth
+                    label="Email"
+                    name="email"
+                    value={values.email}
                     onChange={handleChange}
-                    displayEmpty
-                    label="Country" // important for floating label
-                    renderValue={(selected) => {
-                      if (!selected) return "-Select-"; // placeholder text
-                      const country = countries.find(
-                        (c) => c.code === selected
-                      );
-                      return country ? country.name : "";
-                    }}
-                  >
-                    <MenuItem value="">
-                      <em>-Select-</em>
-                    </MenuItem>
-                    {countries.map((c) => (
-                      <MenuItem key={c.code} value={c.code}>
-                        {c.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
+                    margin="dense"
+                    size="small"
+                  />
 
-                <TextField
-                  fullWidth
-                  label={
-                    COUNTRY_PINCODE[values.address.country]?.label || "PIN/ZIP"
-                  }
-                  name="address.pinCode"
-                  value={values.address.pinCode}
-                  onChange={handleChange}
-                  error={
-                    touched.address?.pinCode && Boolean(errors.address?.pinCode)
-                  }
-                  helperText={
-                    touched.address?.pinCode && errors.address?.pinCode
-                  }
-                  margin="dense"
-                  size="small"
-                />
-              </Box>
+                  <TextField
+                    fullWidth
+                    label="Phone"
+                    name="phone"
+                    value={values.phone}
+                    onChange={handleChange}
+                    error={touched.phone && Boolean(errors.phone)}
+                    helperText={touched.phone && errors.phone}
+                    margin="dense"
+                    size="small"
+                  />
 
-              <Box sx={{ mt: 1 }}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  sx={{ mr: 1 }}
-                >
-                  Submit
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={handleReset}
-                >
-                  Reset
-                </Button>
-              </Box>
+                  <TextField
+                    fullWidth
+                    label="WhatsApp"
+                    name="whatsapp"
+                    value={values.whatsapp}
+                    onChange={handleChange}
+                    margin="dense"
+                    size="small"
+                  />
+
+                  <TextField
+                    fullWidth
+                    label="Owner"
+                    name="owner"
+                    value={values.owner}
+                    onChange={handleChange}
+                    error={touched.owner && Boolean(errors.owner)}
+                    helperText={touched.owner && errors.owner}
+                    margin="dense"
+                    size="small"
+                  />
+
+                  <TextField
+                    fullWidth
+                    label="Description"
+                    name="description"
+                    value={values.description}
+                    onChange={handleChange}
+                    margin="dense"
+                    size="small"
+                  />
+
+                  <GarageAddress countries={countries} />
+
+                  <Box sx={{ mt: 1 }}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      sx={{ mr: 1 }}
+                    >
+                      Submit
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      onClick={handleReset}
+                    >
+                      Reset
+                    </Button>
+                  </Box>
+                </>
+              )}
             </Box>
           </Form>
         )}
