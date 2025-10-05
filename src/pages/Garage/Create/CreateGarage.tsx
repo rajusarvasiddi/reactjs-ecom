@@ -108,7 +108,43 @@ const GarageCreate = () => {
       city: Yup.string(),
       state: Yup.string(),
       country: Yup.string(),
-      pinCode: Yup.string(),
+      // pinCode: Yup.string()
+      //   .required("PIN/ZIP Code is required")
+      //   .test("pincode-validation", "Invalid PIN/ZIP code", function (value) {
+      //     const { country } = this.parent;
+      //     if (!country || !value) return true; // skip if country not selected
+      //     const regex = COUNTRY_PINCODE[country]?.regex;
+      //     return regex ? regex.test(value) : true;
+      //   }),
+      pinCode: Yup.string().test(
+        "pincode-validation",
+        "Invalid PIN/ZIP code",
+        function (value) {
+          const address = this.parent; // this.parent is the address object
+          const country = address.country;
+
+          // Not required if no country is selected
+          if (!country) return true;
+
+          // Required if country is selected
+          if (!value)
+            return this.createError({
+              message: "PIN/ZIP Code is required",
+            });
+
+          // Validate using regex from your constants
+          const regex = COUNTRY_PINCODE[country]?.regex;
+          if (regex && !regex.test(value)) {
+            return this.createError({
+              message: `Invalid ${
+                COUNTRY_PINCODE[country]?.label || "PIN/ZIP"
+              } code`,
+            });
+          }
+
+          return true; // valid
+        }
+      ),
     }),
   });
 
@@ -212,12 +248,13 @@ const GarageCreate = () => {
               <FormControl fullWidth size="small" margin="dense">
                 <InputLabel id="country-select-label">Country</InputLabel>
                 <Select
-                  labelId="country-select-label"
-                  id="country-select"
                   value={values.address.country}
                   onChange={handleChange}
-                  label="Country"
+                  label="country"
+                  name="address.country"
+                  displayEmpty
                 >
+                  <MenuItem value="">-Select-</MenuItem>
                   {countries.map((c) => {
                     return (
                       <MenuItem key={c.code} value={c.code}>
@@ -229,7 +266,25 @@ const GarageCreate = () => {
               </FormControl>
               <TextField
                 fullWidth
-                label="PIN Code"
+                label={
+                  COUNTRY_PINCODE[values.address.country]?.label || "PIN/ZIP"
+                }
+                name="address.pinCode"
+                value={values.address.pinCode}
+                onChange={handleChange}
+                error={
+                  touched.address?.pinCode && Boolean(errors.address?.pinCode)
+                }
+                helperText={
+                  touched.address?.pinCode
+                    ? // Use dynamic label in error message
+                      errors.address?.pinCode?.replace(
+                        "PIN/ZIP",
+                        COUNTRY_PINCODE[values.address.country]?.label ||
+                          "PIN/ZIP"
+                      )
+                    : ""
+                }
                 margin="dense"
                 size="small"
               />

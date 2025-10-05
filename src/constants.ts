@@ -20,11 +20,15 @@ export const COUNTRY_PINCODE: Record<string, CountryValidation> = {
     label: "PIN Code",
     regex: /^[1-9][0-9]{5}$/, // India: 6-digit PIN starting with 1-9
   },
-  US: {
+  USA: {
     label: "ZIP Code",
     regex: /^\d{5}(-\d{4})?$/, // USA: 5-digit ZIP or ZIP+4
   },
-  CA: {
+  CAN: {
+    label: "Postal Code",
+    regex: /^[A-Z]\d[A-Z] \d[A-Z]\d$/, // Canada: A1A 1A1
+  },
+  AUS: {
     label: "Postal Code",
     regex: /^[A-Z]\d[A-Z] \d[A-Z]\d$/, // Canada: A1A 1A1
   },
