@@ -10,6 +10,9 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const GarageCreate = lazy(() => import("./pages/Garage/Create/CreateGarage"));
+const MechanicCreate = lazy(
+  () => import("./pages/Mechanic/Create/MechanicCreate")
+);
 const Products = lazy(() => import("./pages/Products/Products"));
 const ProductDetails = lazy(
   () => import("./pages/ProductDetails/ProductDetails")
@@ -42,6 +45,7 @@ function App() {
         >
           <Route path="dashboard" element={<Home />} />
           <Route path="garage-create" element={<GarageCreate />} />
+          <Route path="mechanic-create" element={<MechanicCreate />}></Route>
           <Route path="products" element={<Products />} />
           <Route path="products/:id" element={<ProductDetails />} />
           <Route path="cart" element={<Cart />} />

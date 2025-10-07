@@ -13,6 +13,8 @@ export const VALIDATION_MESSAGES = {
   INVALID_EMAIL_FORMAT: "Invalid email format",
 };
 
+export const CURRENCY_VALUE = "https://frankfurter.dev/";
+
 export interface CountryValidation {
   label: string;
   regex: RegExp;
@@ -31,7 +33,7 @@ export const COUNTRY_PINCODE: Record<string, CountryValidation> = {
     regex: /^[A-Z]\d[A-Z] \d[A-Z]\d$/, // Canada: A1A 1A1
   },
   AUS: {
-    label: "Postal Code",
-    regex: /^[A-Z]\d[A-Z] \d[A-Z]\d$/, // Canada: A1A 1A1
+    label: "Postcode",
+    regex: /^\d{4}$/, // Australia: 4 digits, e.g. 2000, 3001, 4007
   },
 };

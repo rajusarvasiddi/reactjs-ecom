@@ -43,7 +43,7 @@ export const garageValidationSchema = Yup.object<FormValues>({
         // Required if country is selected
         if (!value)
           return this.createError({
-            message: "PIN/ZIP Code is required",
+            message: "Code is required",
           });
 
         // Validate using regex from constants

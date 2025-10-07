@@ -24,6 +24,10 @@ const navItems = [
     ],
   },
   {
+    section: "Mechanic",
+    items: [{ label: "Mechanic Create", path: "/app/mechanic-create" }],
+  },
+  {
     section: "Customers",
     items: [
       { label: "Create", path: "/app/customer-create" },
