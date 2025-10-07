@@ -20,4 +20,5 @@ export interface FormValues {
     country: string;
     pinCode: string;
   };
+  documents: Record<string, string>;
 }

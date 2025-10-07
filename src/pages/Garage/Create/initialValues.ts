@@ -16,4 +16,5 @@ export const garageInitialValues: FormValues = {
     country: "",
     pinCode: "",
   },
+  documents: {},
 };

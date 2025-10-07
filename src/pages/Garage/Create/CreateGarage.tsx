@@ -2,12 +2,27 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
 import GarageAddress from "./GarageAddress";
 import { useCountries } from "../../../shared/hooks/useCountries";
+import { useBusinessDocumentTypes } from "../../../shared/hooks/useDocumentTypes";
 import { garageInitialValues } from "./initialValues";
 import { FormValues } from "./types";
 import { garageValidationSchema } from "./validationSchema";
+import BusinessDocuments from "./BusinessDocumentsSection";
 
 const GarageCreate = () => {
-  const { countries, loading, error, retry } = useCountries();
+  const {
+    countries,
+    loading: countriesLoading,
+    error: countriesError,
+    retry: retryCountries,
+  } = useCountries();
+
+  const {
+    documentTypes,
+    loading: docsLoading,
+    error: docsError,
+    retry: retryDocs,
+  } = useBusinessDocumentTypes();
+
   const handleSubmit = (values: FormValues) => {
     console.log("Form submitted : ", values);
   };
@@ -28,12 +43,12 @@ const GarageCreate = () => {
                 Create Garage
               </Typography>
 
-              {loading ? (
+              {countriesLoading ? (
                 <Typography>Loading countries...</Typography>
-              ) : error ? (
+              ) : countriesError ? (
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                  <Typography color="error">{error}</Typography>
-                  <Button variant="outlined" onClick={retry}>
+                  <Typography color="error">{countriesError}</Typography>
+                  <Button variant="outlined" onClick={retryCountries}>
                     Retry
                   </Button>
                 </Box>
@@ -107,8 +122,29 @@ const GarageCreate = () => {
                     size="small"
                   />
 
-                  <GarageAddress countries={countries} />
+                  <Box
+                    component="fieldset"
+                    sx={{
+                      border: "1px solid #ccc",
+                      borderRadius: 2,
+                      px: 2,
+                      mt: 2,
+                    }}
+                  >
+                    <GarageAddress countries={countries} />
+                  </Box>
 
+                  <Box
+                    component="fieldset"
+                    sx={{
+                      border: "1px solid #ccc",
+                      borderRadius: 2,
+                      px: 2,
+                      mt: 2,
+                    }}
+                  >
+                    <BusinessDocuments documentTypes={documentTypes} />
+                  </Box>
                   <Box sx={{ mt: 1 }}>
                     <Button
                       type="submit"
