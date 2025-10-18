@@ -18,7 +18,6 @@ const PrivateLayout = () => {
             flex: 1,
             display: "flex",
             flexDirection: "column",
-            p: 3,
           }}
         >
           <Box sx={{ flex: 1 }}>

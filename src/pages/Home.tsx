@@ -1,9 +1,17 @@
-import React from "react";
+import { Typography, Box } from "@mui/material";
 
-export default function Home() {
+const Home = () => {
   return (
-    <>
-      <h1>Home</h1>
-    </>
+    <Box sx={{ p: 3 }}>
+      <Typography variant="h4" gutterBottom>
+        Welcome to GMS
+      </Typography>
+      <Typography>
+        Garage Management System — manage garages, mechanics, and services with
+        ease.
+      </Typography>
+    </Box>
   );
-}
+};
+
+export default Home;

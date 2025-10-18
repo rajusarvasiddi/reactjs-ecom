@@ -1,19 +1,11 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import "./Login.css";
 import logo from "./.././../logo.svg"; // Make sure this path matches your logo file
+import "./Register.css";
+import { Link } from "react-router-dom";
 
-const Login = () => {
-  const navigate = useNavigate();
+const Register = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email && password) {
-      navigate("/app/garage-create");
-    }
-  };
+  const handleSubmit = () => {};
 
   return (
     <div className="login-container">
@@ -33,7 +25,7 @@ const Login = () => {
             <img src={logo} alt="App Logo" className="logo" />
             <h2>GMS</h2>
           </Link>
-          <p>Please login to continue</p>
+          <p>Register to join GMS</p>
         </div>
 
         <div className="form-group">
@@ -47,27 +39,15 @@ const Login = () => {
           />
         </div>
 
-        <div className="form-group">
-          <label>Password</label>
-          <input
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
 
         <div className="login-links">
-          <Link to="/forgot-password">Forgot Password?</Link>
-          <span> | </span>
-          <Link to="/register">Register</Link>
+          Already have an account with GMS?
+          <Link to="/login"> Login here</Link>
         </div>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;

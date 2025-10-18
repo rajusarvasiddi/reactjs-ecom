@@ -9,6 +9,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { WORDS } from "../constants";
 
 const drawerWidth = 220;
 
@@ -20,6 +21,7 @@ const navItems = [
     section: "Garage",
     items: [
       { label: "Garage Create", path: "/app/garage-create" },
+      { label: `${WORDS.pages.companies} List`, path: "/app/garage-list" },
       { label: "Products", path: "/app/products" },
     ],
   },

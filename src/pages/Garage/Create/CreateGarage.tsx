@@ -16,12 +16,7 @@ const GarageCreate = () => {
     retry: retryCountries,
   } = useCountries();
 
-  const {
-    documentTypes,
-    loading: docsLoading,
-    error: docsError,
-    retry: retryDocs,
-  } = useBusinessDocumentTypes();
+  const { documentTypes, loading, error, retry } = useBusinessDocumentTypes();
 
   const handleSubmit = (values: FormValues) => {
     console.log("Form submitted : ", values);
@@ -37,7 +32,12 @@ const GarageCreate = () => {
         {({ values, errors, touched, handleChange, handleReset }) => (
           <Form autoComplete="off" noValidate>
             <Box
-              sx={{ maxWidth: 400, display: "flex", flexDirection: "column" }}
+              sx={{
+                maxWidth: 400,
+                p: 3,
+                display: "flex",
+                flexDirection: "column",
+              }}
             >
               <Typography variant="h4" fontWeight="bold" gutterBottom>
                 Create Garage

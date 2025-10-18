@@ -4,6 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import PrivateLayout from "./components/PrivateLayout";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicLayout from "./components/PublicLayout";
+import GarageList from "./pages/Garage/ShowGarages/GaragesList";
+import Register from "./pages/Register/Register";
 
 // Lazy-loaded pages
 const Login = lazy(() => import("./pages/Login/Login"));
@@ -29,7 +31,9 @@ function App() {
       <Routes>
         {/* Public routes */}
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route element={<PublicLayout />}>
+          <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
         </Route>
@@ -45,6 +49,7 @@ function App() {
         >
           <Route path="dashboard" element={<Home />} />
           <Route path="garage-create" element={<GarageCreate />} />
+          <Route path="garage-list" element={<GarageList />} />
           <Route path="mechanic-create" element={<MechanicCreate />}></Route>
           <Route path="products" element={<Products />} />
           <Route path="products/:id" element={<ProductDetails />} />

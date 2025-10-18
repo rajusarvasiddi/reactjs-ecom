@@ -6,11 +6,17 @@ export const COUNTRIES_LIST =
   "https://mocki.io/v1/072c98ae-6ebd-4fb4-912d-b00ae7b45a13"; // Created mock response using mocki.io
 export const BUSINESS_DOCUMENTS_LIST =
   "https://mocki.io/v1/a3219e5d-8b6f-4fe2-a890-6aa5b43ed7e3";
+export const COMPANIES_LIST =
+  "https://mocki.io/v1/e1c6094f-7dad-4c5e-9f37-59b66fcd769e";
 export const VALIDATION_REGEX = {
   EMAIL: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
 };
 export const VALIDATION_MESSAGES = {
   INVALID_EMAIL_FORMAT: "Invalid email format",
+};
+
+export const WORDS = {
+  pages: { companies: "Companies" },
 };
 
 export const CURRENCY_VALUE = "https://frankfurter.dev/";
