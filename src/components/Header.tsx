@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import {
@@ -8,6 +8,10 @@ import {
   Box,
   Link as MuiLink,
   Button,
+  FormControl,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
 } from "@mui/material";
 import { NavLink, LinkProps as RouterLinkProps } from "react-router-dom";
 
@@ -20,12 +24,18 @@ const Header = () => {
   const cartCount = useSelector((state: RootState) =>
     state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
   );
-
   const location = window.location.pathname;
 
-  const navLinks = [
-    { label: "Garage Create", path: "/admin/garage-create" },
-    { label: "Products", path: "/admin/products" },
+  const [role, setRole] = useState("admin");
+
+  const handleRoleChange = (event: SelectChangeEvent) => {
+    const selectedRole = event.target.value as string;
+    setRole(selectedRole);
+  };
+
+  const navLinks: any[] = [
+    // { label: "Garage Create", path: "/admin/garage-create" },
+    // { label: "Products", path: "/admin/products" },
   ];
 
   return (
@@ -62,7 +72,23 @@ const Header = () => {
           >
             Cart ({cartCount})
           </Button>
-
+          {/* Role dropdown */}
+          <FormControl
+            variant="outlined"
+            size="small"
+            sx={{ minWidth: 120, background: "#FFFFFF", borderRadius: 1 }}
+          >
+            {/* <InputLabel id="role-select-label">Role</InputLabel> */}
+            <Select
+              labelId="role-select-label"
+              value={role}
+              onChange={handleRoleChange}
+            >
+              <MenuItem value="admin">Admin</MenuItem>
+              <MenuItem value="garageOwner">Garage Owner</MenuItem>
+              <MenuItem value="mechanic">Mechanic</MenuItem>
+            </Select>
+          </FormControl>
           <MuiLink component={NavLinkBehavior} to={"/login"}>
             Logout
           </MuiLink>

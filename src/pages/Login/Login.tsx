@@ -11,7 +11,7 @@ const Login = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email && password) {
-      navigate("/admin/garage-create");
+      navigate("/admin/dashboard");
     }
   };
 

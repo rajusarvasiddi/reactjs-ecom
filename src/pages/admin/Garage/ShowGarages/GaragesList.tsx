@@ -8,7 +8,7 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import { useCompanies } from "../../../shared/hooks/useCompanies";
+import { useCompanies } from "../../../../shared/hooks/useCompanies";
 import { useState } from "react";
 
 interface Company {

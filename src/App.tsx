@@ -4,14 +4,18 @@ import { Routes, Route } from "react-router-dom";
 import PrivateLayout from "./components/PrivateLayout";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicLayout from "./components/PublicLayout";
-import GarageList from "./pages/Garage/ShowGarages/GaragesList";
+import GarageList from "./pages/admin/Garage/ShowGarages/GaragesList";
 import Register from "./pages/Register/Register";
+import { Dashboard } from "@mui/icons-material";
+import DashboardPage from "./pages/admin/Dashboard";
 
 // Lazy-loaded pages
 const Login = lazy(() => import("./pages/Login/Login"));
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
-const GarageCreate = lazy(() => import("./pages/Garage/Create/CreateGarage"));
+const GarageCreate = lazy(
+  () => import("./pages/admin/Garage/Create/CreateGarage")
+);
 const MechanicCreate = lazy(
   () => import("./pages/Mechanic/Create/MechanicCreate")
 );
@@ -47,7 +51,7 @@ function App() {
             </PrivateRoute>
           }
         >
-          <Route path="dashboard" element={<Home />} />
+          <Route path="dashboard" element={<DashboardPage />} />
           <Route path="garage-create" element={<GarageCreate />} />
           <Route path="garage-list" element={<GarageList />} />
           <Route path="mechanic-create" element={<MechanicCreate />}></Route>

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useFormikContext } from "formik";
 import { FormValues } from "./types";
-import { COUNTRY_PINCODE } from "../../../constants";
+import { COUNTRY_PINCODE } from "../../../../constants";
 
 interface GarageAddressProps {
   countries: {

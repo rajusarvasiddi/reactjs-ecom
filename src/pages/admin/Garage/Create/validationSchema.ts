@@ -4,7 +4,8 @@ import {
   COUNTRY_PINCODE,
   VALIDATION_MESSAGES,
   VALIDATION_REGEX,
-} from "../../../constants";
+} from "../../../../constants";
+
 import { FormValues } from "./types";
 
 export const garageValidationSchema = Yup.object<FormValues>({

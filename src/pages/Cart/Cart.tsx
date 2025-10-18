@@ -30,7 +30,7 @@ const Cart = () => {
         <div className="cart-grid">
           {cartItems.map((item: any) => (
             <div key={item.id} className="cart-item">
-              <Link to={`/products/${item.id}`} className="product-link">
+              <Link to={`/admin/products/${item.id}`} className="product-link">
                 <img src={item.thumbnail} alt={item.name} />
               </Link>
               <div>
