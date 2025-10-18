@@ -6,7 +6,8 @@ const JobCard = () => {
     "Customer Info",
     "Job Details",
     "Mechanic",
-    "Status",
+    "Completed",
+    "Delivered",
   ];
   return (
     <>
