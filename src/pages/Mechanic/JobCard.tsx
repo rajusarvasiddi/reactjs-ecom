@@ -24,7 +24,7 @@ const JobCard = () => {
             fontWeight="bold"
             gutterBottom
           >
-            Job Card Management
+            Job Cards Management
           </Typography>
           <div>
             <Stepper activeStep={1} alternativeLabel>
