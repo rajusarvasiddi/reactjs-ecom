@@ -12,6 +12,7 @@ import {
   Select,
   MenuItem,
   SelectChangeEvent,
+  TextField,
 } from "@mui/material";
 import { NavLink, LinkProps as RouterLinkProps } from "react-router-dom";
 
@@ -62,7 +63,14 @@ const Header = () => {
               {item.label}
             </MuiLink>
           ))}
-
+          {/* Search bar */}
+          <TextField
+            size="small"
+            variant="outlined"
+            placeholder="Search..."
+            sx={{ background: "#FFFFFF", borderRadius: 1 }}
+            onChange={(e) => console.log("Search value:", e.target.value)}
+          />
           {/* Button-style link */}
           <Button
             component={NavLink}
