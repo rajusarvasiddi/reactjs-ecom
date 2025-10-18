@@ -40,7 +40,7 @@ function App() {
 
         {/* Protected routes */}
         <Route
-          path="/app/*"
+          path="/admin/*"
           element={
             <PrivateRoute isAuthenticated={isAuthenticated}>
               <PrivateLayout />

@@ -24,8 +24,8 @@ const Header = () => {
   const location = window.location.pathname;
 
   const navLinks = [
-    { label: "Garage Create", path: "/app/garage-create" },
-    { label: "Products", path: "/app/products" },
+    { label: "Garage Create", path: "/admin/garage-create" },
+    { label: "Products", path: "/admin/products" },
   ];
 
   return (
@@ -56,8 +56,8 @@ const Header = () => {
           {/* Button-style link */}
           <Button
             component={NavLink}
-            to="/app/cart"
-            variant={location === "/app/cart" ? "contained" : "text"}
+            to="/admin/cart"
+            variant={location === "/admin/cart" ? "contained" : "text"}
             color="primary"
           >
             Cart ({cartCount})

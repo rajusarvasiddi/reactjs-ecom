@@ -15,32 +15,32 @@ const drawerWidth = 220;
 
 const navItems = [
   {
-    items: [{ label: "Dashboard", path: "/app/dashboard" }],
+    items: [{ label: "Dashboard", path: "/admin/dashboard" }],
   },
   {
     section: "Garage",
     items: [
-      { label: "Garage Create", path: "/app/garage-create" },
-      { label: `${WORDS.pages.companies} List`, path: "/app/garage-list" },
-      { label: "Products", path: "/app/products" },
+      { label: "Garage Create", path: "/admin/garage-create" },
+      { label: `${WORDS.pages.companies} List`, path: "/admin/garage-list" },
+      { label: "Products", path: "/admin/products" },
     ],
   },
   {
     section: "Mechanic",
-    items: [{ label: "Mechanic Create", path: "/app/mechanic-create" }],
+    items: [{ label: "Mechanic Create", path: "/admin/mechanic-create" }],
   },
   {
     section: "Customers",
     items: [
-      { label: "Create", path: "/app/customer-create" },
-      { label: "Cart", path: "/app/cart" },
+      { label: "Create", path: "/admin/customer-create" },
+      { label: "Cart", path: "/admin/cart" },
     ],
   },
   {
     section: "Admin",
     items: [
-      { label: "Users", path: "/app/users" },
-      { label: "Settings", path: "/app/settings" },
+      { label: "Users", path: "/admin/users" },
+      { label: "Settings", path: "/admin/settings" },
     ],
   },
 ];
