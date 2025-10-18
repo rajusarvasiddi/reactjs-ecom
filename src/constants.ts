@@ -16,7 +16,7 @@ export const VALIDATION_MESSAGES = {
 };
 
 export const WORDS = {
-  pages: { companies: "Companies" },
+  pages: { companies: "Companies", garages: "Garage" },
 };
 
 export const CURRENCY_VALUE = "https://frankfurter.dev/";

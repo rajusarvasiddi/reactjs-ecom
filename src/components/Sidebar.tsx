@@ -21,13 +21,17 @@ const navItems = [
     section: "Garage",
     items: [
       { label: "Garage Create", path: "/admin/garage-create" },
-      { label: `${WORDS.pages.companies} List`, path: "/admin/garage-list" },
+      { label: `${WORDS.pages.garages} List`, path: "/admin/garage-list" },
       { label: "Products", path: "/admin/products" },
     ],
   },
   {
     section: "Mechanic",
-    items: [{ label: "Mechanic Create", path: "/admin/mechanic-create" }],
+    items: [
+      { label: "Mechanic Create", path: "/admin/mechanic-create" },
+      { label: " Mechanic List", path: "/admin/mechanics" },
+      { label: " Job Cards", path: "/admin/job-cards" },
+    ],
   },
   {
     section: "Customers",

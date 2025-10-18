@@ -43,7 +43,7 @@ const GarageList = () => {
         {/* Header */}
         <Box sx={{ px: 2, borderBottom: "1px solid #FCFAFA" }}>
           <Typography variant="h6" fontWeight="bold">
-            Companies
+            Garages
           </Typography>
         </Box>
 

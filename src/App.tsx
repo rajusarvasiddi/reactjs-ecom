@@ -6,18 +6,19 @@ import PrivateRoute from "./routes/PrivateRoute";
 import PublicLayout from "./components/PublicLayout";
 import GarageList from "./pages/admin/Garage/ShowGarages/GaragesList";
 import Register from "./pages/Register/Register";
-import { Dashboard } from "@mui/icons-material";
-import DashboardPage from "./pages/admin/Dashboard";
+import MechanicList from "./pages/Mechanic/MechanicList";
 
 // Lazy-loaded pages
 const Login = lazy(() => import("./pages/Login/Login"));
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
+const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
+const JobCard = lazy(() => import("./pages/Mechanic/JobCard"));
 const GarageCreate = lazy(
   () => import("./pages/admin/Garage/Create/CreateGarage")
 );
 const MechanicCreate = lazy(
-  () => import("./pages/Mechanic/Create/MechanicCreate")
+  () => import("./pages/Mechanic/Create/CreateMechanic")
 );
 const Products = lazy(() => import("./pages/Products/Products"));
 const ProductDetails = lazy(
@@ -51,10 +52,12 @@ function App() {
             </PrivateRoute>
           }
         >
-          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="garage-create" element={<GarageCreate />} />
           <Route path="garage-list" element={<GarageList />} />
           <Route path="mechanic-create" element={<MechanicCreate />}></Route>
+          <Route path="mechanics" element={<MechanicList />} />
+          <Route path="job-cards" element={<JobCard />} />
           <Route path="products" element={<Products />} />
           <Route path="products/:id" element={<ProductDetails />} />
           <Route path="cart" element={<Cart />} />

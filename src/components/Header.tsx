@@ -71,6 +71,8 @@ const Header = () => {
             sx={{ background: "#FFFFFF", borderRadius: 1 }}
             onChange={(e) => console.log("Search value:", e.target.value)}
           />
+          {/* Create Job Card */}
+          <Button>Create Job Card</Button>
           {/* Button-style link */}
           <Button
             component={NavLink}
