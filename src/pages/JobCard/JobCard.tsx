@@ -7,7 +7,7 @@ import {
   Stepper,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomerInfoStep from "./steps/CustomerInfoStep";
 import DeliveryDetailsStep from "./steps/DeliveryDetailsStep";
 import GrievanceStep from "./steps/GrievanceStep";
@@ -19,9 +19,22 @@ import VehicleInfoStep from "./steps/VehicleInfoStep";
 import WorkProgressStep from "./steps/WorkProgressStep";
 
 const JobCard = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const getStepFromUrl = () => {
+    const params = new URLSearchParams(window.location.search);
+    const step = Number(params.get("step"));
+    return step;
+  };
+
+  const [activeStep, setActiveStep] = useState<number>(getStepFromUrl());
   const [vehicleMake, setVehicleMake] = useState("");
   const [vehicleModel, setVehicleModel] = useState("");
+
+  // Update URL whenever activeStep changes
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("step", activeStep.toString());
+    window.history.replaceState(null, "", "?" + params.toString());
+  }, [activeStep]);
 
   const handleVehicleMakeChange = (event: SelectChangeEvent) => {
     const make = event.target.value;
