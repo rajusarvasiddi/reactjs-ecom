@@ -2,6 +2,7 @@ import { useState } from "react";
 import logo from "./.././../logo.svg"; // Make sure this path matches your logo file
 import "./Register.css";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -38,8 +39,21 @@ const Register = () => {
             required
           />
         </div>
-
-        <button type="submit">Register</button>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          sx={{
+            paddingTop: "1px",
+            paddingBottom: "1px",
+            paddingLeft: "16px",
+            paddingRight: "16px",
+            minHeight: "24px", // or even 24px if you want ultra-compact
+            lineHeight: 1,
+          }}
+        >
+          Register
+        </Button>
 
         <div className="login-links">
           Already have an account with GMS?

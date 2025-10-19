@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
 import logo from "./.././../logo.svg"; // Make sure this path matches your logo file
+import { Button } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -58,7 +59,21 @@ const Login = () => {
           />
         </div>
 
-        <button type="submit">Login</button>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          sx={{
+            paddingTop: "1px",
+            paddingBottom: "1px",
+            paddingLeft: "16px",
+            paddingRight: "16px",
+            minHeight: "24px", // or even 24px if you want ultra-compact
+            lineHeight: 1,
+          }}
+        >
+          Login
+        </Button>
 
         <div className="login-links">
           <Link to="/forgot-password">Forgot Password?</Link>

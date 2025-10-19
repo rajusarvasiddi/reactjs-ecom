@@ -164,10 +164,10 @@ const theme = createTheme({
           textTransform: "none",
         },
         containedPrimary: {
-          backgroundColor: "#111111",
-          color: "#ffffff",
+          backgroundColor: "#111111 !important", // force override
+          color: "#ffffff !important",
           "&:hover": {
-            backgroundColor: "#000000",
+            backgroundColor: "#000000 !important",
           },
         },
         outlinedSecondary: {
@@ -183,7 +183,12 @@ const theme = createTheme({
           color: "#111111",
         },
       },
+      defaultProps: {
+        variant: "contained",
+        color: "primary",
+      },
     },
+
     MuiTypography: {
       styleOverrides: {
         root: {
