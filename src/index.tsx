@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "./theme";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 // import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -19,6 +20,7 @@ root.render(
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Analytics />
+          <SpeedInsights />
           <CssBaseline />
           <App />
         </ThemeProvider>
