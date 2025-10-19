@@ -80,14 +80,15 @@ const CustomerInfoStep = () => {
             />
           </Grid>
           <Grid size={12}>
-            <FormControl size="small" fullWidth>
-              <InputLabel>Preferred Communication Channel</InputLabel>
+            <FormControl fullWidth size="small">
+              <InputLabel id="demo-select-small-label">
+                Preferred Communication Channel
+              </InputLabel>
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-small"
                 value={preferredComm}
-                label="Preferred Communication"
-                displayEmpty
+                label="Preferred Communication Channel"
                 onChange={handlePreferredComm}
               >
                 <MenuItem value="">
