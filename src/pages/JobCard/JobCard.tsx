@@ -40,11 +40,13 @@ const JobCard = () => {
   const steps = [
     "Create Job Card",
     "Customer Info",
-    "Inspection",
     "Job Details",
-    "Mechanic",
-    "Completed",
+    "Technician",
+    "Inspection & Approval",
+    "Work Progress",
+    "Invoice/Payment",
     "Delivered",
+    "Re-work/Grievance",
   ];
 
   const getStepContent = (step: number) => {
@@ -78,6 +80,7 @@ const JobCard = () => {
                     id="demo-select-small"
                     value={vehicleMake}
                     label="Age"
+                    displayEmpty
                     onChange={handleVehicleMakeChange}
                   >
                     <MenuItem value="">
@@ -125,6 +128,7 @@ const JobCard = () => {
             <Typography variant="h6" gutterBottom>
               Job Details
             </Typography>
+            <div>General Service, Brake fluid pop-up</div>
           </Box>
         );
       case 4:
@@ -171,7 +175,7 @@ const JobCard = () => {
             fontWeight="bold"
             gutterBottom
           >
-            Job Cards
+            Job Card
           </Typography>
           <Stepper activeStep={activeStep} alternativeLabel>
             {steps.map((label, index) => (
