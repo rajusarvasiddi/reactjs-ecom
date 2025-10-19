@@ -44,10 +44,14 @@ const JobCard = () => {
             </Typography>
             <Grid container spacing={2}>
               {/* <Grid item xs={12} sm={6}> */}
-              <TextField fullWidth label="VIN / Registration Number" />
+              <TextField
+                fullWidth
+                label="VIN / Registration Number"
+                size="small"
+              />
               {/* </Grid> */}
               {/* <Grid item xs={12} sm={6}> */}
-              <TextField fullWidth label="Vehicle Make & Model" />
+              <TextField fullWidth label="Vehicle Make & Model" size="small" />
               {/* </Grid> */}
             </Grid>
           </Box>
