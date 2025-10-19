@@ -1,8 +1,25 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
 
 const CustomerInfoStep = () => {
+  const [preferredComm, setPreferredComm] = useState("");
+  const handlePreferredComm = (event: SelectChangeEvent) => {
+    const preference = event.target.value;
+    setPreferredComm(preference);
+  };
   return (
-    <Box sx={{ border: "1px solid #D3D3D3", mt: 2, pt: 2, p: 3 }}>
+    <>
       <Typography variant="h6" gutterBottom>
         Customer Information
       </Typography>
@@ -11,29 +28,76 @@ const CustomerInfoStep = () => {
         {/* Left Column */}
         <Grid size={6}>
           <Grid size={12} sx={{ mb: 1 }}>
-            <TextField fullWidth label="First Name" size="small" />
+            <TextField
+              fullWidth
+              label="First Name"
+              size="small"
+              autoComplete="off"
+            />
           </Grid>
           <Grid size={12} sx={{ mb: 1 }}>
-            <TextField fullWidth label="Middle Name" size="small" />
+            <TextField
+              fullWidth
+              label="Middle Name"
+              size="small"
+              autoComplete="off"
+            />
           </Grid>
           <Grid size={12} sx={{ mb: 1 }}>
-            <TextField fullWidth label="Last Name" size="small" />
+            <TextField
+              fullWidth
+              label="Last Name"
+              size="small"
+              autoComplete="off"
+            />
           </Grid>
           <Grid size={12}>
-            <TextField fullWidth label="Phone" size="small" />
+            <TextField
+              fullWidth
+              label="Phone"
+              size="small"
+              autoComplete="off"
+            />
           </Grid>
         </Grid>
 
         {/* Right Column */}
         <Grid size={6}>
           <Grid size={12} sx={{ mb: 1 }}>
-            <TextField fullWidth label="Email" size="small" />
+            <TextField
+              fullWidth
+              label="Email"
+              size="small"
+              autoComplete="off"
+            />
           </Grid>
           <Grid size={12} sx={{ mb: 1 }}>
-            <TextField fullWidth label="WhatsApp" size="small" />
+            <TextField
+              fullWidth
+              label="WhatsApp"
+              size="small"
+              autoComplete="off"
+            />
           </Grid>
           <Grid size={12}>
-            <TextField fullWidth label="Preferred Communication" size="small" />
+            <FormControl size="small" fullWidth>
+              <InputLabel>Preferred Communication Channel</InputLabel>
+              <Select
+                labelId="demo-select-small-label"
+                id="demo-select-small"
+                value={preferredComm}
+                label="Preferred Communication"
+                displayEmpty
+                onChange={handlePreferredComm}
+              >
+                <MenuItem value="">
+                  <em>-Select-</em>
+                </MenuItem>
+                <MenuItem value={1}>Mobile</MenuItem>
+                <MenuItem value={2}>Email</MenuItem>
+                <MenuItem value={3}>WhatsApp</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
         </Grid>
       </Grid>
@@ -48,7 +112,7 @@ const CustomerInfoStep = () => {
           </Button>
         </Box>
       </Grid>
-    </Box>
+    </>
   );
 };
 

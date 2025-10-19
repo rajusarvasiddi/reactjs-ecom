@@ -25,7 +25,7 @@ const VehicleInfoStep: React.FC<VehicleInfoStepProps> = ({
   handleVehicleModelChange,
 }) => {
   return (
-    <Box sx={{ border: "1px solid #D3D3D3", mt: 2, pt: 2, p: 3 }}>
+    <>
       <Typography variant="h6" gutterBottom>
         Vehicle Information
       </Typography>
@@ -79,15 +79,17 @@ const VehicleInfoStep: React.FC<VehicleInfoStepProps> = ({
           <TextField fullWidth label="Mileage" size="small" />
         </Grid>
         <Grid size={4}>
-          <Button variant="outlined" sx={{ mr: 1 }} size="small">
-            Reset
-          </Button>
-          <Button variant="contained" size="small">
-            Save
-          </Button>
+          <Box display="flex" justifyContent="flex-end">
+            <Button variant="outlined" sx={{ mr: 1 }} size="small">
+              Reset
+            </Button>
+            <Button variant="contained" size="small">
+              Save
+            </Button>
+          </Box>
         </Grid>
       </Grid>
-    </Box>
+    </>
   );
 };
 

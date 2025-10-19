@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Grid,
   SelectChangeEvent,
   Step,
   StepLabel,
@@ -82,7 +83,15 @@ const JobCard = () => {
           />
         );
       case 1:
-        return <CustomerInfoStep />;
+        return (
+          <>
+            <Grid container>
+              <Grid size={8}>
+                <CustomerInfoStep />
+              </Grid>
+            </Grid>
+          </>
+        );
       case 2:
         return <JobDetailsStep />;
       case 3:
@@ -98,7 +107,7 @@ const JobCard = () => {
       case 8:
         return <GrievanceStep />;
       default:
-        return "Unknown step";
+        return "Unknown/Invalid step";
     }
   };
 
@@ -132,7 +141,11 @@ const JobCard = () => {
               </Step>
             ))}
           </Stepper>
-          <Box sx={{ mb: 4 }}>{getStepContent(activeStep)}</Box>
+          <Box sx={{ mb: 4 }}>
+            <Box sx={{ border: "1px solid #D3D3D3", mt: 2, pt: 2, p: 3 }}>
+              {getStepContent(activeStep)}
+            </Box>
+          </Box>
 
           {/* <div>
             <ul>
