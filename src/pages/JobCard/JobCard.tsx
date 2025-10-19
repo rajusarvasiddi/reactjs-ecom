@@ -1,7 +1,13 @@
+import { BorderTop } from "@mui/icons-material";
 import {
   Box,
   Button,
+  FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
   Step,
   StepLabel,
   Stepper,
@@ -12,6 +18,13 @@ import { useState } from "react";
 
 const JobCard = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [vehicleMake, setVehicleMake] = useState("");
+
+  const handleVehicleMakeChange = (event: SelectChangeEvent) => {
+    const make = event.target.value;
+    setVehicleMake(make);
+  };
+
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
       setActiveStep((prevStep) => prevStep + 1);
@@ -38,21 +51,52 @@ const JobCard = () => {
     switch (step) {
       case 0:
         return (
-          <Box>
+          <Box sx={{ border: "1px solid #D3D3D3", mt: 2, pt: 2, p: 3 }}>
             <Typography variant="h6" gutterBottom>
               Vehicle Information
             </Typography>
-            <Grid container spacing={2}>
-              {/* <Grid item xs={12} sm={6}> */}
-              <TextField
-                fullWidth
-                label="VIN / Registration Number"
-                size="small"
-              />
-              {/* </Grid> */}
-              {/* <Grid item xs={12} sm={6}> */}
-              <TextField fullWidth label="Vehicle Make & Model" size="small" />
-              {/* </Grid> */}
+            <Grid container direction={"column"} spacing={2}>
+              <Grid size={4}>
+                <TextField
+                  fullWidth
+                  label="VIN / Registration Number"
+                  size="small"
+                />
+              </Grid>
+              <Grid size={4}>
+                <TextField
+                  fullWidth
+                  label="Vehicle Make & Model"
+                  size="small"
+                />
+              </Grid>
+              <Grid size={4}>
+                <FormControl sx={{ m: 1 }} size="small" fullWidth>
+                  <InputLabel id="demo-select-small-label">Make</InputLabel>
+                  <Select
+                    labelId="demo-select-small-label"
+                    id="demo-select-small"
+                    value={vehicleMake}
+                    label="Age"
+                    onChange={handleVehicleMakeChange}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>Audi</MenuItem>
+                    <MenuItem value={20}>BMW</MenuItem>
+                    <MenuItem value={30}>Toyota</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid size={4}>
+                <Button variant="outlined" sx={{ mr: 1 }} size="small">
+                  Reset
+                </Button>
+                <Button variant="contained" size="small">
+                  Save
+                </Button>
+              </Grid>
             </Grid>
           </Box>
         );
@@ -62,6 +106,9 @@ const JobCard = () => {
             <Typography variant="h6" gutterBottom>
               Customer Information
             </Typography>
+            <Grid container spacing={2}>
+              <Grid size={8}>Grid size 8</Grid>
+            </Grid>
           </Box>
         );
       case 2:
@@ -188,31 +235,38 @@ const JobCard = () => {
               <li>Notify mechanics about assigned jobs</li>
             </ul>
           </div> */}
-          <div>
-            <Box
+          <Box
+            sx={{
+              flex: "1 1 auto",
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <Button
               sx={{
-                flex: "1 1 auto",
-                display: "flex",
-                justifyContent: "flex-end",
+                mr: 1,
+                border: "1px solid #000",
+                "&:disabled": {
+                  border: "1px solid #D3D3D3",
+                },
               }}
+              disabled={activeStep === 0}
+              onClick={handlePrevious}
             >
+              Previous
+            </Button>
+            {activeStep < steps.length - 1 && (
               <Button
-                sx={{ mr: 1 }}
-                disabled={activeStep === 0}
-                onClick={handlePrevious}
+                sx={{ mr: 1, border: "1px solid #000" }}
+                onClick={handleNext}
               >
-                Previous
+                Next
               </Button>
-              {activeStep < steps.length - 1 && (
-                <Button sx={{ mr: 1 }} onClick={handleNext}>
-                  Next
-                </Button>
-              )}
-              {activeStep === steps.length - 1 && (
-                <Button sx={{ mr: 1 }}>Finish</Button>
-              )}
-            </Box>
-          </div>
+            )}
+            {activeStep === steps.length - 1 && (
+              <Button sx={{ mr: 1, border: "1px solid #000" }}>Finish</Button>
+            )}
+          </Box>
         </Box>
       </Box>
     </>
