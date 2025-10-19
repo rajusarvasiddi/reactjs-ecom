@@ -19,10 +19,16 @@ import { useState } from "react";
 const JobCard = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [vehicleMake, setVehicleMake] = useState("");
+  const [vehicleModel, setVehicleModel] = useState("");
 
   const handleVehicleMakeChange = (event: SelectChangeEvent) => {
     const make = event.target.value;
     setVehicleMake(make);
+  };
+
+  const handleVehicleModelChange = (event: SelectChangeEvent) => {
+    const model = event.target.value;
+    setVehicleModel(model);
   };
 
   const handleNext = () => {
@@ -59,18 +65,7 @@ const JobCard = () => {
             </Typography>
             <Grid container direction={"column"} spacing={2}>
               <Grid size={4}>
-                <TextField
-                  fullWidth
-                  label="VIN / Registration Number"
-                  size="small"
-                />
-              </Grid>
-              <Grid size={4}>
-                <TextField
-                  fullWidth
-                  label="Vehicle Make & Model"
-                  size="small"
-                />
+                <TextField fullWidth label="VIN / Rego Number" size="small" />
               </Grid>
               <Grid size={4}>
                 <FormControl sx={{ m: 1 }} size="small" fullWidth>
@@ -91,6 +86,38 @@ const JobCard = () => {
                     <MenuItem value={30}>Toyota</MenuItem>
                   </Select>
                 </FormControl>
+              </Grid>
+              <Grid size={4}>
+                <FormControl sx={{ m: 1 }} size="small" fullWidth>
+                  <InputLabel id="demo-select-small-label">Model</InputLabel>
+                  <Select
+                    labelId="demo-select-small-label"
+                    id="demo-select-small"
+                    value={vehicleModel}
+                    label="Model"
+                    displayEmpty
+                    onChange={handleVehicleModelChange}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={"camry"}>Camry</MenuItem>
+                    <MenuItem value={"rav4"}>RAV4</MenuItem>
+                    <MenuItem value={"corolla"}>Corolla</MenuItem>
+                    <MenuItem value={"supra"}>Supra</MenuItem>
+                    <MenuItem value={"landCruiser"}>Land Cruiser</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid size={4}>
+                <TextField
+                  fullWidth
+                  label="Vehicle Make & Model"
+                  size="small"
+                />
+              </Grid>
+              <Grid size={4}>
+                <TextField fullWidth label="Mileage" size="small" />
               </Grid>
               <Grid size={4}>
                 <Button variant="outlined" sx={{ mr: 1 }} size="small">
