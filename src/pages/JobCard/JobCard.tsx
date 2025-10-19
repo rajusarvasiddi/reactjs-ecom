@@ -1,13 +1,29 @@
 import {
   Box,
   Button,
+  Grid,
   Step,
   StepLabel,
   Stepper,
+  TextField,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 
 const JobCard = () => {
+  const [activeStep, setActiveStep] = useState(0);
+  const handleNext = () => {
+    if (activeStep < steps.length - 1) {
+      setActiveStep((prevStep) => prevStep + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (activeStep > 0) {
+      setActiveStep((prevStep) => prevStep - 1);
+    }
+  };
+
   const steps = [
     "Create Job Card",
     "Customer Info",
@@ -17,6 +33,77 @@ const JobCard = () => {
     "Completed",
     "Delivered",
   ];
+
+  const getStepContent = (step: number) => {
+    switch (step) {
+      case 0:
+        return (
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              Vehicle Information
+            </Typography>
+            <Grid container spacing={2}>
+              {/* <Grid item xs={12} sm={6}> */}
+              <TextField fullWidth label="VIN / Registration Number" />
+              {/* </Grid> */}
+              {/* <Grid item xs={12} sm={6}> */}
+              <TextField fullWidth label="Vehicle Make & Model" />
+              {/* </Grid> */}
+            </Grid>
+          </Box>
+        );
+      case 1:
+        return (
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              Customer Information
+            </Typography>
+          </Box>
+        );
+      case 2:
+        return (
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              Vehicle Inspection
+            </Typography>
+          </Box>
+        );
+      case 3:
+        return (
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              Job Details
+            </Typography>
+          </Box>
+        );
+      case 4:
+        return (
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              Assign Mechanic
+            </Typography>
+          </Box>
+        );
+      case 5:
+        return (
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              Job Completion
+            </Typography>
+          </Box>
+        );
+      case 6:
+        return (
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              Vehicle Delivered
+            </Typography>
+          </Box>
+        );
+      default:
+        return "Unknown step";
+    }
+  };
   return (
     <>
       <Box
@@ -33,16 +120,23 @@ const JobCard = () => {
             fontWeight="bold"
             gutterBottom
           >
-            Job Cards Management
+            Job Cards
           </Typography>
-          <Stepper activeStep={1} alternativeLabel>
-            {steps.map((label) => (
+          <Stepper activeStep={activeStep} alternativeLabel>
+            {steps.map((label, index) => (
               <Step key={label}>
-                <StepLabel>{label}</StepLabel>
+                <StepLabel
+                  onClick={() => setActiveStep(index)}
+                  sx={{ cursor: "pointer" }}
+                >
+                  {label}
+                </StepLabel>
               </Step>
             ))}
           </Stepper>
-          <div>
+          <Box sx={{ mb: 4 }}>{getStepContent(activeStep)}</Box>
+
+          {/* <div>
             <ul>
               <li>
                 <h3>Create Job Card</h3>
@@ -89,12 +183,30 @@ const JobCard = () => {
               <li>Notify customers about job status (SMS/Email)</li>
               <li>Notify mechanics about assigned jobs</li>
             </ul>
-          </div>
+          </div> */}
           <div>
-            <Box sx={{ flex: "1 1 auto" }}>
-              <Button sx={{ mr: 1 }}>Previous</Button>
-              <Button sx={{ mr: 1 }}>Next</Button>
-              <Button sx={{ mr: 1 }}>Finish</Button>
+            <Box
+              sx={{
+                flex: "1 1 auto",
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Button
+                sx={{ mr: 1 }}
+                disabled={activeStep === 0}
+                onClick={handlePrevious}
+              >
+                Previous
+              </Button>
+              {activeStep < steps.length - 1 && (
+                <Button sx={{ mr: 1 }} onClick={handleNext}>
+                  Next
+                </Button>
+              )}
+              {activeStep === steps.length - 1 && (
+                <Button sx={{ mr: 1 }}>Finish</Button>
+              )}
             </Box>
           </div>
         </Box>
