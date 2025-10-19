@@ -7,6 +7,7 @@ import { store } from "./store/store";
 import { Provider } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "./theme";
+import { Analytics } from "@vercel/analytics/react";
 // import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -17,6 +18,7 @@ root.render(
     <BrowserRouter>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
+          <Analytics />
           <CssBaseline />
           <App />
         </ThemeProvider>
