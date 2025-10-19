@@ -13,7 +13,7 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
-const JobCard = lazy(() => import("./pages/Mechanic/JobCard"));
+const JobCard = lazy(() => import("./pages/JobCard/JobCard"));
 const GarageCreate = lazy(
   () => import("./pages/admin/Garage/Create/CreateGarage")
 );
