@@ -1,20 +1,22 @@
-import { BorderTop } from "@mui/icons-material";
 import {
   Box,
   Button,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
   SelectChangeEvent,
   Step,
   StepLabel,
   Stepper,
-  TextField,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import CustomerInfoStep from "./steps/CustomerInfoStep";
+import DeliveryDetailsStep from "./steps/DeliveryDetailsStep";
+import GrievanceStep from "./steps/GrievanceStep";
+import InspectionApprovalStep from "./steps/InspectionApprovalStep";
+import InvoicePaymentsStep from "./steps/InvoicePaymentsStep";
+import JobDetailsStep from "./steps/JobDetailsStep";
+import TechnicialDetailsStep from "./steps/TechnicialDetailsStep";
+import VehicleInfoStep from "./steps/VehicleInfoStep";
+import WorkProgressStep from "./steps/WorkProgressStep";
 
 const JobCard = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -59,133 +61,34 @@ const JobCard = () => {
     switch (step) {
       case 0:
         return (
-          <Box sx={{ border: "1px solid #D3D3D3", mt: 2, pt: 2, p: 3 }}>
-            <Typography variant="h6" gutterBottom>
-              Vehicle Information
-            </Typography>
-            <Grid container direction={"column"} spacing={2}>
-              <Grid size={4}>
-                <TextField fullWidth label="VIN / Rego Number" size="small" />
-              </Grid>
-              <Grid size={4}>
-                <FormControl sx={{ m: 1 }} size="small" fullWidth>
-                  <InputLabel id="demo-select-small-label">Make</InputLabel>
-                  <Select
-                    labelId="demo-select-small-label"
-                    id="demo-select-small"
-                    value={vehicleMake}
-                    label="Age"
-                    displayEmpty
-                    onChange={handleVehicleMakeChange}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Audi</MenuItem>
-                    <MenuItem value={20}>BMW</MenuItem>
-                    <MenuItem value={30}>Toyota</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid size={4}>
-                <FormControl sx={{ m: 1 }} size="small" fullWidth>
-                  <InputLabel id="demo-select-small-label">Model</InputLabel>
-                  <Select
-                    labelId="demo-select-small-label"
-                    id="demo-select-small"
-                    value={vehicleModel}
-                    label="Model"
-                    displayEmpty
-                    onChange={handleVehicleModelChange}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={"camry"}>Camry</MenuItem>
-                    <MenuItem value={"rav4"}>RAV4</MenuItem>
-                    <MenuItem value={"corolla"}>Corolla</MenuItem>
-                    <MenuItem value={"supra"}>Supra</MenuItem>
-                    <MenuItem value={"landCruiser"}>Land Cruiser</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid size={4}>
-                <TextField
-                  fullWidth
-                  label="Vehicle Make & Model"
-                  size="small"
-                />
-              </Grid>
-              <Grid size={4}>
-                <TextField fullWidth label="Mileage" size="small" />
-              </Grid>
-              <Grid size={4}>
-                <Button variant="outlined" sx={{ mr: 1 }} size="small">
-                  Reset
-                </Button>
-                <Button variant="contained" size="small">
-                  Save
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
+          <VehicleInfoStep
+            vehicleMake={vehicleMake}
+            vehicleModel={vehicleModel}
+            handleVehicleMakeChange={handleVehicleMakeChange}
+            handleVehicleModelChange={handleVehicleModelChange}
+          />
         );
       case 1:
-        return (
-          <Box>
-            <Typography variant="h6" gutterBottom>
-              Customer Information
-            </Typography>
-            <Grid container spacing={2}>
-              <Grid size={8}>Grid size 8</Grid>
-            </Grid>
-          </Box>
-        );
+        return <CustomerInfoStep />;
       case 2:
-        return (
-          <Box>
-            <Typography variant="h6" gutterBottom>
-              Vehicle Inspection
-            </Typography>
-          </Box>
-        );
+        return <JobDetailsStep />;
       case 3:
-        return (
-          <Box>
-            <Typography variant="h6" gutterBottom>
-              Job Details
-            </Typography>
-            <div>General Service, Brake fluid pop-up</div>
-          </Box>
-        );
+        return <TechnicialDetailsStep />;
       case 4:
-        return (
-          <Box>
-            <Typography variant="h6" gutterBottom>
-              Assign Mechanic
-            </Typography>
-          </Box>
-        );
+        return <InspectionApprovalStep />;
       case 5:
-        return (
-          <Box>
-            <Typography variant="h6" gutterBottom>
-              Job Completion
-            </Typography>
-          </Box>
-        );
+        return <WorkProgressStep />;
       case 6:
-        return (
-          <Box>
-            <Typography variant="h6" gutterBottom>
-              Vehicle Delivered
-            </Typography>
-          </Box>
-        );
+        return <InvoicePaymentsStep />;
+      case 7:
+        return <DeliveryDetailsStep />;
+      case 8:
+        return <GrievanceStep />;
       default:
         return "Unknown step";
     }
   };
+
   return (
     <>
       <Box
@@ -198,7 +101,7 @@ const JobCard = () => {
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <Typography
             variant="h4"
-            sx={{ marginBottom: 4 }}
+            sx={{ marginBottom: 2 }}
             fontWeight="bold"
             gutterBottom
           >
