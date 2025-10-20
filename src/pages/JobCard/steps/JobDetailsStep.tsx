@@ -135,11 +135,13 @@ const JobDetailsStep = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
+                        size="small"
                         checked={service?.isChecked}
                         name={service.name}
                       />
                     }
                     label={service?.name}
+                    sx={{ my: -0.5 }}
                   />
                 ))}
               </FormGroup>
@@ -159,9 +161,14 @@ const JobDetailsStep = () => {
                 {parts.map((part: any) => (
                   <FormControlLabel
                     control={
-                      <Checkbox checked={part?.isChecked} name={part.name} />
+                      <Checkbox
+                        size="small"
+                        checked={part?.isChecked}
+                        name={part.name}
+                      />
                     }
                     label={part?.name}
+                    sx={{ my: -0.5 }}
                   />
                 ))}
               </FormGroup>
