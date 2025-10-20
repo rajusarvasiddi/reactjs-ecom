@@ -5,26 +5,11 @@ import {
   FormGroup,
   FormLabel,
   Grid,
-  InputLabel,
-  ListItemText,
-  MenuItem,
-  OutlinedInput,
-  Select,
   SelectChangeEvent,
   TextField,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
 const JobDetailsStep = () => {
   const serviceTypes = [
     { id: 1, name: "General", isChecked: true },
@@ -50,18 +35,6 @@ const JobDetailsStep = () => {
     { id: 9, name: "Clutch" },
     { id: 10, name: "Fuel Pump" },
   ];
-  const partsRequired = [
-    "Oliver Hansen",
-    "Van Henry",
-    "April Tucker",
-    "Ralph Hubbard",
-    "Omar Alexander",
-    "Carlos Abbott",
-    "Miriam Wagner",
-    "Bradley Wilkerson",
-    "Virginia Andrews",
-    "Kelly Snyder",
-  ];
   const [serviceType, setServiceType] = useState("");
   const [partName, setPartName] = useState<string[]>([]);
   const handleServiceTypeChange = (event: SelectChangeEvent) => {
@@ -69,16 +42,6 @@ const JobDetailsStep = () => {
     setServiceType(serviceType);
   };
 
-  const handlePartNameChange =
-    () => (event: SelectChangeEvent<typeof partName>) => {
-      const {
-        target: { value },
-      } = event;
-      setPartName(
-        // On autofill we get a stringified value.
-        typeof value === "string" ? value.split(",") : value
-      );
-    };
   return (
     <>
       <Typography variant="h6" gutterBottom>
