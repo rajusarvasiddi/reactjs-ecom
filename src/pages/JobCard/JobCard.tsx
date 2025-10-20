@@ -8,16 +8,22 @@ import {
   Stepper,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import CustomerInfoStep from "./steps/CustomerInfoStep";
-import DeliveryDetailsStep from "./steps/DeliveryDetailsStep";
-import GrievanceStep from "./steps/GrievanceStep";
-import InspectionApprovalStep from "./steps/InspectionApprovalStep";
-import InvoicePaymentsStep from "./steps/InvoicePaymentsStep";
-import JobDetailsStep from "./steps/JobDetailsStep";
-import TechnicialDetailsStep from "./steps/TechnicialDetailsStep";
-import VehicleInfoStep from "./steps/VehicleInfoStep";
-import WorkProgressStep from "./steps/WorkProgressStep";
+import { lazy, Suspense, useEffect, useState } from "react";
+// import CustomerInfoStep from "./steps/CustomerInfoStep";
+
+const CustomerInfoStep = lazy(() => import("./steps/CustomerInfoStep"));
+const DeliveryDetailsStep = lazy(() => import("./steps/DeliveryDetailsStep"));
+const GrievanceStep = lazy(() => import("./steps/GrievanceStep"));
+const InspectionApprovalStep = lazy(
+  () => import("./steps/InspectionApprovalStep")
+);
+const InvoicePaymentsStep = lazy(() => import("./steps/InvoicePaymentsStep"));
+const JobDetailsStep = lazy(() => import("./steps/JobDetailsStep"));
+const TechnicialDetailsStep = lazy(
+  () => import("./steps/TechnicialDetailsStep")
+);
+const VehicleInfoStep = lazy(() => import("./steps/VehicleInfoStep"));
+const WorkProgressStep = lazy(() => import("./steps/WorkProgressStep"));
 
 const JobCard = () => {
   const getStepFromUrl = () => {
@@ -151,58 +157,12 @@ const JobCard = () => {
           </Stepper>
           <Box sx={{ mb: 4 }}>
             <Box sx={{ border: "1px solid #D3D3D3", mt: 2, pt: 2, p: 3 }}>
-              {getStepContent(activeStep)}
+              <Suspense fallback={<Typography>Loading step...</Typography>}>
+                {getStepContent(activeStep)}
+              </Suspense>
             </Box>
           </Box>
 
-          {/* <div>
-            <ul>
-              <li>
-                <h3>Create Job Card</h3>
-                <div>VIN/Registration Number</div>
-                <div>Vehicle Make & Model</div>
-                <div>
-                  Before creating a new job card, check if there's an existing
-                  job card with status Pending/In Progress for this vehicle. If
-                  yes → show warning: "A job card already exists for this
-                  vehicle. Do you want to update it instead?" "This vehicle
-                  already has an active job card (<strong>ID: JC-101</strong>).
-                  Do you want to view/update it or create a new one?" [View /
-                  Update] [Create New]
-                </div>
-                <div>
-                  <strong>Customer Information</strong>
-                </div>
-                <div>Name, Contact</div>
-              </li>
-              <li>
-                <h3>Job Card Management</h3>
-                <div>List (active, pending, completed)</div>
-                <div>
-                  <strong>Update Job Card</strong>
-                </div>
-                <ul>
-                  <li>Add or modify services</li>
-                  <li>Updated Parts Used</li>
-                  <li>Add mechanic notes</li>
-                  <li>
-                    Track status (Pending, In Progress, Completed, Delivered)
-                  </li>
-                </ul>
-                <li>Invoice</li>
-              </li>
-              <li>
-                <h3>Job Card History</h3>
-              </li>
-              <li>History of past services</li>
-              <li>Reports (service trends, frequent repairs)</li>
-              <li>
-                <h3>Notifications</h3>
-              </li>
-              <li>Notify customers about job status (SMS/Email)</li>
-              <li>Notify mechanics about assigned jobs</li>
-            </ul>
-          </div> */}
           <Box
             sx={{
               flex: "1 1 auto",
