@@ -65,7 +65,7 @@ const JobCard = () => {
     "Job Details",
     "Technician",
     "Inspection & Approval",
-    "Work Progress",
+    "Work Log",
     "Invoice/Payment",
     "Delivered",
     "Re-work/Grievance",
@@ -93,7 +93,15 @@ const JobCard = () => {
           </>
         );
       case 2:
-        return <JobDetailsStep />;
+        return (
+          <>
+            <Grid container>
+              <Grid size={12}>
+                <JobDetailsStep />
+              </Grid>
+            </Grid>
+          </>
+        );
       case 3:
         return <TechnicialDetailsStep />;
       case 4:
@@ -210,6 +218,7 @@ const JobCard = () => {
                   border: "1px solid #D3D3D3",
                 },
               }}
+              variant="outlined"
               disabled={activeStep === 0}
               onClick={handlePrevious}
             >

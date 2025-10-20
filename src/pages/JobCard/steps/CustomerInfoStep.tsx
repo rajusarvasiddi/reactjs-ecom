@@ -100,10 +100,20 @@ const CustomerInfoStep = () => {
               </Select>
             </FormControl>
           </Grid>
+          <Grid size={12} sx={{ mt: 2 }}>
+            <TextField
+              fullWidth
+              label="Customer Notes"
+              size="small"
+              autoComplete="off"
+              multiline
+              rows={3}
+            />
+          </Grid>
         </Grid>
       </Grid>
 
-      <Grid size={12}>
+      {/* <Grid size={12}>
         <Box display="flex" justifyContent="flex-end" mt={2}>
           <Button variant="outlined" sx={{ mr: 1 }} size="small">
             Reset
@@ -112,7 +122,7 @@ const CustomerInfoStep = () => {
             Save
           </Button>
         </Box>
-      </Grid>
+      </Grid> */}
     </>
   );
 };

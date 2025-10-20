@@ -11,6 +11,15 @@ const GrievanceStep = () => {
       >
         Re-work / Grievance
       </Typography>
+      <div>Rework Required? (Yes / No)</div>
+      <div>
+        Grievance Type (Dropdown: Delay / Quality Issue / Parts Issue / Other)
+      </div>
+      <div>Description of Issue</div>
+      <div>Action Taken</div>
+      <div>Responsible Staff / Technician</div>
+      <div>Resolution Date</div>
+      <div>Status (Open / Closed / Pending)</div>
     </>
   );
 };

@@ -11,6 +11,13 @@ const InvoicePaymentsStep = () => {
       >
         Invoice and Payment
       </Typography>
+      <div>Total Cost</div>
+      <div>Discount (if any)</div>
+      <div>Tax / GST</div>
+      <div>Payment Mode (Cash / Card / Online / Wallet)</div>
+      <div>Payment Status (Paid / Pending)</div>
+      <div>Payment Date</div>
+      <div>Receipt Number</div>
     </>
   );
 };

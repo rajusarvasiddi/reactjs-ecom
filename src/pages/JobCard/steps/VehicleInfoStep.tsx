@@ -100,7 +100,7 @@ const VehicleInfoStep: React.FC<VehicleInfoStepProps> = ({
             autoComplete="off"
           />
         </Grid>
-        <Grid size={4}>
+        {/* <Grid size={4}>
           <Box display="flex" justifyContent="flex-end">
             <Button variant="outlined" sx={{ mr: 1 }} size="small">
               Reset
@@ -109,7 +109,7 @@ const VehicleInfoStep: React.FC<VehicleInfoStepProps> = ({
               Save
             </Button>
           </Box>
-        </Grid>
+        </Grid> */}
       </Grid>
     </>
   );
