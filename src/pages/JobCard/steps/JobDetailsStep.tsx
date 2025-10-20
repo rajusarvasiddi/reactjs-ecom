@@ -125,7 +125,7 @@ const JobDetailsStep = () => {
         <Grid size={3}>
           <Grid size={12} sx={{ mb: 1 }}>
             <FormControl
-              sx={{ my: 1, mx: 0 }}
+              sx={{ mb: 1, mt: 0, mx: 0 }}
               component="fieldset"
               variant="standard"
             >
@@ -138,6 +138,7 @@ const JobDetailsStep = () => {
                         size="small"
                         checked={service?.isChecked}
                         name={service.name}
+                        key={service.id}
                       />
                     }
                     label={service?.name}
@@ -165,6 +166,7 @@ const JobDetailsStep = () => {
                         size="small"
                         checked={part?.isChecked}
                         name={part.name}
+                        key={part.id}
                       />
                     }
                     label={part?.name}
