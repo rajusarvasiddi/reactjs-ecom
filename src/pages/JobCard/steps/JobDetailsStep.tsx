@@ -133,12 +133,12 @@ const JobDetailsStep = () => {
               <FormGroup>
                 {serviceTypes.map((service: any) => (
                   <FormControlLabel
+                    key={service.id}
                     control={
                       <Checkbox
                         size="small"
                         checked={service?.isChecked}
                         name={service.name}
-                        key={service.id}
                       />
                     }
                     label={service?.name}
@@ -161,12 +161,12 @@ const JobDetailsStep = () => {
               <FormGroup>
                 {parts.map((part: any) => (
                   <FormControlLabel
+                    key={part.id}
                     control={
                       <Checkbox
                         size="small"
                         checked={part?.isChecked}
                         name={part.name}
-                        key={part.id}
                       />
                     }
                     label={part?.name}
