@@ -11,6 +11,17 @@ import {
 import { lazy, Suspense, useEffect, useState } from "react";
 // import CustomerInfoStep from "./steps/CustomerInfoStep";
 
+const steps = [
+  "Create Job Card",
+  "Customer Info",
+  "Job Details",
+  "Technician",
+  "Inspection & Approval",
+  "Work Log",
+  "Invoice/Payment",
+  "Delivered",
+  "Re-work/Grievance",
+];
 const CustomerInfoStep = lazy(() => import("./steps/CustomerInfoStep"));
 const DeliveryDetailsStep = lazy(() => import("./steps/DeliveryDetailsStep"));
 const GrievanceStep = lazy(() => import("./steps/GrievanceStep"));
@@ -29,7 +40,7 @@ const JobCard = () => {
   const getStepFromUrl = () => {
     const params = new URLSearchParams(window.location.search);
     const step = Number(params.get("step"));
-    return step;
+    return isNaN(step) || step < 0 || step >= steps.length ? 0 : step;
   };
 
   const [activeStep, setActiveStep] = useState<number>(getStepFromUrl());
@@ -64,18 +75,6 @@ const JobCard = () => {
       setActiveStep((prevStep) => prevStep - 1);
     }
   };
-
-  const steps = [
-    "Create Job Card",
-    "Customer Info",
-    "Job Details",
-    "Technician",
-    "Inspection & Approval",
-    "Work Log",
-    "Invoice/Payment",
-    "Delivered",
-    "Re-work/Grievance",
-  ];
 
   const getStepContent = (step: number) => {
     switch (step) {
