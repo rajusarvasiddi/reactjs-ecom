@@ -79,7 +79,6 @@ const GarageAddress = ({ countries }: GarageAddressProps) => {
           name="address.country"
           value={values.address.country}
           onChange={handleChange}
-          displayEmpty
           label="Country"
           renderValue={(selected) => {
             if (!selected) return "-Select-";
@@ -105,7 +104,6 @@ const GarageAddress = ({ countries }: GarageAddressProps) => {
           name="address.state"
           value={values.address.state}
           onChange={handleChange}
-          displayEmpty
           label="State"
           renderValue={(selected) => {
             if (!selected) return "-Select-";
