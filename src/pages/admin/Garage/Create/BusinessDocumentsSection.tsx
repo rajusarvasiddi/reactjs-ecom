@@ -63,7 +63,7 @@ const BusinessDocuments = ({
                 marginLeft: "8px",
               }}
             >
-              <AttachFileIcon />
+              <AttachFileIcon fontSize="small" />
               <input
                 type="file"
                 style={{ display: "none" }}
