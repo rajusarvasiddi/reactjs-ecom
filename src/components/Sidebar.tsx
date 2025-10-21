@@ -1,5 +1,3 @@
-// src/components/Sidebar.tsx
-import React from "react";
 import {
   Box,
   Drawer,
@@ -9,19 +7,18 @@ import {
   ListItemText,
   Toolbar,
   Typography,
-  useTheme,
   useMediaQuery,
-  Divider,
+  useTheme,
 } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { WORDS } from "../constants";
 import { RootState } from "../store/store";
 import { closeSidebar } from "../store/uiSlice";
-import { NavLink } from "react-router-dom";
-import { WORDS } from "../constants"; // ✅ keep your constant reference
 
 const drawerWidth = 220;
 
-// ✅ Your original navItems structure
 const navItems = [
   {
     items: [{ label: "Dashboard", path: "/admin/dashboard" }],
@@ -113,47 +110,6 @@ const Sidebar: React.FC = () => {
             </List>
           </Box>
         ))}
-        {/* {navItems.map((section, idx) => (
-          <Box key={idx}>
-            {section.section && (
-              <Typography
-                variant="subtitle2"
-                sx={{
-                  px: 2,
-                  mt: 1.5,
-                  mb: 0.5,
-                  color: "text.secondary",
-                  fontWeight: 600,
-                }}
-              >
-                {section.section}
-              </Typography>
-            )}
-            <List disablePadding>
-              {section.items.map((item) => (
-                <ListItem key={item.path} disablePadding>
-                  <NavLink
-                    to={item.path}
-                    style={{ textDecoration: "none", width: "100%" }}
-                    onClick={() => {
-                      if (isMobile) dispatch(closeSidebar());
-                    }}
-                  >
-                    {({ isActive }) => (
-                      <ListItemButton selected={isActive}>
-                        <ListItemText
-                          primary={item.label}
-                          primaryTypographyProps={{ fontSize: 14 }}
-                        />
-                      </ListItemButton>
-                    )}
-                  </NavLink>
-                </ListItem>
-              ))}
-            </List>
-            {idx < navItems.length - 1 && <Divider sx={{ my: 1 }} />}
-          </Box>
-        ))} */}
       </Box>
     </Box>
   );

@@ -79,7 +79,7 @@ const Header: React.FC = () => {
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           {isMobile && (
             <IconButton
-              color="inherit"
+              color="primary"
               edge="start"
               onClick={() => dispatch(toggleSidebar())}
             >
