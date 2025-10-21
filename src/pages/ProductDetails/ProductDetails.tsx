@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
-import "./ProductDetails.css";
-import renderStars from "../../utils/RenderStars";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { useParams } from "react-router-dom";
 import { addToCart, removeFromCart } from "../../store/cartSlice";
+import { RootState } from "../../store/store";
+import renderStars from "../../utils/RenderStars";
+import "./ProductDetails.css";
 
 type Product = {
   id: number;

@@ -1,4 +1,5 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
+import axios from "axios";
 import { Form, Formik } from "formik";
 import { useCountries } from "../../../../shared/hooks/useCountries";
 import { useBusinessDocumentTypes } from "../../../../shared/hooks/useDocumentTypes";
@@ -18,8 +19,23 @@ const GarageCreate = () => {
 
   const { documentTypes, loading, error, retry } = useBusinessDocumentTypes();
 
-  const handleSubmit = (values: FormValues) => {
+  const handleSubmit = async (values: FormValues) => {
     console.log("Form submitted : ", values);
+    try {
+      const payload = {
+        ...values,
+        documents: {},
+      };
+      const response = await axios.post(
+        "https://dummyjson.com/posts/add",
+        payload
+      );
+      console.log("Server response:", response.data);
+      alert("Garage created successfully!");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Failed to create garage. Please try again.");
+    }
   };
 
   return (
