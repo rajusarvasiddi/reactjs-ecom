@@ -143,7 +143,10 @@ const GarageCreate = () => {
                       mt: 2,
                     }}
                   >
-                    <BusinessDocuments documentTypes={documentTypes} />
+                    <BusinessDocuments
+                      legendTitle="Business Registration Document(s)"
+                      documentTypes={documentTypes}
+                    />
                   </Box>
                   <Box
                     sx={{

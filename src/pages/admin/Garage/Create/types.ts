@@ -20,5 +20,5 @@ export interface FormValues {
     country: string;
     pinCode: string;
   };
-  documents: Record<string, string>;
+  documents: Record<string, { name: string; file?: File }>; // Updated to include file
 }
