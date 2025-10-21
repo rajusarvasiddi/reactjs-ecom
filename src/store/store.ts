@@ -10,18 +10,26 @@ const rootReducer = combineReducers({
   sidebar: sidebarReducer,
 });
 
-const preloadedState = loadState();
+const preloadedState = loadState() || {};
 
 export const store = configureStore({
   reducer: rootReducer,
   preloadedState,
 });
 
+// Debounce saveState to avoid excessive localStorage writes
+let saveTimeout: ReturnType<typeof setTimeout> | null = null;
+const DEBOUNCE_DELAY = 300; // milliseconds
 store.subscribe(() => {
-  saveState({
-    cart: store.getState().cart,
-    sidebar: store.getState().sidebar,
-  });
+  clearTimeout(saveTimeout!);
+  saveTimeout = setTimeout(
+    () =>
+      saveState({
+        cart: store.getState().cart,
+        sidebar: store.getState().sidebar,
+      }),
+    DEBOUNCE_DELAY
+  );
 });
 
 // Sync across tabs
