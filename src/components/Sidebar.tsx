@@ -1,24 +1,27 @@
+// src/components/Sidebar.tsx
+import React from "react";
 import {
-  AppBar,
   Box,
   Drawer,
-  IconButton,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
   Toolbar,
   Typography,
-  useMediaQuery,
   useTheme,
+  useMediaQuery,
+  Divider,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../store/store";
+import { closeSidebar } from "../store/uiSlice";
 import { NavLink } from "react-router-dom";
-import { WORDS } from "../constants";
+import { WORDS } from "../constants"; // ✅ keep your constant reference
 
 const drawerWidth = 220;
 
+// ✅ Your original navItems structure
 const navItems = [
   {
     items: [{ label: "Dashboard", path: "/admin/dashboard" }],
@@ -35,8 +38,8 @@ const navItems = [
     section: "Mechanic",
     items: [
       { label: "Mechanic Create", path: "/admin/mechanic-create" },
-      { label: " Mechanic List", path: "/admin/mechanics" },
-      { label: " Job Cards", path: "/admin/job-cards" },
+      { label: "Mechanic List", path: "/admin/mechanics" },
+      { label: "Job Cards", path: "/admin/job-cards" },
     ],
   },
   {
@@ -55,100 +58,137 @@ const navItems = [
   },
 ];
 
-const Sidebar = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
+const Sidebar: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const dispatch = useDispatch();
+  const mobileOpen = useSelector((state: RootState) => state.ui.sidebarOpen);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const drawerContent = (
+    <Box>
+      <Toolbar
+        sx={{ minHeight: 64, display: "flex", alignItems: "center", px: 2 }}
+      >
+        <img
+          src="/logo192.png"
+          alt="GMS Logo"
+          style={{ width: 30, height: 30 }}
+        />
+        <Typography variant="h6" sx={{ fontWeight: 600, ml: 1 }}>
+          GMS
+        </Typography>
+      </Toolbar>
 
-  return (
-    <>
-      <Box sx={{ display: "flex" }}>
-        {/* Top AppBar */}
-        <Drawer
-          variant="permanent"
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            [`& .MuiDrawer-paper`]: {
-              width: drawerWidth,
-              boxSizing: "border-box",
-              backgroundColor: "#ffffff",
-              borderRight: "1px solid #e0e0e0",
-            },
-          }}
-        >
-          <AppBar position="sticky">
-            <Toolbar
-              sx={{ minHeight: 64, display: "flex", alignItems: "center" }}
-            >
-              {isMobile && (
-                <IconButton
-                  color="primary"
-                  edge="start"
-                  onClick={handleDrawerToggle}
-                  sx={{ mr: 2 }}
-                >
-                  <MenuIcon />
-                </IconButton>
-              )}
-
-              <Box
-                sx={{ display: "flex", alignItems: "center", gap: 1, px: 2 }}
+      <Box sx={{ px: 1.5, pt: 1 }}>
+        {navItems.map((group, index) => (
+          <Box key={index} sx={{ mb: 2 }}>
+            {group.section && (
+              <Typography
+                variant="caption"
+                sx={{ px: 2, pb: 1, color: "custom.lightGray" }}
               >
-                <img
-                  src="/logo192.png"
-                  alt="GMS Logo"
-                  style={{ width: 30, height: 30 }}
-                />
-                <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                  GMS
-                </Typography>
-              </Box>
-            </Toolbar>
-          </AppBar>
-
-          <Box sx={{ px: 1.5, pt: 1 }}>
+                {group.section}
+              </Typography>
+            )}
             <List>
-              {navItems.map((group, index) => (
-                <Box key={index} sx={{ mb: 2 }}>
-                  {group.section && (
-                    <Typography
-                      variant="caption"
-                      sx={{ px: 2, pb: 1, color: "custom.lightGray" }}
-                    >
-                      {group.section}
-                    </Typography>
-                  )}
-                  <List>
-                    {group.items.map((item) => (
-                      <ListItem key={item.path} disablePadding>
-                        <Box sx={{ width: "100%" }}>
-                          <NavLink
-                            to={item.path}
-                            style={{ textDecoration: "none" }}
-                          >
-                            {({ isActive }) => (
-                              <ListItemButton selected={isActive}>
-                                <ListItemText primary={item.label} />
-                              </ListItemButton>
-                            )}
-                          </NavLink>
-                        </Box>
-                      </ListItem>
-                    ))}
-                  </List>
-                  {/* {index < navItems.length - 1 && <Divider sx={{ my: 1.5 }} />} */}
-                </Box>
+              {group.items.map((item) => (
+                <ListItem key={item.path} disablePadding>
+                  <NavLink
+                    to={item.path}
+                    style={{ textDecoration: "none", width: "100%" }}
+                    onClick={() => {
+                      if (isMobile) {
+                        dispatch(closeSidebar());
+                      }
+                    }}
+                  >
+                    {({ isActive }) => (
+                      <ListItemButton selected={isActive}>
+                        <ListItemText primary={item.label} />
+                      </ListItemButton>
+                    )}
+                  </NavLink>
+                </ListItem>
               ))}
             </List>
           </Box>
-        </Drawer>
+        ))}
+        {/* {navItems.map((section, idx) => (
+          <Box key={idx}>
+            {section.section && (
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  px: 2,
+                  mt: 1.5,
+                  mb: 0.5,
+                  color: "text.secondary",
+                  fontWeight: 600,
+                }}
+              >
+                {section.section}
+              </Typography>
+            )}
+            <List disablePadding>
+              {section.items.map((item) => (
+                <ListItem key={item.path} disablePadding>
+                  <NavLink
+                    to={item.path}
+                    style={{ textDecoration: "none", width: "100%" }}
+                    onClick={() => {
+                      if (isMobile) dispatch(closeSidebar());
+                    }}
+                  >
+                    {({ isActive }) => (
+                      <ListItemButton selected={isActive}>
+                        <ListItemText
+                          primary={item.label}
+                          primaryTypographyProps={{ fontSize: 14 }}
+                        />
+                      </ListItemButton>
+                    )}
+                  </NavLink>
+                </ListItem>
+              ))}
+            </List>
+            {idx < navItems.length - 1 && <Divider sx={{ my: 1 }} />}
+          </Box>
+        ))} */}
       </Box>
-    </>
+    </Box>
+  );
+
+  return (
+    <Box
+      component="nav"
+      sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
+    >
+      {/* Mobile Drawer */}
+      <Drawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={() => dispatch(closeSidebar())}
+        ModalProps={{ keepMounted: true }}
+        sx={{
+          display: { xs: "block", md: "none" },
+          "& .MuiDrawer-paper": { width: drawerWidth },
+        }}
+      >
+        {drawerContent}
+      </Drawer>
+
+      {/* Desktop Drawer */}
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: "none", md: "block" },
+          "& .MuiDrawer-paper": { width: drawerWidth, boxSizing: "border-box" },
+        }}
+        open
+      >
+        {drawerContent}
+      </Drawer>
+    </Box>
   );
 };
 

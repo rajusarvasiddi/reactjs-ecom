@@ -1,3 +1,5 @@
+import { boolean } from "yup";
+
 // src/store/localStorage.ts
 type CartItem = {
   id: number;
@@ -12,8 +14,13 @@ type CartState = {
   items: CartItem[];
 };
 
+type UIState = {
+  sidebarOpen: boolean;
+};
+
 type PersistedState = {
   cart: CartState;
+  ui: UIState;
 };
 
 export const loadState = (): Partial<PersistedState> | undefined => {

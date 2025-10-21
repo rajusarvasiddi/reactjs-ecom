@@ -1,14 +1,12 @@
+// src/components/Header.tsx
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/store";
-import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import {
   AppBar,
   Toolbar,
   Typography,
   Box,
-  Link as MuiLink,
   FormControl,
   Select,
   MenuItem,
@@ -21,124 +19,152 @@ import {
   Tooltip,
   IconButton,
   Badge,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import {
   NavLink,
   LinkProps as RouterLinkProps,
   useNavigate,
 } from "react-router-dom";
-import { Logout, PersonAdd, Settings } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import {
+  Logout,
+  PersonAdd,
+  Settings,
+  Menu as MenuIcon,
+} from "@mui/icons-material";
+import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
+import { toggleSidebar } from "../store/uiSlice";
 
-// TypeScript-safe NavLink for MuiLink
+// Type-safe NavLink for MuiLink-like usage
 const NavLinkBehavior = React.forwardRef<HTMLAnchorElement, RouterLinkProps>(
   (props, ref) => <NavLink ref={ref} {...props} />
 );
 
-const Header = () => {
+const Header: React.FC = () => {
   const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    navigate("/login");
-  };
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (e: React.MouseEvent<HTMLElement>) =>
+    setAnchorEl(e.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+  const handleLogout = () => navigate("/login");
+
   const cartCount = useSelector((state: RootState) =>
     state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
   );
 
   const [role, setRole] = useState("admin");
-
-  const handleRoleChange = (event: SelectChangeEvent) => {
-    const selectedRole = event.target.value as string;
-    setRole(selectedRole);
-  };
+  const handleRoleChange = (event: SelectChangeEvent) =>
+    setRole(event.target.value as string);
 
   const navLinks: any[] = [
-    // { label: "Garage Create", path: "/admin/garage-create" },
-    // { label: "Products", path: "/admin/products" },
+    // add if needed
   ];
 
   return (
     <AppBar position="sticky">
       <Toolbar
-        sx={{ display: "flex", justifyContent: "space-between" }}
-        className="toolbarBorder"
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
+        {/* Left: (mobile) hamburger + logo, (desktop) logo */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          {isMobile && (
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={() => dispatch(toggleSidebar())}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <img
             src="/logo192.png"
             alt="GMS Logo"
-            style={{ width: 40, height: 40, objectFit: "contain" }}
+            style={{
+              width: isMobile ? 30 : 40,
+              height: isMobile ? 30 : 40,
+              objectFit: "contain",
+            }}
           />
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+          <Typography
+            variant="h6"
+            sx={{ fontWeight: 600, fontSize: isMobile ? 16 : 20 }}
+          >
             GMS
           </Typography>
         </Box>
 
-        <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-          {/* Regular links using MuiLink */}
+        {/* Right: desktop items hidden on mobile except notifications + avatar */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          {/* Nav Links (Desktop only) */}
           {navLinks.map((item) => (
-            <MuiLink key={item.path} component={NavLinkBehavior} to={item.path}>
-              {item.label}
-            </MuiLink>
+            <Box key={item.path} sx={{ display: isMobile ? "none" : "block" }}>
+              <NavLinkBehavior to={item.path}>{item.label}</NavLinkBehavior>
+            </Box>
           ))}
-          {/* Search bar */}
+
+          {/* Search (Desktop only) */}
           <TextField
             size="small"
-            variant="outlined"
             placeholder="Search..."
-            sx={{ background: "#FFFFFF", borderRadius: 1 }}
-            onChange={(e) => console.log("Search value:", e.target.value)}
+            sx={{
+              display: isMobile ? "none" : "block",
+              background: "#fff",
+              borderRadius: 1,
+              width: 200,
+            }}
+            onChange={(e) => console.log("Search:", e.target.value)}
           />
-          {/* Create Job Card */}
-          <MuiLink component={NavLinkBehavior} to={"/admin/job-cards"}>
-            Create Job Card
-          </MuiLink>
 
-          <Badge color="error" badgeContent={cartCount} sx={{ ml: 2, mr: 2 }}>
-            <NotificationsActiveOutlinedIcon sx={{ color: "#000" }} />
-          </Badge>
+          {/* Create Job Card (Desktop only) */}
+          <Box component="span" sx={{ display: isMobile ? "none" : "block" }}>
+            <NavLinkBehavior to={"/admin/job-cards"}>
+              Create Job Card
+            </NavLinkBehavior>
+          </Box>
 
-          {/* Role dropdown */}
+          {/* Role (Desktop only) */}
           <FormControl
             variant="outlined"
             size="small"
-            sx={{ minWidth: 120, background: "#FFFFFF", borderRadius: 1 }}
+            sx={{
+              display: isMobile ? "none" : "flex",
+              minWidth: 120,
+              background: "#fff",
+              borderRadius: 1,
+            }}
           >
-            <Select
-              labelId="role-select-label"
-              value={role}
-              size="small"
-              onChange={handleRoleChange}
-            >
+            <Select value={role} onChange={handleRoleChange} size="small">
               <MenuItem value="admin">Admin</MenuItem>
               <MenuItem value="garageOwner">Garage Owner</MenuItem>
               <MenuItem value="mechanic">Mechanic</MenuItem>
             </Select>
           </FormControl>
 
+          {/* Notifications (always visible) */}
+          <Badge color="error" badgeContent={cartCount} sx={{ ml: 1 }}>
+            <NotificationsActiveOutlinedIcon sx={{ color: "#000" }} />
+          </Badge>
+
+          {/* Avatar */}
           <Tooltip title="Account settings">
-            <IconButton
-              onClick={handleClick}
-              size="small"
-              sx={{ ml: 2 }}
-              aria-controls={open ? "account-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-            >
+            <IconButton onClick={handleClick} size="small" sx={{ ml: 1 }}>
               <Avatar sx={{ width: 32, height: 32 }}>MK</Avatar>
             </IconButton>
           </Tooltip>
+
+          {/* Account menu */}
           <Menu
             anchorEl={anchorEl}
-            id="account-menu"
             open={open}
             onClose={handleClose}
             onClick={handleClose}

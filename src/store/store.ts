@@ -1,11 +1,13 @@
 // src/store/store.ts
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import cartReducer from "./cartSlice";
+import uiReducer from "./uiSlice";
 import { replaceCart } from "../store/cartSlice";
 import { loadState, saveState } from "./localStorage";
 
 const rootReducer = combineReducers({
   cart: cartReducer,
+  ui: uiReducer,
 });
 
 const preloadedState = loadState();
@@ -18,6 +20,7 @@ export const store = configureStore({
 store.subscribe(() => {
   saveState({
     cart: store.getState().cart,
+    ui: store.getState().ui,
   });
 });
 
