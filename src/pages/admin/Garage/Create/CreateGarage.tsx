@@ -145,19 +145,30 @@ const GarageCreate = () => {
                   >
                     <BusinessDocuments documentTypes={documentTypes} />
                   </Box>
-                  <Box sx={{ mt: 1 }}>
+                  <Box
+                    sx={{
+                      mt: 1,
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      gap: 1,
+                    }}
+                  >
                     <Button
                       type="submit"
                       variant="contained"
                       color="primary"
-                      sx={{ mr: 1 }}
+                      size="small"
+                      sx={{ py: 0.5, height: 32, minWidth: 88 }}
                     >
                       Submit
                     </Button>
                     <Button
+                      type="button"
                       variant="outlined"
                       color="secondary"
                       onClick={handleReset}
+                      size="small"
+                      sx={{ py: 0.5, height: 32, minWidth: 88 }}
                     >
                       Reset
                     </Button>
