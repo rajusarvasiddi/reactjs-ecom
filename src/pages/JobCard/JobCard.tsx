@@ -1,12 +1,13 @@
 import {
   Box,
   Button,
-  Grid,
-  SelectChangeEvent,
   Step,
+  StepContent,
   StepLabel,
   Stepper,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { lazy, Suspense, useEffect, useState } from "react";
 
@@ -21,21 +22,26 @@ const steps = [
   "Delivered",
   "Re-work/Grievance",
 ];
+
+// lazy imports
+const VehicleInfoStep = lazy(() => import("./steps/VehicleInfoStep"));
 const CustomerInfoStep = lazy(() => import("./steps/CustomerInfoStep"));
-const DeliveryDetailsStep = lazy(() => import("./steps/DeliveryDetailsStep"));
-const GrievanceStep = lazy(() => import("./steps/GrievanceStep"));
-const InspectionApprovalStep = lazy(
-  () => import("./steps/InspectionApprovalStep")
-);
-const InvoicePaymentsStep = lazy(() => import("./steps/InvoicePaymentsStep"));
 const JobDetailsStep = lazy(() => import("./steps/JobDetailsStep"));
 const TechnicialDetailsStep = lazy(
   () => import("./steps/TechnicialDetailsStep")
 );
-const VehicleInfoStep = lazy(() => import("./steps/VehicleInfoStep"));
+const InspectionApprovalStep = lazy(
+  () => import("./steps/InspectionApprovalStep")
+);
 const WorkProgressStep = lazy(() => import("./steps/WorkProgressStep"));
+const InvoicePaymentsStep = lazy(() => import("./steps/InvoicePaymentsStep"));
+const DeliveryDetailsStep = lazy(() => import("./steps/DeliveryDetailsStep"));
+const GrievanceStep = lazy(() => import("./steps/GrievanceStep"));
 
 const JobCard = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const getStepFromUrl = () => {
     const params = new URLSearchParams(window.location.search);
     const step = Number(params.get("step"));
@@ -46,33 +52,25 @@ const JobCard = () => {
   const [vehicleMake, setVehicleMake] = useState("");
   const [vehicleModel, setVehicleModel] = useState("");
 
-  // Update URL whenever activeStep changes
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     params.set("step", activeStep.toString());
     window.history.replaceState(null, "", "?" + params.toString());
   }, [activeStep]);
 
-  const handleVehicleMakeChange = (event: SelectChangeEvent) => {
-    const make = event.target.value;
-    setVehicleMake(make);
-  };
-
-  const handleVehicleModelChange = (event: SelectChangeEvent) => {
-    const model = event.target.value;
-    setVehicleModel(model);
-  };
-
   const handleNext = () => {
-    if (activeStep < steps.length - 1) {
-      setActiveStep((prevStep) => prevStep + 1);
-    }
+    if (activeStep < steps.length - 1) setActiveStep((prev) => prev + 1);
   };
 
   const handlePrevious = () => {
-    if (activeStep > 0) {
-      setActiveStep((prevStep) => prevStep - 1);
-    }
+    if (activeStep > 0) setActiveStep((prev) => prev - 1);
+  };
+
+  const handleVehicleMakeChange = (event: any) => {
+    setVehicleMake(event.target.value);
+  };
+  const handleVehicleModelChange = (event: any) => {
+    setVehicleModel(event.target.value);
   };
 
   const getStepContent = (step: number) => {
@@ -87,25 +85,9 @@ const JobCard = () => {
           />
         );
       case 1:
-        return (
-          <>
-            <Grid container>
-              <Grid size={8}>
-                <CustomerInfoStep />
-              </Grid>
-            </Grid>
-          </>
-        );
+        return <CustomerInfoStep />;
       case 2:
-        return (
-          <>
-            <Grid container>
-              <Grid size={12}>
-                <JobDetailsStep />
-              </Grid>
-            </Grid>
-          </>
-        );
+        return <JobDetailsStep />;
       case 3:
         return <TechnicialDetailsStep />;
       case 4:
@@ -119,84 +101,98 @@ const JobCard = () => {
       case 8:
         return <GrievanceStep />;
       default:
-        return "Unknown/Invalid step";
+        return "Unknown step";
     }
   };
 
   return (
-    <>
-      <Box
+    <Box
+      sx={{
+        p: { xs: 2, sm: 3 },
+        bgcolor: "#fafafa",
+      }}
+    >
+      <Typography variant={isMobile ? "h5" : "h4"} fontWeight="bold" mb={3}>
+        Job Card
+      </Typography>
+
+      {/* Vertical Stepper (no scroll, no collapse) */}
+      <Stepper
+        activeStep={activeStep}
+        orientation="vertical"
         sx={{
-          p: 3,
-          display: "flex",
-          flexDirection: "column",
+          ".MuiStepConnector-line": {
+            minHeight: isMobile ? "30px" : "40px",
+          },
         }}
       >
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <Typography
-            variant="h4"
-            sx={{ marginBottom: 2 }}
-            fontWeight="bold"
-            gutterBottom
-          >
-            Job Card
-          </Typography>
-          <Stepper activeStep={activeStep} alternativeLabel>
-            {steps.map((label, index) => (
-              <Step key={label}>
-                <StepLabel
-                  onClick={() => setActiveStep(index)}
-                  sx={{ cursor: "pointer" }}
-                >
-                  {label}
-                </StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          <Box sx={{ mb: 4 }}>
-            <Box sx={{ border: "1px solid #D3D3D3", mt: 2, pt: 2, p: 3 }}>
-              <Suspense fallback={<Typography>Loading step...</Typography>}>
-                {getStepContent(activeStep)}
-              </Suspense>
-            </Box>
-          </Box>
-
-          <Box
-            sx={{
-              flex: "1 1 auto",
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <Button
+        {steps.map((label, index) => (
+          <Step key={label}>
+            <StepLabel
+              onClick={() => setActiveStep(index)}
               sx={{
-                mr: 1,
-                border: "1px solid #000",
-                "&:disabled": {
-                  border: "1px solid #D3D3D3",
+                cursor: "pointer",
+                "& .MuiStepLabel-label": {
+                  fontWeight: index === activeStep ? "bold" : "normal",
+                  color: index === activeStep ? "#000" : "#666",
                 },
               }}
-              variant="outlined"
-              disabled={activeStep === 0}
-              onClick={handlePrevious}
             >
-              Previous
-            </Button>
-            {activeStep < steps.length - 1 && (
-              <Button
-                sx={{ mr: 1, border: "1px solid #000" }}
-                onClick={handleNext}
-              >
-                Next
-              </Button>
+              {label}
+            </StepLabel>
+            {index === activeStep && (
+              <StepContent>
+                <Box
+                  sx={{
+                    border: "1px solid #E0E0E0",
+                    borderRadius: 2,
+                    p: { xs: 2, sm: 3 },
+                    bgcolor: "#fff",
+                    mt: 1,
+                  }}
+                >
+                  <Suspense fallback={<Typography>Loading step...</Typography>}>
+                    {getStepContent(activeStep)}
+                  </Suspense>
+                </Box>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: isMobile ? "space-between" : "flex-end",
+                    gap: 2,
+                    mt: 3,
+                  }}
+                >
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    disabled={activeStep === 0}
+                    onClick={handlePrevious}
+                    sx={{
+                      flex: isMobile ? 1 : "unset",
+                    }}
+                  >
+                    Previous
+                  </Button>
+
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    sx={{
+                      flex: isMobile ? 1 : "unset",
+                    }}
+                  >
+                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  </Button>
+                </Box>
+              </StepContent>
             )}
-            {activeStep === steps.length - 1 && (
-              <Button sx={{ mr: 1, border: "1px solid #000" }}>Finish</Button>
-            )}
-          </Box>
-        </Box>
-      </Box>
-    </>
+          </Step>
+        ))}
+      </Stepper>
+    </Box>
   );
 };
 
