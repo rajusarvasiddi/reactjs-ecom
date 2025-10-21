@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { WORDS } from "../constants";
 import { RootState } from "../store/store";
-import { closeSidebar } from "../store/uiSlice";
+import { closeSidebar } from "../store/sidebarSlice";
 
 const drawerWidth = 220;
 
@@ -59,7 +59,9 @@ const Sidebar: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const dispatch = useDispatch();
-  const mobileOpen = useSelector((state: RootState) => state.ui.sidebarOpen);
+  const mobileOpen = useSelector(
+    (state: RootState) => state.sidebar.sidebarOpen
+  );
 
   const drawerContent = (
     <Box>

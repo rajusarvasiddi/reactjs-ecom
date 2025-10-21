@@ -34,7 +34,7 @@ import {
   Menu as MenuIcon,
 } from "@mui/icons-material";
 import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
-import { toggleSidebar } from "../store/uiSlice";
+import { toggleSidebar } from "../store/sidebarSlice";
 
 // Type-safe NavLink for MuiLink-like usage
 const NavLinkBehavior = React.forwardRef<HTMLAnchorElement, RouterLinkProps>(
@@ -116,21 +116,14 @@ const Header: React.FC = () => {
           <TextField
             size="small"
             placeholder="Search..."
+            autoComplete="off"
             sx={{
               display: isMobile ? "none" : "block",
               background: "#fff",
               borderRadius: 1,
               width: 200,
             }}
-            onChange={(e) => console.log("Search:", e.target.value)}
           />
-
-          {/* Create Job Card (Desktop only) */}
-          <Box component="span" sx={{ display: isMobile ? "none" : "block" }}>
-            <NavLinkBehavior to={"/admin/job-cards"}>
-              Create Job Card
-            </NavLinkBehavior>
-          </Box>
 
           {/* Role (Desktop only) */}
           <FormControl

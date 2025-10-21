@@ -14,13 +14,13 @@ type CartState = {
   items: CartItem[];
 };
 
-type UIState = {
+type SidebarState = {
   sidebarOpen: boolean;
 };
 
 type PersistedState = {
   cart: CartState;
-  ui: UIState;
+  sidebar: SidebarState;
 };
 
 export const loadState = (): Partial<PersistedState> | undefined => {
