@@ -1,12 +1,12 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
-import GarageAddress from "./GarageAddress";
 import { useCountries } from "../../../../shared/hooks/useCountries";
 import { useBusinessDocumentTypes } from "../../../../shared/hooks/useDocumentTypes";
+import BusinessDocuments from "./BusinessDocumentsSection";
+import GarageAddress from "./GarageAddress";
 import { garageInitialValues } from "./initialValues";
 import { FormValues } from "./types";
 import { garageValidationSchema } from "./validationSchema";
-import BusinessDocuments from "./BusinessDocumentsSection";
 
 const GarageCreate = () => {
   const {
