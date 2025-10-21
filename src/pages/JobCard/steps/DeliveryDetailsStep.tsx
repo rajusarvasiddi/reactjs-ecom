@@ -27,7 +27,7 @@ const DeliveryDetailsStep = () => {
       </Typography>
 
       <Grid container spacing={2}>
-        <Grid size={4} sx={{ pb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ pb: 2 }}>
           <TextField
             fullWidth
             label="Delivery Date & Time"
@@ -37,7 +37,7 @@ const DeliveryDetailsStep = () => {
           />
         </Grid>
 
-        <Grid size={4} sx={{ pb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ pb: 2 }}>
           <TextField
             fullWidth
             label="Delivered By (Staff Name)"
@@ -46,7 +46,7 @@ const DeliveryDetailsStep = () => {
           />
         </Grid>
 
-        <Grid size={4} sx={{ pb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ pb: 2 }}>
           <TextField
             fullWidth
             label="Received By (Customer Name)"
@@ -55,7 +55,7 @@ const DeliveryDetailsStep = () => {
           />
         </Grid>
 
-        <Grid size={4} sx={{ pb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ pb: 2 }}>
           <FormControl fullWidth size="small">
             <InputLabel>Delivery Condition</InputLabel>
             <Select
@@ -70,7 +70,7 @@ const DeliveryDetailsStep = () => {
           </FormControl>
         </Grid>
 
-        <Grid size={4} sx={{ pb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ pb: 2 }}>
           <TextField
             fullWidth
             label="Delivery Remarks"
@@ -81,7 +81,7 @@ const DeliveryDetailsStep = () => {
           />
         </Grid>
 
-        <Grid size={4} sx={{ pb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ pb: 2 }}>
           <Button variant="outlined" component="label" fullWidth size="small">
             Upload / Capture Signature
             <input

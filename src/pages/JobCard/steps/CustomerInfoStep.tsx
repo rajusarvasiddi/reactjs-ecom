@@ -26,7 +26,7 @@ const CustomerInfoStep = () => {
 
       <Grid container spacing={2}>
         {/* Left Column */}
-        <Grid size={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Grid size={12} sx={{ mb: 1 }}>
             <TextField
               fullWidth
@@ -62,7 +62,7 @@ const CustomerInfoStep = () => {
         </Grid>
 
         {/* Right Column */}
-        <Grid size={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Grid size={12} sx={{ mb: 1 }}>
             <TextField
               fullWidth

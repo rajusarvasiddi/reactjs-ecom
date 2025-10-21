@@ -19,7 +19,7 @@ const WorkProgressStep = () => {
         Work Progress
       </Typography>
       <Grid container spacing={2}>
-        <Grid size={4} sx={{ mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Work Started On (DateTime)"
@@ -27,7 +27,7 @@ const WorkProgressStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid size={4} sx={{ mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Work Completed On (DateTime)"
@@ -35,7 +35,7 @@ const WorkProgressStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid size={4} sx={{ mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <FormControl fullWidth size="small">
             <InputLabel id="work-status-label">Work Status</InputLabel>
             <Select labelId="work-status-label" label="Work Status">
@@ -46,7 +46,7 @@ const WorkProgressStep = () => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid size={4} sx={{ mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Parts Used"
@@ -54,7 +54,7 @@ const WorkProgressStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid size={4} sx={{ mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Labor Hours Spent"
@@ -62,7 +62,7 @@ const WorkProgressStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid size={12} sx={{ mb: 2 }}>
+        <Grid size={{ xs: 12 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             multiline

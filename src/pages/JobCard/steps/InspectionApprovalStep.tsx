@@ -7,7 +7,7 @@ const InspectionApprovalStep = () => {
         Inspection and Approval
       </Typography>
       <Grid container spacing={2}>
-        <Grid size={4} sx={{ mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Inspection Date"
@@ -15,7 +15,7 @@ const InspectionApprovalStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid size={4} sx={{ mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Inspector Name"
@@ -23,7 +23,7 @@ const InspectionApprovalStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid size={4} sx={{ mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Approval Date"
@@ -31,7 +31,7 @@ const InspectionApprovalStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid size={12} sx={{ mb: 2 }}>
+        <Grid size={{ xs: 12 }} sx={{ mb: 2 }}>
           <TextField
             id="outlined-multiline-static"
             label="Condition Report / Checklist"
@@ -41,7 +41,7 @@ const InspectionApprovalStep = () => {
             defaultValue=""
           />
         </Grid>
-        <Grid size={4} sx={{ mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Estimated Cost Approval (Yes / No)"
@@ -49,7 +49,7 @@ const InspectionApprovalStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid size={4} sx={{ mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Approved By (Manager / Customer)"

@@ -4,12 +4,10 @@ import {
   FormControlLabel,
   FormGroup,
   FormLabel,
-  Grid,
-  SelectChangeEvent,
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import Grid from "@mui/material/Grid";
 const JobDetailsStep = () => {
   const serviceTypes = [
     { id: 1, name: "General", isChecked: true },
@@ -35,12 +33,6 @@ const JobDetailsStep = () => {
     { id: 9, name: "Clutch" },
     { id: 10, name: "Fuel Pump" },
   ];
-  const [serviceType, setServiceType] = useState("");
-  const [partName, setPartName] = useState<string[]>([]);
-  const handleServiceTypeChange = (event: SelectChangeEvent) => {
-    const serviceType = event.target.value;
-    setServiceType(serviceType);
-  };
 
   return (
     <>
@@ -48,7 +40,8 @@ const JobDetailsStep = () => {
         Job Details
       </Typography>
       <Grid container spacing={2}>
-        <Grid size={5}>
+        {/* Main column: spans full width on xs, 7/12 on md and up */}
+        <Grid size={{ xs: 12, md: 6, lg: 6 }}>
           <Grid size={12} sx={{ mb: 1 }}>
             <TextField
               id="outlined-multiline-static"
@@ -85,7 +78,8 @@ const JobDetailsStep = () => {
           </Grid>
         </Grid>
 
-        <Grid size={3}>
+        {/* Service column: stacks under main on small screens, becomes its own column on lg */}
+        <Grid size={{ xs: 12, md: 5, lg: 3 }}>
           <Grid size={12} sx={{ mb: 1 }}>
             <FormControl
               sx={{ mb: 1, mt: 0, mx: 0 }}
@@ -113,7 +107,8 @@ const JobDetailsStep = () => {
           </Grid>
         </Grid>
 
-        <Grid size={3}>
+        {/* Parts column: stacks under main on small screens, becomes its own column on lg */}
+        <Grid size={{ xs: 12, md: 12, lg: 3 }}>
           <Grid size={12} sx={{ mb: 1 }}>
             <FormControl
               sx={{ my: 1, mx: 0 }}

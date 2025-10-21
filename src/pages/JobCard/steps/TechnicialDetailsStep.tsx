@@ -21,60 +21,62 @@ const TechnicialDetailsStep = () => {
         Technician
       </Typography>
       <Grid container spacing={2}>
-        <Grid size={12}>
-          <Grid size={4} sx={{ mb: 2 }}>
-            <TextField
-              fullWidth
-              label="Technician ID"
-              size="small"
-              autoComplete="off"
-            />
-          </Grid>
-          <Grid size={4} sx={{ mb: 2 }}>
-            <FormControl fullWidth size="small">
-              <InputLabel id="technician-status-label">
-                Technician Skill set
-              </InputLabel>
-              <Select
-                labelId="technician-status-label"
-                id="technician-status"
-                label="Status"
-                value={technicianSkillSet}
-                onChange={handleTechnicianSkillSetChange}
-              >
-                <MenuItem value="">-Select-</MenuItem>
-                <MenuItem value={1}>Skill 1</MenuItem>
-                <MenuItem value={2}>Skill 2</MenuItem>
-                <MenuItem value={3}>Skill 3</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid size={4} sx={{ mb: 2 }}>
-            <TextField
-              fullWidth
-              label="Scheduled End Date & Time"
-              size="small"
-              autoComplete="off"
-            />
-          </Grid>
-          <Grid size={4} sx={{ mb: 2 }}>
-            <TextField
-              fullWidth
-              label="Estimated Labor Hours"
-              size="small"
-              autoComplete="off"
-            />
-          </Grid>
-          <Grid size={4} sx={{ mb: 2 }}>
-            <TextField
-              fullWidth
-              multiline
-              rows={8}
-              label="Remarks / Instructions"
-              size="small"
-              autoComplete="off"
-            />
-          </Grid>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
+          <TextField
+            fullWidth
+            label="Technician ID"
+            size="small"
+            autoComplete="off"
+          />
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
+          <FormControl fullWidth size="small">
+            <InputLabel id="technician-status-label">
+              Technician Skill set
+            </InputLabel>
+            <Select
+              labelId="technician-status-label"
+              id="technician-status"
+              label="Technician Skill set"
+              value={technicianSkillSet}
+              onChange={handleTechnicianSkillSetChange}
+            >
+              <MenuItem value="">-Select-</MenuItem>
+              <MenuItem value={1}>Skill 1</MenuItem>
+              <MenuItem value={2}>Skill 2</MenuItem>
+              <MenuItem value={3}>Skill 3</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
+          <TextField
+            fullWidth
+            label="Scheduled End Date & Time"
+            size="small"
+            autoComplete="off"
+          />
+        </Grid>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
+          <TextField
+            fullWidth
+            label="Estimated Labor Hours"
+            size="small"
+            autoComplete="off"
+          />
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 12 }} sx={{ mb: 2 }}>
+          <TextField
+            fullWidth
+            multiline
+            rows={8}
+            label="Remarks / Instructions"
+            size="small"
+            autoComplete="off"
+          />
         </Grid>
       </Grid>
       {/* <div>Technician Name (Dropdown / Autocomplete)</div>

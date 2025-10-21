@@ -22,7 +22,7 @@ const GrievanceStep = () => {
 
       <Grid container spacing={2}>
         {/* Rework Required */}
-        <Grid size={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <FormControl fullWidth size="small">
             <InputLabel>Rework Required?</InputLabel>
             <Select
@@ -37,7 +37,7 @@ const GrievanceStep = () => {
         </Grid>
 
         {/* Grievance Type */}
-        <Grid size={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <FormControl fullWidth size="small">
             <InputLabel>Grievance Type</InputLabel>
             <Select
@@ -54,7 +54,7 @@ const GrievanceStep = () => {
         </Grid>
 
         {/* Description of Issue */}
-        <Grid size={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextField
             fullWidth
             label="Description of Issue"
@@ -66,7 +66,7 @@ const GrievanceStep = () => {
         </Grid>
 
         {/* Action Taken */}
-        <Grid size={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextField
             fullWidth
             label="Action Taken"
@@ -78,7 +78,7 @@ const GrievanceStep = () => {
         </Grid>
 
         {/* Responsible Staff / Technician */}
-        <Grid size={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextField
             fullWidth
             label="Responsible Staff / Technician"
@@ -88,7 +88,7 @@ const GrievanceStep = () => {
         </Grid>
 
         {/* Resolution Date */}
-        <Grid size={6}>
+        <Grid size={{ xs: 12, sm: 6 }}>
           <TextField
             fullWidth
             label="Resolution Date"
@@ -99,7 +99,7 @@ const GrievanceStep = () => {
         </Grid>
 
         {/* Status */}
-        <Grid size={6} sx={{ pb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6 }} sx={{ pb: 2 }}>
           <FormControl fullWidth size="small">
             <InputLabel>Status</InputLabel>
             <Select

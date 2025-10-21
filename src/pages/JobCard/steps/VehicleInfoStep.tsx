@@ -1,8 +1,5 @@
 import {
-  Box,
-  Button,
   FormControl,
-  Grid,
   InputLabel,
   MenuItem,
   Select,
@@ -10,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
+import Grid from "@mui/material/Grid";
 interface VehicleInfoStepProps {
   vehicleMake: string;
   vehicleModel: string;
@@ -29,8 +26,8 @@ const VehicleInfoStep: React.FC<VehicleInfoStepProps> = ({
       <Typography variant="h6" gutterBottom>
         Vehicle Information
       </Typography>
-      <Grid container direction={"column"} spacing={2}>
-        <Grid size={4}>
+      <Grid container direction="column" spacing={2}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <TextField
             fullWidth
             label="Rego Number"
@@ -38,7 +35,8 @@ const VehicleInfoStep: React.FC<VehicleInfoStepProps> = ({
             autoComplete="off"
           />
         </Grid>
-        <Grid size={4}>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <TextField
             fullWidth
             label="VIN Number"
@@ -46,7 +44,8 @@ const VehicleInfoStep: React.FC<VehicleInfoStepProps> = ({
             autoComplete="off"
           />
         </Grid>
-        <Grid size={4}>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <FormControl size="small" fullWidth>
             <InputLabel id="vehicle-make-label">Make</InputLabel>
             <Select
@@ -56,19 +55,17 @@ const VehicleInfoStep: React.FC<VehicleInfoStepProps> = ({
               label="Make"
               onChange={handleVehicleMakeChange}
             >
-              {/* Placeholder */}
               <MenuItem value="">
                 <em>-Select-</em>
               </MenuItem>
-
-              {/* Actual options */}
               <MenuItem value={1}>Audi</MenuItem>
               <MenuItem value={2}>BMW</MenuItem>
               <MenuItem value={3}>Toyota</MenuItem>
             </Select>
           </FormControl>
         </Grid>
-        <Grid size={4}>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <FormControl size="small" fullWidth>
             <InputLabel id="vehicle-model-label">Model</InputLabel>
             <Select
@@ -78,12 +75,9 @@ const VehicleInfoStep: React.FC<VehicleInfoStepProps> = ({
               label="Model"
               onChange={handleVehicleModelChange}
             >
-              {/* Placeholder */}
               <MenuItem value="">
                 <em>-Select-</em>
               </MenuItem>
-
-              {/* Actual options */}
               <MenuItem value="camry">Camry</MenuItem>
               <MenuItem value="rav4">RAV4</MenuItem>
               <MenuItem value="corolla">Corolla</MenuItem>
@@ -92,7 +86,8 @@ const VehicleInfoStep: React.FC<VehicleInfoStepProps> = ({
             </Select>
           </FormControl>
         </Grid>
-        <Grid size={4}>
+
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <TextField
             fullWidth
             label="Mileage"
@@ -100,7 +95,9 @@ const VehicleInfoStep: React.FC<VehicleInfoStepProps> = ({
             autoComplete="off"
           />
         </Grid>
-        {/* <Grid size={4}>
+
+        {/* Uncomment if you want buttons later */}
+        {/* <Grid item xs={12} sm={6} md={4}>
           <Box display="flex" justifyContent="flex-end">
             <Button variant="outlined" sx={{ mr: 1 }} size="small">
               Reset

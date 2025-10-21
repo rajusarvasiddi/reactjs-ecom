@@ -20,7 +20,7 @@ const InvoicePaymentsStep = () => {
       </Typography>
 
       <Grid container spacing={2}>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Invoice Number"
@@ -28,7 +28,7 @@ const InvoicePaymentsStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Invoice Date"
@@ -37,7 +37,7 @@ const InvoicePaymentsStep = () => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Billing To (Customer / Company)"
@@ -45,7 +45,7 @@ const InvoicePaymentsStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Billing Address"
@@ -53,7 +53,7 @@ const InvoicePaymentsStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Job Cost"
@@ -62,7 +62,7 @@ const InvoicePaymentsStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Additional Charges"
@@ -71,7 +71,7 @@ const InvoicePaymentsStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Labor Charges"
@@ -80,7 +80,7 @@ const InvoicePaymentsStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Parts Charges"
@@ -89,7 +89,7 @@ const InvoicePaymentsStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Tax Amount"
@@ -98,7 +98,7 @@ const InvoicePaymentsStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Total Cost"
@@ -107,7 +107,7 @@ const InvoicePaymentsStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Discount (if any)"
@@ -116,7 +116,7 @@ const InvoicePaymentsStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Tax / GST"
@@ -125,7 +125,7 @@ const InvoicePaymentsStep = () => {
             autoComplete="off"
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <FormControl fullWidth size="small">
             <InputLabel>Payment Mode</InputLabel>
             <Select
@@ -140,7 +140,7 @@ const InvoicePaymentsStep = () => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <FormControl fullWidth size="small">
             <InputLabel>Payment Status</InputLabel>
             <Select
@@ -153,7 +153,7 @@ const InvoicePaymentsStep = () => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Payment Date"
@@ -162,7 +162,7 @@ const InvoicePaymentsStep = () => {
             InputLabelProps={{ shrink: true }}
           />
         </Grid>
-        <Grid sx={{ width: "33.33%", mb: 2 }}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }} sx={{ mb: 2 }}>
           <TextField
             fullWidth
             label="Receipt Number"
