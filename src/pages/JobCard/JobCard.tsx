@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import { lazy, Suspense, useEffect, useState } from "react";
-// import CustomerInfoStep from "./steps/CustomerInfoStep";
 
 const steps = [
   "Create Job Card",
