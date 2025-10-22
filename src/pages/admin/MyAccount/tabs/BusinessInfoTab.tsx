@@ -1,21 +1,62 @@
-import React from "react";
-import { Box, Button, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Button, CircularProgress, TextField } from "@mui/material";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+
+interface BusinessInfo {
+  garageName: string;
+  registrationNo: string;
+  gstTaxId: string;
+  businessEmail: string;
+  businessPhone: string;
+}
 
 const validationSchema = Yup.object().shape({
   garageName: Yup.string().required("Garage / Company Name is required"),
 });
 
-const initialValues = {
-  garageName: "",
-  registrationNo: "",
-  gstTaxId: "",
-  businessEmail: "",
-  businessPhone: "",
-};
-
 const BusinessInfoTab = () => {
+  const getBusinessInfoUrl =
+    "https://mocki.io/v1/3b517869-4480-47eb-90ee-73bebc440da8";
+
+  const [loading, setLoading] = useState(true);
+  const [businessInfo, setBusinessInfo] = useState<BusinessInfo | null>(null);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    const fetchBusinessInfo = async () => {
+      try {
+        const { data } = await axios.get<BusinessInfo>(getBusinessInfoUrl);
+        setBusinessInfo(data);
+        timer = setTimeout(() => {
+          setLoading(false);
+        }, 100);
+      } catch (error) {
+        console.error("Failed to fetch business info", error);
+      }
+    };
+
+    fetchBusinessInfo();
+    return () => clearTimeout(timer);
+  }, []);
+
+  const initialValues = {
+    garageName: businessInfo?.garageName || "",
+    registrationNo: businessInfo?.registrationNo || "",
+    gstTaxId: businessInfo?.gstTaxId || "",
+    businessEmail: businessInfo?.businessEmail || "",
+    businessPhone: businessInfo?.businessPhone || "",
+  };
+
+  if (loading) {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "left", py: 2 }}>
+        <CircularProgress size={24} />
+      </Box>
+    );
+  }
+
   return (
     <Formik
       initialValues={initialValues}
