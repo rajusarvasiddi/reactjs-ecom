@@ -1,17 +1,20 @@
 import { Box, CircularProgress, Tab, Tabs, Typography } from "@mui/material";
 import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { accountTabs } from "./accountTabs";
-import { Suspense } from "react";
+import { Suspense, useState, useEffect } from "react";
 
 const MyAccount = () => {
   const location = useLocation();
+  const [value, setValue] = useState(0);
 
-  // Remove trailing slash and get the last segment of URL
-  const currentTab = accountTabs.findIndex(
-    (tab) => tab.path === location.pathname.replace(/\/$/, "").split("/").pop()
-  );
-
-  const value = currentTab === -1 ? 0 : currentTab;
+  // Update active tab whenever location changes
+  useEffect(() => {
+    const currentTab = accountTabs.findIndex(
+      (tab) =>
+        tab.path === location.pathname.replace(/\/$/, "").split("/").pop()
+    );
+    setValue(currentTab === -1 ? 0 : currentTab);
+  }, [location.pathname]);
 
   return (
     <>
