@@ -1,41 +1,35 @@
-// src/components/Header.tsx
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../store/store";
+import { Logout, Menu as MenuIcon, PersonAdd } from "@mui/icons-material";
+import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 import {
   AppBar,
-  Toolbar,
-  Typography,
+  Avatar,
+  Badge,
   Box,
+  Divider,
   FormControl,
-  Select,
+  IconButton,
+  ListItemIcon,
+  Menu,
   MenuItem,
+  Select,
   SelectChangeEvent,
   TextField,
-  Menu,
-  Avatar,
-  ListItemIcon,
-  Divider,
+  Toolbar,
   Tooltip,
-  IconButton,
-  Badge,
+  Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
+  Link,
   NavLink,
   LinkProps as RouterLinkProps,
   useNavigate,
 } from "react-router-dom";
-import {
-  Logout,
-  PersonAdd,
-  Settings,
-  Menu as MenuIcon,
-} from "@mui/icons-material";
-import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 import { toggleSidebar } from "../store/sidebarSlice";
-import { Link } from "react-router-dom";
+import { RootState } from "../store/store";
 
 // Type-safe NavLink for MuiLink-like usage
 const NavLinkBehavior = React.forwardRef<HTMLAnchorElement, RouterLinkProps>(
@@ -206,12 +200,6 @@ const Header: React.FC = () => {
                 <PersonAdd fontSize="small" />
               </ListItemIcon>
               Add Operator
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <Settings fontSize="small" />
-              </ListItemIcon>
-              Settings
             </MenuItem>
             <Divider />
             <MenuItem onClick={handleLogout}>
