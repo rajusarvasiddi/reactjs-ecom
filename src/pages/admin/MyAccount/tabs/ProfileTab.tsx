@@ -151,7 +151,7 @@ const ProfileTab = () => {
               size="small"
               autoComplete="off"
             />
-            <FormControl>
+            <FormControl size="small">
               <InputLabel id="gender-label">Gender</InputLabel>
               <Select
                 labelId="gender-label"
@@ -159,7 +159,6 @@ const ProfileTab = () => {
                 value={values.gender}
                 onChange={handleChange}
                 label="Gender"
-                size="small"
               >
                 {genders.map((g) => (
                   <MenuItem key={g} value={g}>
@@ -192,7 +191,7 @@ const ProfileTab = () => {
                 />
               </Button>
             </Box>
-            <FormControl>
+            <FormControl size="small">
               <InputLabel id="notification-label">
                 Notification Preference
               </InputLabel>
@@ -201,7 +200,6 @@ const ProfileTab = () => {
                 name="notificationPreference"
                 value={values.notificationPreference}
                 onChange={handleChange}
-                size="small"
                 label="Notification Preference"
               >
                 {notifications.map((n) => (

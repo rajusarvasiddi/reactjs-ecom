@@ -92,7 +92,7 @@ const AddressTab = () => {
               size="small"
               autoComplete="off"
             />
-            <FormControl>
+            <FormControl size="small">
               <InputLabel id="country-label">Country</InputLabel>
               <Select
                 labelId="country-label"
@@ -101,7 +101,6 @@ const AddressTab = () => {
                 onChange={handleChange}
                 required
                 label="Country"
-                size="small"
               >
                 {countries.map((c) => (
                   <MenuItem key={c.code} value={c.code}>
