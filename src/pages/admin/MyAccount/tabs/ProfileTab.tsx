@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -8,9 +8,22 @@ import {
   InputLabel,
   Select,
   Avatar,
-} from "@mui/material";
+  capitalize,
+} from "@mui/material"; // Removed 'capitalize' import
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+
+interface UserInfo {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  dob: string;
+  gender: string;
+  profilePic: File | null;
+  notificationPreference: string;
+}
 
 const genders = ["Male", "Female", "Other"];
 const notifications = ["Email", "SMS", "Push"];
@@ -20,26 +33,68 @@ const validationSchema = Yup.object().shape({
   lastName: Yup.string().required("Last Name is required"),
 });
 
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "user@example.com", // read-only
-  phone: "",
-  dob: "",
-  gender: "",
-  profilePic: null,
-  notification: "",
-};
+// Helper function to capitalize API values
+// const capitalize = (str: string) =>
+//   str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
 const ProfileTab = () => {
+  const getUserInfo =
+    "https://mocki.io/v1/36889aee-67f4-4239-bbff-77c111b9b846";
+
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const { data } = await axios.get<UserInfo>(getUserInfo);
+        let formattedDOB = "";
+        if (data.dob) {
+          const [day, month, year] = data.dob.split("-");
+          formattedDOB = `${year}-${month.padStart(2, "0")}-${day.padStart(
+            2,
+            "0"
+          )}`;
+        }
+        setUserInfo({
+          ...data,
+          dob: formattedDOB,
+          gender: data.gender ? capitalize(data.gender) : "",
+          notificationPreference: data.notificationPreference
+            ? capitalize(data.notificationPreference)
+            : "",
+        });
+      } catch (err) {
+        console.error("Failed to fetch user info", err);
+      }
+    };
+    fetchUserInfo();
+  }, []);
+
+  const initialValues = {
+    firstName: userInfo?.firstName || "",
+    lastName: userInfo?.lastName || "",
+    email: userInfo?.email || "",
+    phone: userInfo?.phone || "",
+    dob: userInfo?.dob || "",
+    gender: userInfo?.gender || "",
+    profilePic: userInfo?.profilePic || null,
+    notification: userInfo?.notificationPreference
+      ? notifications.find(
+          (n) =>
+            n.toLowerCase() === userInfo.notificationPreference.toLowerCase()
+        ) || ""
+      : "",
+  };
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values) => console.log(values)}
+      enableReinitialize
+      onSubmit={(values) => console.log("Form Submitted :: ", values)}
     >
       {({ values, errors, touched, handleChange, setFieldValue }) => (
-        <Form>
+        <Form noValidate>
           <Box
             sx={{
               display: "flex",
@@ -143,7 +198,7 @@ const ProfileTab = () => {
               </InputLabel>
               <Select
                 labelId="notification-label"
-                name="notification"
+                name="notificationPreference"
                 value={values.notification}
                 onChange={handleChange}
                 size="small"
