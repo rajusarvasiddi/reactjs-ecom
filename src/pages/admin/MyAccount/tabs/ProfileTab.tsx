@@ -9,7 +9,7 @@ import {
   Select,
   Avatar,
   capitalize,
-} from "@mui/material"; // Removed 'capitalize' import
+} from "@mui/material";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -78,7 +78,7 @@ const ProfileTab = () => {
     dob: userInfo?.dob || "",
     gender: userInfo?.gender || "",
     profilePic: userInfo?.profilePic || null,
-    notification: userInfo?.notificationPreference
+    notificationPreference: userInfo?.notificationPreference
       ? notifications.find(
           (n) =>
             n.toLowerCase() === userInfo.notificationPreference.toLowerCase()
@@ -199,7 +199,7 @@ const ProfileTab = () => {
               <Select
                 labelId="notification-label"
                 name="notificationPreference"
-                value={values.notification}
+                value={values.notificationPreference}
                 onChange={handleChange}
                 size="small"
                 label="Notification Preference"
