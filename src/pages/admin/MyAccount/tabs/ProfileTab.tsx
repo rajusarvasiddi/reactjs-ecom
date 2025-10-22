@@ -9,6 +9,7 @@ import {
   Select,
   Avatar,
   capitalize,
+  CircularProgress,
 } from "@mui/material";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -40,10 +41,11 @@ const validationSchema = Yup.object().shape({
 const ProfileTab = () => {
   const getUserInfo =
     "https://mocki.io/v1/36889aee-67f4-4239-bbff-77c111b9b846";
-
+  const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
   useEffect(() => {
+    let timer: NodeJS.Timeout;
     const fetchUserInfo = async () => {
       try {
         const { data } = await axios.get<UserInfo>(getUserInfo);
@@ -63,11 +65,15 @@ const ProfileTab = () => {
             ? capitalize(data.notificationPreference)
             : "",
         });
+        timer = setTimeout(() => {
+          setLoading(false);
+        }, 100);
       } catch (err) {
         console.error("Failed to fetch user info", err);
       }
     };
     fetchUserInfo();
+    return () => clearTimeout(timer);
   }, []);
 
   const initialValues = {
@@ -85,6 +91,14 @@ const ProfileTab = () => {
         ) || ""
       : "",
   };
+
+  if (loading) {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "left", py: 2 }}>
+        <CircularProgress size={24} />
+      </Box>
+    );
+  }
 
   return (
     <Formik
