@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, CircularProgress, Tab, Tabs, Typography } from "@mui/material";
 import { Link, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { accountTabs } from "./accountTabs";
 import { Suspense } from "react";
@@ -7,9 +7,9 @@ const MyAccount = () => {
   const location = useLocation();
 
   //   Determine the current active tab based on the URL path
-  const currentTab = accountTabs.findIndex((tab) => {
-    return location.pathname.includes(tab.path);
-  });
+  const currentTab = accountTabs.findIndex(
+    (tab) => tab.path === location.pathname.split("/").pop()
+  );
 
   const value = currentTab === -1 ? 0 : currentTab;
 
@@ -25,18 +25,25 @@ const MyAccount = () => {
           flexDirection: "column",
         }}
       >
-        <Tabs value={value}>
+        <Tabs value={value} aria-label="My Account Tabs">
           {accountTabs.map((tab) => (
             <Tab
               key={tab.path}
               label={tab.label}
               component={Link}
               to={`/admin/my-account/${tab.path}`}
+              aria-controls={`tabpanel-${tab.path}`}
             />
           ))}
         </Tabs>
         <Box sx={{ mt: 3 }}>
-          <Suspense fallback={<Typography>Loading...</Typography>}>
+          <Suspense
+            fallback={
+              <Box sx={{ display: "flex", justifyContent: "center", py: 2 }}>
+                <CircularProgress size={24} />
+              </Box>
+            }
+          >
             <Routes>
               <Route
                 index
