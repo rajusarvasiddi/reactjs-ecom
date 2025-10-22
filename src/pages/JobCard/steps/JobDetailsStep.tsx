@@ -8,8 +8,20 @@ import {
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import { useState } from "react";
+interface ServiceType {
+  id: number;
+  name: string;
+  isChecked?: boolean;
+}
+
+interface Part {
+  id: number;
+  name: string;
+  isChecked?: boolean;
+}
 const JobDetailsStep = () => {
-  const serviceTypes = [
+  const serviceTypesList: ServiceType[] = [
     { id: 1, name: "General", isChecked: true },
     { id: 2, name: "Electrical" },
     { id: 3, name: "Mechanical", isChecked: true },
@@ -21,8 +33,8 @@ const JobDetailsStep = () => {
     { id: 9, name: "Transmission Repair" },
     { id: 10, name: "Engine Repair" },
   ];
-  const parts = [
-    { id: 1, name: "Engine Oil" },
+  const partsList: Part[] = [
+    { id: 1, name: "Engine Oil", isChecked: true },
     { id: 2, name: "Brake Pads" },
     { id: 3, name: "Air Filter" },
     { id: 4, name: "Spark Plugs" },
@@ -33,6 +45,27 @@ const JobDetailsStep = () => {
     { id: 9, name: "Clutch" },
     { id: 10, name: "Fuel Pump" },
   ];
+  const [serviceTypes, setServiceTypes] = useState(serviceTypesList);
+  const [parts, setPartsList] = useState(partsList);
+
+  const handleServiceTypeChange = (id: number) => {
+    setServiceTypes((prev) =>
+      prev.map((service) =>
+        service.id === id
+          ? { ...service, isChecked: !service.isChecked }
+          : service
+      )
+    );
+  };
+  const handlePartsLIstChange = (id: number) => {
+    setPartsList((prev) =>
+      prev.map((service) =>
+        service.id === id
+          ? { ...service, isChecked: !service.isChecked }
+          : service
+      )
+    );
+  };
 
   return (
     <>
@@ -94,8 +127,9 @@ const JobDetailsStep = () => {
                     control={
                       <Checkbox
                         size="small"
-                        checked={service?.isChecked}
+                        checked={Boolean(service?.isChecked)}
                         name={service.name}
+                        onChange={() => handleServiceTypeChange(service.id)}
                       />
                     }
                     label={service?.name}
@@ -123,8 +157,9 @@ const JobDetailsStep = () => {
                     control={
                       <Checkbox
                         size="small"
-                        checked={part?.isChecked}
+                        checked={Boolean(part?.isChecked)}
                         name={part.name}
+                        onChange={() => handlePartsLIstChange(part.id)}
                       />
                     }
                     label={part?.name}
