@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -7,15 +7,26 @@ import {
   FormControl,
   InputLabel,
   Select,
+  CircularProgress,
 } from "@mui/material";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
+interface AddressInfo {
+  addressLine1: string;
+  addressLine2: string;
+  city: string;
+  state: string;
+  country: string;
+  postalCode: string;
+}
 // Example countries list
 const countries = [
   { code: "IN", name: "India" },
   { code: "US", name: "United States" },
   { code: "CA", name: "Canada" },
+  { code: "AUS", name: "Australia" },
 ];
 
 const validationSchema = Yup.object().shape({
@@ -26,16 +37,48 @@ const validationSchema = Yup.object().shape({
   postalCode: Yup.string().required("Postal / ZIP Code is required"),
 });
 
-const initialValues = {
-  addressLine1: "",
-  addressLine2: "",
-  city: "",
-  state: "",
-  country: "",
-  postalCode: "",
-};
-
 const AddressTab = () => {
+  const getAddressUrl =
+    "https://mocki.io/v1/d67b1b3f-d0e8-4f17-92b5-3aa3d609f0d2";
+
+  const [loading, setLoading] = useState(true);
+  const [addressInfo, setAddressInfo] = useState<AddressInfo | null>(null);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    const fetchAddressInfo = async () => {
+      try {
+        const { data } = await axios.get<AddressInfo>(getAddressUrl);
+        setAddressInfo(data);
+        timer = setTimeout(() => {
+          setLoading(false);
+        }, 100);
+      } catch (error) {
+        console.error("Failed to fetch address info", error);
+      }
+    };
+
+    fetchAddressInfo();
+    return () => clearTimeout(timer);
+  }, []);
+
+  const initialValues = {
+    addressLine1: addressInfo?.addressLine1 || "",
+    addressLine2: addressInfo?.addressLine2 || "",
+    city: addressInfo?.city || "",
+    state: addressInfo?.state || "",
+    country: addressInfo?.country || "",
+    postalCode: addressInfo?.postalCode || "",
+  };
+
+  if (loading) {
+    return (
+      <Box sx={{ display: "flex", justifyContent: "left", py: 2 }}>
+        <CircularProgress size={24} />
+      </Box>
+    );
+  }
+
   return (
     <Formik
       initialValues={initialValues}
