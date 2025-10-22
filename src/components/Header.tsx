@@ -35,6 +35,7 @@ import {
 } from "@mui/icons-material";
 import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 import { toggleSidebar } from "../store/sidebarSlice";
+import { Link } from "react-router-dom";
 
 // Type-safe NavLink for MuiLink-like usage
 const NavLinkBehavior = React.forwardRef<HTMLAnchorElement, RouterLinkProps>(
@@ -192,7 +193,11 @@ const Header: React.FC = () => {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuItem onClick={handleClose}>
+            <MenuItem
+              component={Link}
+              to="/admin/my-account"
+              onClick={handleClose}
+            >
               <Avatar /> My Account
             </MenuItem>
             <Divider />

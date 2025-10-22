@@ -4,9 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import PrivateLayout from "./components/PrivateLayout";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicLayout from "./components/PublicLayout";
-import GarageList from "./pages/admin/Garage/ShowGarages/GaragesList";
-import Register from "./pages/Register/Register";
-import MechanicList from "./pages/Mechanic/MechanicList";
 
 // Lazy-loaded pages
 const Login = lazy(() => import("./pages/Login/Login"));
@@ -24,8 +21,14 @@ const Products = lazy(() => import("./pages/Products/Products"));
 const ProductDetails = lazy(
   () => import("./pages/ProductDetails/ProductDetails")
 );
+const MyAccount = lazy(() => import("./pages/admin/MyAccount/MyAccount"));
 const Contact = lazy(() => import("./pages/Contact/Contact"));
 const Cart = lazy(() => import("./pages/Cart/Cart"));
+const MechanicList = lazy(() => import("./pages/Mechanic/MechanicList"));
+const GarageList = lazy(
+  () => import("./pages/admin/Garage/ShowGarages/GaragesList")
+);
+const Register = lazy(() => import("./pages/Register/Register"));
 
 // Mock auth check
 const isAuthenticated = true;
@@ -52,6 +55,7 @@ function App() {
             </PrivateRoute>
           }
         >
+          <Route path="my-account/*" element={<MyAccount />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="garage-create" element={<GarageCreate />} />
           <Route path="garage-list" element={<GarageList />} />
