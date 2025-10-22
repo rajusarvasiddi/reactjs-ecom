@@ -1,17 +1,7 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
+import { Box, Button, CircularProgress, Grid, TextField } from "@mui/material";
 import axios from "axios";
 import { Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 
 interface BusinessInfo {
@@ -74,7 +64,7 @@ const BusinessInfoTab = () => {
       onSubmit={(values) => console.log(values)}
     >
       {({ values, errors, touched, handleChange }) => (
-        <Form>
+        <Form noValidate>
           <Box
             sx={{
               display: "flex",
