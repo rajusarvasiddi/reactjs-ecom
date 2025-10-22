@@ -6,9 +6,9 @@ import { Suspense } from "react";
 const MyAccount = () => {
   const location = useLocation();
 
-  //   Determine the current active tab based on the URL path
+  // Remove trailing slash and get the last segment of URL
   const currentTab = accountTabs.findIndex(
-    (tab) => tab.path === location.pathname.split("/").pop()
+    (tab) => tab.path === location.pathname.replace(/\/$/, "").split("/").pop()
   );
 
   const value = currentTab === -1 ? 0 : currentTab;
@@ -32,6 +32,7 @@ const MyAccount = () => {
               label={tab.label}
               component={Link}
               to={`/admin/my-account/${tab.path}`}
+              id={`tab-${tab.path}`}
               aria-controls={`tabpanel-${tab.path}`}
             />
           ))}
@@ -50,7 +51,18 @@ const MyAccount = () => {
                 element={<Navigate to="/admin/my-account/profile" replace />}
               />
               {accountTabs.map((tab) => (
-                <Route key={tab.path} path={tab.path} element={tab.element} />
+                <Route
+                  key={tab.path}
+                  path={tab.path}
+                  element={
+                    <Box
+                      id={`tabpanel-${tab.path}`}
+                      aria-labelledby={`tab-${tab.path}`}
+                    >
+                      {tab.element}
+                    </Box>
+                  }
+                />
               ))}
               <Route
                 path="*"
