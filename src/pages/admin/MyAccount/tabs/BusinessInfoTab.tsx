@@ -1,8 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Box, Button, CircularProgress, TextField } from "@mui/material";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import axios from "axios";
+import { Form, Formik } from "formik";
+import React, { useEffect, useState } from "react";
+import * as Yup from "yup";
 
 interface BusinessInfo {
   garageName: string;
@@ -73,53 +83,74 @@ const BusinessInfoTab = () => {
               maxWidth: 500,
             }}
           >
-            <TextField
-              label="Garage / Company Name"
-              name="garageName"
-              size="small"
-              value={values.garageName}
-              onChange={handleChange}
-              error={touched.garageName && Boolean(errors.garageName)}
-              helperText={touched.garageName && errors.garageName}
-              required
-              autoComplete="off"
-            />
-            <TextField
-              label="Business Registration No"
-              name="registrationNo"
-              size="small"
-              value={values.registrationNo}
-              onChange={handleChange}
-              autoComplete="off"
-            />
-            <TextField
-              label="GST / Tax ID"
-              name="gstTaxId"
-              size="small"
-              value={values.gstTaxId}
-              onChange={handleChange}
-              autoComplete="off"
-            />
-            <TextField
-              label="Business Email"
-              name="businessEmail"
-              type="email"
-              size="small"
-              value={values.businessEmail}
-              onChange={handleChange}
-              autoComplete="off"
-            />
-            <TextField
-              label="Business Phone"
-              name="businessPhone"
-              size="small"
-              value={values.businessPhone}
-              onChange={handleChange}
-              autoComplete="off"
-            />
-            <Button type="submit" variant="contained" size="small">
-              Save Business Info
-            </Button>
+            <Grid container spacing={2}>
+              <Grid size={{ xs: 12, md: 9 }}>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="Garage / Company Name"
+                    name="garageName"
+                    size="small"
+                    value={values.garageName}
+                    onChange={handleChange}
+                    error={touched.garageName && Boolean(errors.garageName)}
+                    helperText={touched.garageName && errors.garageName}
+                    required
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="Business Registration No"
+                    name="registrationNo"
+                    size="small"
+                    value={values.registrationNo}
+                    onChange={handleChange}
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="GST / Tax ID"
+                    name="gstTaxId"
+                    size="small"
+                    value={values.gstTaxId}
+                    onChange={handleChange}
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="Business Email"
+                    name="businessEmail"
+                    type="email"
+                    size="small"
+                    value={values.businessEmail}
+                    onChange={handleChange}
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="Business Phone"
+                    name="businessPhone"
+                    size="small"
+                    value={values.businessPhone}
+                    onChange={handleChange}
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <Button type="submit" variant="contained" size="small">
+                    Save Business Info
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
           </Box>
         </Form>
       )}

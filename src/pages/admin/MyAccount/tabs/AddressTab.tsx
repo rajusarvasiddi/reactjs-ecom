@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
-  TextField,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Select,
   CircularProgress,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
 } from "@mui/material";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import axios from "axios";
+import { Form, Formik } from "formik";
+import { useEffect, useState } from "react";
+import * as Yup from "yup";
 
 interface AddressInfo {
   addressLine1: string;
@@ -95,77 +96,100 @@ const AddressTab = () => {
               maxWidth: 500,
             }}
           >
-            <TextField
-              label="Address Line 1"
-              name="addressLine1"
-              value={values.addressLine1}
-              onChange={handleChange}
-              error={touched.addressLine1 && Boolean(errors.addressLine1)}
-              helperText={touched.addressLine1 && errors.addressLine1}
-              required
-              size="small"
-              autoComplete="off"
-            />
-            <TextField
-              label="Address Line 2"
-              name="addressLine2"
-              value={values.addressLine2}
-              onChange={handleChange}
-              size="small"
-              autoComplete="off"
-            />
-            <TextField
-              label="City"
-              name="city"
-              value={values.city}
-              onChange={handleChange}
-              error={touched.city && Boolean(errors.city)}
-              helperText={touched.city && errors.city}
-              required
-              size="small"
-            />
-            <TextField
-              label="State / Province"
-              name="state"
-              value={values.state}
-              onChange={handleChange}
-              error={touched.state && Boolean(errors.state)}
-              helperText={touched.state && errors.state}
-              required
-              size="small"
-              autoComplete="off"
-            />
-            <FormControl size="small">
-              <InputLabel id="country-label">Country</InputLabel>
-              <Select
-                labelId="country-label"
-                name="country"
-                value={values.country}
-                onChange={handleChange}
-                required
-                label="Country"
-              >
-                {countries.map((c) => (
-                  <MenuItem key={c.code} value={c.code}>
-                    {c.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <TextField
-              label="Postal / ZIP Code"
-              name="postalCode"
-              value={values.postalCode}
-              onChange={handleChange}
-              error={touched.postalCode && Boolean(errors.postalCode)}
-              helperText={touched.postalCode && errors.postalCode}
-              required
-              size="small"
-              autoComplete="off"
-            />
-            <Button type="submit" variant="contained">
-              Save Address
-            </Button>
+            <Grid container spacing={2}>
+              <Grid size={{ xs: 12, md: 9 }}>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="Address Line 1"
+                    name="addressLine1"
+                    value={values.addressLine1}
+                    onChange={handleChange}
+                    error={touched.addressLine1 && Boolean(errors.addressLine1)}
+                    helperText={touched.addressLine1 && errors.addressLine1}
+                    required
+                    size="small"
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="Address Line 2"
+                    name="addressLine2"
+                    value={values.addressLine2}
+                    onChange={handleChange}
+                    size="small"
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="City"
+                    name="city"
+                    value={values.city}
+                    onChange={handleChange}
+                    error={touched.city && Boolean(errors.city)}
+                    helperText={touched.city && errors.city}
+                    required
+                    size="small"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="State / Province"
+                    name="state"
+                    value={values.state}
+                    onChange={handleChange}
+                    error={touched.state && Boolean(errors.state)}
+                    helperText={touched.state && errors.state}
+                    required
+                    size="small"
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <FormControl size="small" fullWidth>
+                    <InputLabel id="country-label">Country</InputLabel>
+                    <Select
+                      labelId="country-label"
+                      name="country"
+                      value={values.country}
+                      onChange={handleChange}
+                      required
+                      label="Country"
+                    >
+                      {countries.map((c) => (
+                        <MenuItem key={c.code} value={c.code}>
+                          {c.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="Postal / ZIP Code"
+                    name="postalCode"
+                    value={values.postalCode}
+                    onChange={handleChange}
+                    error={touched.postalCode && Boolean(errors.postalCode)}
+                    helperText={touched.postalCode && errors.postalCode}
+                    required
+                    size="small"
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <Button type="submit" variant="contained">
+                    Save Address
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
           </Box>
         </Form>
       )}

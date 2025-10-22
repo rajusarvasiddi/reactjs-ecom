@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
 import {
+  Avatar,
   Box,
   Button,
-  TextField,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Select,
-  Avatar,
   capitalize,
   CircularProgress,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
 } from "@mui/material";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import axios from "axios";
+import { Form, Formik } from "formik";
+import { useEffect, useState } from "react";
+import * as Yup from "yup";
 
 interface UserInfo {
   firstName: string;
@@ -117,115 +118,142 @@ const ProfileTab = () => {
               maxWidth: 500,
             }}
           >
-            <TextField
-              label="First Name"
-              name="firstName"
-              value={values.firstName}
-              onChange={handleChange}
-              error={touched.firstName && Boolean(errors.firstName)}
-              helperText={touched.firstName && errors.firstName}
-              required
-              size="small"
-              autoComplete="off"
-            />
-            <TextField
-              label="Last Name"
-              name="lastName"
-              value={values.lastName}
-              onChange={handleChange}
-              error={touched.lastName && Boolean(errors.lastName)}
-              helperText={touched.lastName && errors.lastName}
-              required
-              size="small"
-              autoComplete="off"
-            />
-            <TextField
-              label="Email"
-              name="email"
-              value={values.email}
-              slotProps={{ input: { readOnly: true } }}
-              size="small"
-            />
-            <TextField
-              label="Phone Number"
-              name="phone"
-              value={values.phone}
-              onChange={handleChange}
-              placeholder="+91 9999999999"
-              size="small"
-              autoComplete="off"
-            />
-            <TextField
-              label="Date of Birth"
-              name="dob"
-              type="date"
-              InputLabelProps={{ shrink: true }}
-              value={values.dob}
-              onChange={handleChange}
-              size="small"
-              autoComplete="off"
-            />
-            <FormControl size="small">
-              <InputLabel id="gender-label">Gender</InputLabel>
-              <Select
-                labelId="gender-label"
-                name="gender"
-                value={values.gender}
-                onChange={handleChange}
-                label="Gender"
-              >
-                {genders.map((g) => (
-                  <MenuItem key={g} value={g}>
-                    {g}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Avatar
-                src={
-                  values.profilePic
-                    ? URL.createObjectURL(values.profilePic)
-                    : ""
-                }
-                sx={{ width: 56, height: 56 }}
-              />
-              <Button variant="contained" component="label">
-                Upload Profile Picture
-                <input
-                  type="file"
-                  hidden
-                  accept="image/*"
-                  onChange={(e) =>
-                    setFieldValue(
-                      "profilePic",
-                      e.currentTarget.files?.[0] || null
-                    )
-                  }
-                />
-              </Button>
-            </Box>
-            <FormControl size="small">
-              <InputLabel id="notification-label">
-                Notification Preference
-              </InputLabel>
-              <Select
-                labelId="notification-label"
-                name="notificationPreference"
-                value={values.notificationPreference}
-                onChange={handleChange}
-                label="Notification Preference"
-              >
-                {notifications.map((n) => (
-                  <MenuItem key={n} value={n}>
-                    {n}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <Button type="submit" variant="contained">
-              Save Changes
-            </Button>
+            <Grid container spacing={2}>
+              <Grid size={{ xs: 12, md: 9 }}>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="First Name"
+                    name="firstName"
+                    value={values.firstName}
+                    onChange={handleChange}
+                    error={touched.firstName && Boolean(errors.firstName)}
+                    helperText={touched.firstName && errors.firstName}
+                    required
+                    size="small"
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="Last Name"
+                    name="lastName"
+                    value={values.lastName}
+                    onChange={handleChange}
+                    error={touched.lastName && Boolean(errors.lastName)}
+                    helperText={touched.lastName && errors.lastName}
+                    required
+                    size="small"
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="Email"
+                    name="email"
+                    value={values.email}
+                    slotProps={{ input: { readOnly: true } }}
+                    size="small"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="Phone Number"
+                    name="phone"
+                    value={values.phone}
+                    onChange={handleChange}
+                    placeholder="+91 9999999999"
+                    size="small"
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <TextField
+                    label="Date of Birth"
+                    name="dob"
+                    type="date"
+                    InputLabelProps={{ shrink: true }}
+                    value={values.dob}
+                    onChange={handleChange}
+                    size="small"
+                    autoComplete="off"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <FormControl size="small" fullWidth>
+                    <InputLabel id="gender-label">Gender</InputLabel>
+                    <Select
+                      labelId="gender-label"
+                      name="gender"
+                      value={values.gender}
+                      onChange={handleChange}
+                      label="Gender"
+                    >
+                      {genders.map((g) => (
+                        <MenuItem key={g} value={g}>
+                          {g}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                    <Avatar
+                      src={
+                        values.profilePic
+                          ? URL.createObjectURL(values.profilePic)
+                          : ""
+                      }
+                      sx={{ width: 56, height: 56 }}
+                    />
+                    <Button variant="contained" component="label">
+                      Upload Profile Picture
+                      <input
+                        type="file"
+                        hidden
+                        accept="image/*"
+                        onChange={(e) =>
+                          setFieldValue(
+                            "profilePic",
+                            e.currentTarget.files?.[0] || null
+                          )
+                        }
+                      />
+                    </Button>
+                  </Box>
+                </Grid>
+                <Grid size={12} sx={{ mb: 1 }}>
+                  <FormControl size="small" fullWidth>
+                    <InputLabel id="notification-label">
+                      Notification Preference
+                    </InputLabel>
+                    <Select
+                      labelId="notification-label"
+                      name="notificationPreference"
+                      value={values.notificationPreference}
+                      onChange={handleChange}
+                      label="Notification Preference"
+                    >
+                      {notifications.map((n) => (
+                        <MenuItem key={n} value={n}>
+                          {n}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid size={12}>
+                <Button type="submit" variant="contained">
+                  Save Changes
+                </Button>
+              </Grid>
+            </Grid>
           </Box>
         </Form>
       )}
