@@ -18,9 +18,13 @@ type SidebarState = {
   sidebarOpen: boolean;
 };
 
+type RoleState = {
+  role: "admin" | "mechanic" | "customer" | null | null;
+};
 type PersistedState = {
   cart: CartState;
   sidebar: SidebarState;
+  role: RoleState;
 };
 
 export const loadState = (): Partial<PersistedState> | undefined => {

@@ -30,6 +30,7 @@ import {
 } from "react-router-dom";
 import { toggleSidebar } from "../store/sidebarSlice";
 import { RootState } from "../store/store";
+import { setRole } from "store/roleSlice";
 
 // Type-safe NavLink for MuiLink-like usage
 const NavLinkBehavior = React.forwardRef<HTMLAnchorElement, RouterLinkProps>(
@@ -53,9 +54,18 @@ const Header: React.FC = () => {
     state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
   );
 
-  const [role, setRole] = useState("admin");
-  const handleRoleChange = (event: SelectChangeEvent) =>
-    setRole(event.target.value as string);
+  // const [role, setRole] = useState("admin");
+
+  const currentRole =
+    useSelector((state: RootState) => state.role.role) || "admin";
+  const handleRoleChange = (event: SelectChangeEvent) => {
+    const selectedRole = event?.target?.value as
+      | "admin"
+      | "garageOwner"
+      | "mechanic";
+    dispatch(setRole(selectedRole));
+  };
+  // setRole(event.target.value as string);
 
   const navLinks: any[] = [
     // add if needed
@@ -131,7 +141,14 @@ const Header: React.FC = () => {
               borderRadius: 1,
             }}
           >
-            <Select value={role} onChange={handleRoleChange} size="small">
+            <Select
+              value={currentRole || ""}
+              onChange={handleRoleChange}
+              size="small"
+            >
+              <MenuItem value="" disabled>
+                Select Role
+              </MenuItem>
               <MenuItem value="admin">Admin</MenuItem>
               <MenuItem value="garageOwner">Garage Owner</MenuItem>
               <MenuItem value="mechanic">Mechanic</MenuItem>

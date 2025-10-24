@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useCompanies } from "../../../../shared/hooks/useCompanies";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 interface Company {
   id: number;
@@ -19,6 +20,8 @@ interface Company {
 
 const GarageList = () => {
   const [age, setAge] = useState("");
+  // const dispatch = useDispatch();
+  const currentRole = useSelector((state: any) => state.role.role);
   const { companies, error, retry } = useCompanies() as {
     companies: Company[];
     error: string | null;
@@ -43,7 +46,7 @@ const GarageList = () => {
         {/* Header */}
         <Box sx={{ px: 2, borderBottom: "1px solid #FCFAFA" }}>
           <Typography variant="h6" fontWeight="bold">
-            Garages
+            Garages {currentRole || "admin"}
           </Typography>
         </Box>
 
