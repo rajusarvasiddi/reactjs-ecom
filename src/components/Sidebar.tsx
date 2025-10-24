@@ -31,6 +31,7 @@ const navItems = [
       { label: "Mechanic Create", path: "/admin/mechanic-create" },
       { label: "Mechanic List", path: "/admin/mechanics" },
       { label: "Cart", path: "/admin/cart" },
+      { label: "Inventory", path: "/admin/products" },
     ],
   },
   {
@@ -49,7 +50,7 @@ const navItems = [
   },
   {
     section: "Mechanic",
-    items: [{ label: "Job Cards", path: "/admin/job-cards" }],
+    items: [{ label: "Job Cards", path: "/mechanic/job-cards" }],
   },
   {
     section: "Customers",
@@ -57,7 +58,6 @@ const navItems = [
       { label: "Request Service", path: "/customer/create-service-request" },
       { label: "Service History", path: "/customer/service-history" },
       { label: "Add Vehicle", path: "/customer/add-vehicle" },
-      { label: "Products", path: "/admin/products" },
     ],
   },
 ];
