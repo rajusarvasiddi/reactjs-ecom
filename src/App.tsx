@@ -1,10 +1,9 @@
 // src/App.tsx
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import PrivateLayout from "./components/PrivateLayout";
 import PrivateRoute from "./routes/PrivateRoute";
-import PublicLayout from "./components/PublicLayout";
-
+const PublicLayout = lazy(() => import("./components/PublicLayout"));
+const PrivateLayout = lazy(() => import("./components/PrivateLayout"));
 // Lazy-loaded pages
 const Login = lazy(() => import("./pages/Login/Login"));
 const Home = lazy(() => import("./pages/Home"));

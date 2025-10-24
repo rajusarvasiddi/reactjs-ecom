@@ -43,6 +43,7 @@ const navItems = [
       { label: "Mechanic Create", path: "/admin/mechanic-create" },
       { label: "Mechanic List", path: "/admin/mechanics" },
       { label: "Create Job Card", path: "/admin/create-job-cards" },
+      { label: "Job Cards", path: "/admin/job-cards" },
       { label: "Invoices", path: "/admin/invoices" },
     ],
   },
