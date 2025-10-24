@@ -113,7 +113,7 @@ const JobCard = () => {
       }}
     >
       <Typography variant={isMobile ? "h5" : "h4"} fontWeight="bold" mb={3}>
-        Job Card
+        Job Card: Create
       </Typography>
 
       {/* Vertical Stepper (no scroll, no collapse) */}

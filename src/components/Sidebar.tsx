@@ -30,7 +30,7 @@ const navItems = [
       { label: `${WORDS.pages.garages} List`, path: "/admin/garage-list" },
       { label: "Mechanic Create", path: "/admin/mechanic-create" },
       { label: "Mechanic List", path: "/admin/mechanics" },
-      { label: "Job Cards", path: "/admin/create-job-cards" },
+      { label: "Create Job Card", path: "/admin/create-job-cards" },
       { label: "Products", path: "/admin/products" },
     ],
   },
