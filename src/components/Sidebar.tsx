@@ -24,20 +24,19 @@ const navItems = [
     items: [{ label: "Dashboard", path: "/admin/dashboard" }],
   },
   {
-    section: "Garage",
+    section: "Garage Owner",
     items: [
       { label: "Garage Create", path: "/admin/garage-create" },
       { label: `${WORDS.pages.garages} List`, path: "/admin/garage-list" },
+      { label: "Mechanic Create", path: "/admin/mechanic-create" },
+      { label: "Mechanic List", path: "/admin/mechanics" },
+      { label: "Job Cards", path: "/admin/create-job-cards" },
       { label: "Products", path: "/admin/products" },
     ],
   },
   {
     section: "Mechanic",
-    items: [
-      { label: "Mechanic Create", path: "/admin/mechanic-create" },
-      { label: "Mechanic List", path: "/admin/mechanics" },
-      { label: "Job Cards", path: "/admin/job-cards" },
-    ],
+    items: [{ label: "Job Cards", path: "/admin/job-cards" }],
   },
   {
     section: "Customers",
@@ -49,8 +48,10 @@ const navItems = [
   {
     section: "Admin",
     items: [
-      { label: "Users", path: "/admin/users" },
-      { label: "Settings", path: "/admin/settings" },
+      { label: "Garage Create", path: "/admin/garage-create" },
+      { label: `${WORDS.pages.garages} List`, path: "/admin/garage-list" },
+      { label: "Mechanic Create", path: "/admin/mechanic-create" },
+      { label: "Mechanic List", path: "/admin/mechanics" },
     ],
   },
 ];

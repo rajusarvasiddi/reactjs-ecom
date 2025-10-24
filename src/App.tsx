@@ -10,7 +10,7 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
-const JobCard = lazy(() => import("./pages/JobCard/JobCard"));
+const JobCard = lazy(() => import("./pages/JobCard/Create/JobCard"));
 const GarageCreate = lazy(
   () => import("./pages/admin/Garage/Create/CreateGarage")
 );
@@ -27,6 +27,9 @@ const Cart = lazy(() => import("./pages/Cart/Cart"));
 const MechanicList = lazy(() => import("./pages/Mechanic/MechanicList"));
 const GarageList = lazy(
   () => import("./pages/admin/Garage/ShowGarages/GaragesList")
+);
+const JobCardsList = lazy(
+  () => import("pages/JobCard/JobCardsList/JobCardsList")
 );
 const Register = lazy(() => import("./pages/Register/Register"));
 
@@ -61,7 +64,8 @@ function App() {
           <Route path="garage-list" element={<GarageList />} />
           <Route path="mechanic-create" element={<MechanicCreate />}></Route>
           <Route path="mechanics" element={<MechanicList />} />
-          <Route path="job-cards" element={<JobCard />} />
+          <Route path="create-job-cards" element={<JobCard />} />
+          <Route path="job-cards" element={<JobCardsList />} />
           <Route path="products" element={<Products />} />
           <Route path="products/:id" element={<ProductDetails />} />
           <Route path="cart" element={<Cart />} />
