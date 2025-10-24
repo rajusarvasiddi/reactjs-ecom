@@ -24,14 +24,26 @@ const navItems = [
     items: [{ label: "Dashboard", path: "/admin/dashboard" }],
   },
   {
-    section: "Garage Owner",
+    section: "Admin",
     items: [
       { label: "Garage Create", path: "/admin/garage-create" },
       { label: `${WORDS.pages.garages} List`, path: "/admin/garage-list" },
       { label: "Mechanic Create", path: "/admin/mechanic-create" },
       { label: "Mechanic List", path: "/admin/mechanics" },
+      { label: "Cart", path: "/admin/cart" },
+    ],
+  },
+  {
+    section: "Garage Owner",
+    items: [
+      {
+        label: "Garage Create",
+        path: `/admin/garage-create`,
+      },
+      { label: "Mechanic Create", path: "/admin/mechanic-create" },
+      { label: "Mechanic List", path: "/admin/mechanics" },
       { label: "Create Job Card", path: "/admin/create-job-cards" },
-      { label: "Products", path: "/admin/products" },
+      { label: "Invoices", path: "/admin/invoices" },
     ],
   },
   {
@@ -41,17 +53,10 @@ const navItems = [
   {
     section: "Customers",
     items: [
-      { label: "Create", path: "/admin/customer-create" },
-      { label: "Cart", path: "/admin/cart" },
-    ],
-  },
-  {
-    section: "Admin",
-    items: [
-      { label: "Garage Create", path: "/admin/garage-create" },
-      { label: `${WORDS.pages.garages} List`, path: "/admin/garage-list" },
-      { label: "Mechanic Create", path: "/admin/mechanic-create" },
-      { label: "Mechanic List", path: "/admin/mechanics" },
+      { label: "Request Service", path: "/customer/create-service-request" },
+      { label: "Service History", path: "/customer/service-history" },
+      { label: "Add Vehicle", path: "/customer/add-vehicle" },
+      { label: "Products", path: "/admin/products" },
     ],
   },
 ];
