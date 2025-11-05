@@ -1,6 +1,3 @@
-import { boolean } from "yup";
-
-// src/store/localStorage.ts
 type CartItem = {
   id: number;
   title: string;
