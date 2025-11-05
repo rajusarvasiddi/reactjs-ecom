@@ -47,9 +47,16 @@ const MechanicList = () => {
 
   const filteredMechanics = sortedMechanics.filter((m) => {
     const query = search.toLowerCase().trim();
-    return Object.values(m).some((value) =>
-      value?.toString().toLowerCase().includes(query)
-    );
+
+    return Object.values(m).some((value: any) => {
+      if (!value) return false;
+      // Handle date objects separately
+      if (value instanceof Date) {
+        const formatted = value.toLocaleDateString("en-GB"); // e.g. 05/11/2025
+        return formatted.toLowerCase().includes(query);
+      }
+      return value.toString().toLowerCase().includes(query);
+    });
   });
 
   const handleChangePage = (_: unknown, newPage: number) => {
@@ -88,6 +95,7 @@ const MechanicList = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           sx={{ mb: 2, maxWidth: 400 }}
+          autoComplete="off"
         />
         <TableContainer component={Paper}>
           <Table sx={{ width: "100%" }} size="small" aria-label="a dense table">
