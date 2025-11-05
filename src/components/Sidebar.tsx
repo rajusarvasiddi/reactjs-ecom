@@ -22,9 +22,11 @@ const drawerWidth = 220;
 const navItems = [
   {
     items: [{ label: "Dashboard", path: "/admin/dashboard" }],
+    roles: ["admin", "garageOwner", "mechanic", "customer"],
   },
   {
     section: "Admin",
+    roles: ["admin"],
     items: [
       { label: "Garage Create", path: "/admin/garage-create" },
       { label: `${WORDS.pages.garages} List`, path: "/admin/garage-list" },
@@ -36,6 +38,7 @@ const navItems = [
   },
   {
     section: "Garage Owner",
+    roles: ["garageOwner"],
     items: [
       {
         label: "Garage Create",
@@ -50,10 +53,12 @@ const navItems = [
   },
   {
     section: "Mechanic",
+    roles: ["mechanic"],
     items: [{ label: "Job Cards", path: "/mechanic/job-cards" }],
   },
   {
     section: "Customers",
+    roles: ["customer"],
     items: [
       { label: "Request Service", path: "/customer/create-service-request" },
       { label: "Service History", path: "/customer/service-history" },
@@ -68,6 +73,11 @@ const Sidebar: React.FC = () => {
   const dispatch = useDispatch();
   const mobileOpen = useSelector(
     (state: RootState) => state.sidebar.sidebarOpen
+  );
+  const role = useSelector((state: RootState) => state.role.role);
+
+  const filteredNavItems = navItems.filter((group) =>
+    group.roles ? group.roles.includes(role || "") : true
   );
 
   const drawerContent = (
@@ -86,7 +96,7 @@ const Sidebar: React.FC = () => {
       </Toolbar>
 
       <Box sx={{ px: 1.5, pt: 1 }}>
-        {navItems.map((group, index) => (
+        {filteredNavItems.map((group, index) => (
           <Box key={index} sx={{ mb: 2 }}>
             {group.section && (
               <Typography
