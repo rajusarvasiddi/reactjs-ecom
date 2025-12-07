@@ -1,12 +1,5 @@
 import bcrypt from "bcryptjs";
-
-import { API_BASE_URL } from "../constants";
-
-export interface LoginResponse {
-  access_token: string;
-  id_token: string;
-  refresh_token: string;
-}
+import api from "./api";
 
 // FIXED SALT for deterministic hashing (client-side only obfuscation)
 // In a real scenario, the server would handle raw passwords or use a challenge-response.
@@ -16,36 +9,16 @@ const hashPassword = async (password: string): Promise<string> => {
   return bcrypt.hash(password, FIXED_SALT);
 };
 
-export const login = async (email: string, password: string): Promise<LoginResponse> => {
+export const login = async (email: string, password: string): Promise<void> => {
   const hashedPassword = await hashPassword(password);
-  const response = await fetch(`${API_BASE_URL}/auth/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password: hashedPassword }),
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || "Login failed");
-  }
-
-  return response.json();
+  await api.post("/auth/login", { email, password: hashedPassword });
 };
 
 export const register = async (email: string, password: string): Promise<void> => {
   const hashedPassword = await hashPassword(password);
-  const response = await fetch(`${API_BASE_URL}/auth/signup`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password: hashedPassword }),
-  });
+  await api.post("/auth/signup", { email, password: hashedPassword });
+};
 
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || "Registration failed");
-  }
+export const logout = async (): Promise<void> => {
+  await api.post("/auth/logout");
 };

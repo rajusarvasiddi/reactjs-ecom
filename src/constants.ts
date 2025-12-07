@@ -1,6 +1,7 @@
 export const SITE_URL = "https://www.ecom.com";
 export const API_BASE_URL = "https://gms-serverless.vercel.app/api";
 export const SITE_TITLE = "eCom";
+export const PORTAL_TITLE = "GMS";
 export const TOTAL_NO_OF_PAGES = 14;
 export const PRODUCTS_LIST = "https://dummyjson.com/products";
 export const COUNTRIES_LIST = `${API_BASE_URL}/countries`;

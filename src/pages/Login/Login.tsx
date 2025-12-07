@@ -20,8 +20,8 @@ const Login = () => {
     if (email && password) {
       dispatch(loginStart());
       try {
-        const data = await login(email, password);
-        dispatch(loginSuccess(data));
+        await login(email, password);
+        dispatch(loginSuccess());
         navigate("/admin/dashboard");
       } catch (err: any) {
         dispatch(loginFailure(err.message));

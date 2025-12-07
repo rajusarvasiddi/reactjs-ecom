@@ -4,6 +4,7 @@ import "./Register.css";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, CircularProgress, Alert } from "@mui/material";
 import { register } from "../../services/authService";
+import { PORTAL_TITLE } from "../../constants";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ const Register = () => {
             }}
           >
             <img src={logo} alt="App Logo" className="logo" />
-            <h2>GMS</h2>
+            <h2>{PORTAL_TITLE}</h2>
           </Link>
           <p>Register to join GMS</p>
           {error && <Alert severity="error" sx={{ mt: 2, width: '100%' }}>{error}</Alert>}
@@ -85,7 +86,7 @@ const Register = () => {
             paddingBottom: "1px",
             paddingLeft: "16px",
             paddingRight: "16px",
-            minHeight: "24px", // or even 24px if you want ultra-compact
+            minHeight: "24px",
             lineHeight: 1,
           }}
           disabled={loading}
