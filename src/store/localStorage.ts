@@ -18,10 +18,20 @@ type SidebarState = {
 type RoleState = {
   role: "admin" | "mechanic" | "customer" | null | null;
 };
+
+type AuthState = {
+  accessToken: string | null;
+  idToken: string | null;
+  refreshToken: string | null;
+  isAuthenticated: boolean;
+  loading: boolean;
+  error: string | null;
+};
 type PersistedState = {
   cart: CartState;
   sidebar: SidebarState;
   role: RoleState;
+  auth: AuthState;
 };
 
 export const loadState = (): Partial<PersistedState> | undefined => {
