@@ -11,15 +11,19 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email && password) {
       setLoading(true);
       setError(null);
+      setSuccess(null);
       try {
         await register(email, password);
-        navigate("/login");
+        setSuccess("Registration successful! You can now login.");
+        setEmail("");
+        setPassword("");
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -48,6 +52,7 @@ const Register = () => {
           </Link>
           <p>Register to join GMS</p>
           {error && <Alert severity="error" sx={{ mt: 2, width: '100%' }}>{error}</Alert>}
+          {success && <Alert severity="success" sx={{ mt: 2, width: '100%' }}>{success}</Alert>}
         </div>
 
         <div className="form-group">

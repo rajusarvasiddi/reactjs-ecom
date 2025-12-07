@@ -1,5 +1,7 @@
 import bcrypt from "bcryptjs";
 
+import { API_BASE_URL } from "../constants";
+
 export interface LoginResponse {
   access_token: string;
   id_token: string;
@@ -16,7 +18,7 @@ const hashPassword = async (password: string): Promise<string> => {
 
 export const login = async (email: string, password: string): Promise<LoginResponse> => {
   const hashedPassword = await hashPassword(password);
-  const response = await fetch("https://gms-serverless.vercel.app/api/auth/login", {
+  const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -34,7 +36,7 @@ export const login = async (email: string, password: string): Promise<LoginRespo
 
 export const register = async (email: string, password: string): Promise<void> => {
   const hashedPassword = await hashPassword(password);
-  const response = await fetch("https://gms-serverless.vercel.app/api/auth/signup", {
+  const response = await fetch(`${API_BASE_URL}/auth/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
