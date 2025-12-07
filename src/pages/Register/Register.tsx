@@ -1,12 +1,32 @@
 import { useState } from "react";
 import logo from "./.././../logo.svg"; // Make sure this path matches your logo file
 import "./Register.css";
-import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { useNavigate, Link } from "react-router-dom";
+import { Button, CircularProgress, Alert } from "@mui/material";
+import { register } from "../../services/authService";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const handleSubmit = () => {};
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email && password) {
+      setLoading(true);
+      setError(null);
+      try {
+        await register(email, password);
+        navigate("/login");
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
 
   return (
     <div className="login-container">
@@ -27,6 +47,7 @@ const Register = () => {
             <h2>GMS</h2>
           </Link>
           <p>Register to join GMS</p>
+          {error && <Alert severity="error" sx={{ mt: 2, width: '100%' }}>{error}</Alert>}
         </div>
 
         <div className="form-group">
@@ -36,6 +57,17 @@ const Register = () => {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
@@ -51,8 +83,9 @@ const Register = () => {
             minHeight: "24px", // or even 24px if you want ultra-compact
             lineHeight: 1,
           }}
+          disabled={loading}
         >
-          Register
+          {loading ? <CircularProgress size={24} color="inherit" /> : "Register"}
         </Button>
 
         <div className="login-links">
@@ -60,7 +93,7 @@ const Register = () => {
           <Link to="/login"> Login here</Link>
         </div>
       </form>
-    </div>
+    </div >
   );
 };
 

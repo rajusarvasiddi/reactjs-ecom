@@ -31,3 +31,19 @@ export const login = async (email: string, password: string): Promise<LoginRespo
 
   return response.json();
 };
+
+export const register = async (email: string, password: string): Promise<void> => {
+  const hashedPassword = await hashPassword(password);
+  const response = await fetch("https://gms-serverless.vercel.app/api/auth/signup", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password: hashedPassword }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || "Registration failed");
+  }
+};
