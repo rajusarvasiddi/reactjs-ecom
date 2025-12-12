@@ -74,9 +74,9 @@ const GarageList = () => {
               Retry
             </Button>
           ) : (
-            companies.map((c) => (
+            companies.map((c: any) => (
               <Box
-                key={c.id}
+                key={c._id}
                 sx={{
                   p: 1,
                   borderBottom: "1px solid #FCFAFA",

@@ -10,13 +10,13 @@ const hashPassword = async (password: string): Promise<string> => {
 };
 
 export const login = async (email: string, password: string): Promise<void> => {
-  const hashedPassword = await hashPassword(password);
-  await api.post("/auth/login", { email, password: hashedPassword });
+  // const hashedPassword = await hashPassword(password);
+  await api.post("/auth/login", { email, password: password });
 };
 
 export const register = async (email: string, password: string): Promise<void> => {
-  const hashedPassword = await hashPassword(password);
-  await api.post("/auth/signup", { email, password: hashedPassword });
+  // const hashedPassword = await hashPassword(password);
+  await api.post("/auth/signup", { email, password: password });
 };
 
 export const logout = async (): Promise<void> => {

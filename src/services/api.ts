@@ -16,8 +16,19 @@ api.interceptors.response.use(
     async (error) => {
         const originalRequest = error.config;
 
+
+        // Ignore refresh for these routes
+        const skipRefresh =
+            originalRequest.url?.includes("/auth/login") ||
+            originalRequest.url?.includes("/auth/signup") ||
+            originalRequest.url?.includes("/auth/logout");
+
+        if (skipRefresh) {
+            return Promise.reject(error);
+        }
+
         // If 401 Unauthorized and not already retrying
-        if (error.response?.status === 401 && !originalRequest._retry) {
+        if (error.response?.status === 401 && !originalRequest._retry && !skipRefresh) {
             originalRequest._retry = true;
 
             try {

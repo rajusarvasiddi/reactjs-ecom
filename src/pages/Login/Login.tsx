@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
 import logo from "./.././../logo.svg"; // Make sure this path matches your logo file
 import { Button, CircularProgress, Alert } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../services/authService";
-import { loginStart, loginSuccess, loginFailure } from "../../store/authSlice";
+import { loginStart, loginSuccess, loginFailure, clearError } from "../../store/authSlice";
 import { RootState } from "../../store/store";
 
 const Login = () => {
@@ -14,6 +14,10 @@ const Login = () => {
   const { loading, error } = useSelector((state: RootState) => state.auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
