@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { COUNTRIES_LIST } from "../../constants";
 import axios from "axios";
+import api from "../../services/api";
 
 interface Country {
   code: string;
@@ -10,14 +11,13 @@ interface Country {
 export const useCountries = () => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   const fetchCountries = useCallback(async () => {
-    setLoading(true);
-    setError("");
-
     try {
-      const response = await axios.get(COUNTRIES_LIST);
+      setLoading(true);
+      setError(null);
+      const response = await api.get<Country[]>("/countries");
       setCountries(response.data);
     } catch (error) {
       console.log("Unable to fetch countries: ", error);

@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from "../../services/api";
 import { useCallback, useEffect, useState } from "react";
 import { BUSINESS_DOCUMENTS_LIST } from "../../constants";
 
@@ -10,14 +11,14 @@ export interface DocumentType {
 export const useBusinessDocumentTypes = () => {
   const [documentTypes, setDocumentTypes] = useState<DocumentType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   const fetchDocumentTypes = useCallback(async () => {
     setLoading(true);
-    setError("");
+    setError(null);
 
     try {
-      const response = await axios.get(BUSINESS_DOCUMENTS_LIST);
+      const response = await api.get<DocumentType[]>("/documents");
       setDocumentTypes(response.data);
     } catch (error) {
       console.log("Unable to fetch document types: ", error);

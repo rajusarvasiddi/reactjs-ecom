@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from "../../services/api";
 import { COMPANIES_LIST } from "../../constants";
 import { useCallback, useEffect, useState } from "react";
 
@@ -15,7 +16,7 @@ export const useCompanies = () => {
   const fetchCompanies = useCallback(async () => {
     try {
       setError(null);
-      const response = await axios.get<Company[]>(COMPANIES_LIST);
+      const response = await api.get<Company[]>("/companies");
       setCompanies(response.data);
     } catch (err: any) {
       const message =
