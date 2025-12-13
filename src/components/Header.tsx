@@ -6,13 +6,11 @@ import {
   Badge,
   Box,
   Divider,
-  FormControl,
+
   IconButton,
   ListItemIcon,
   Menu,
   MenuItem,
-  Select,
-  SelectChangeEvent,
   TextField,
   Toolbar,
   Tooltip,
@@ -30,7 +28,6 @@ import {
 } from "react-router-dom";
 import { toggleSidebar } from "../store/sidebarSlice";
 import { RootState } from "../store/store";
-import { setRole } from "store/roleSlice";
 import { logout as logoutAction } from "../store/authSlice";
 import { logout as logoutService } from "../services/authService";
 
@@ -71,13 +68,6 @@ const Header: React.FC = () => {
 
   const currentRole =
     useSelector((state: RootState) => state.role.role) || "admin";
-  const handleRoleChange = (event: SelectChangeEvent) => {
-    const selectedRole = event?.target?.value as
-      | "admin"
-      | "garageOwner"
-      | "mechanic";
-    dispatch(setRole(selectedRole));
-  };
   // setRole(event.target.value as string);
 
   const navLinks: any[] = [
@@ -144,29 +134,21 @@ const Header: React.FC = () => {
           />
 
           {/* Role (Desktop only) */}
-          <FormControl
-            variant="outlined"
-            size="small"
+          <Box
             sx={{
               display: isMobile ? "none" : "flex",
-              minWidth: 120,
-              background: "#fff",
+              alignItems: "center",
+              background: "#f5f5f5",
+              px: 2,
+              py: 0.5,
               borderRadius: 1,
+              border: "1px solid #e0e0e0",
             }}
           >
-            <Select
-              value={currentRole || ""}
-              onChange={handleRoleChange}
-              size="small"
-            >
-              <MenuItem value="" disabled>
-                Select Role
-              </MenuItem>
-              <MenuItem value="admin">Admin</MenuItem>
-              <MenuItem value="garageOwner">Garage Owner</MenuItem>
-              <MenuItem value="mechanic">Mechanic</MenuItem>
-            </Select>
-          </FormControl>
+            <Typography variant="body2" sx={{ fontWeight: 500, color: "#333", textTransform: "capitalize" }}>
+              {currentRole?.replace("-", " ")}
+            </Typography>
+          </Box>
 
           {/* Notifications (always visible) */}
           <Badge color="error" badgeContent={cartCount} sx={{ ml: 1 }}>
