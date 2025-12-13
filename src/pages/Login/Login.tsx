@@ -58,7 +58,14 @@ const Login = () => {
       dispatch(loginStart());
       try {
         const data: any = await login(email, password);
-        dispatch(loginSuccess(data.access_token));
+        dispatch(loginSuccess({
+          token: data.access_token,
+          user: {
+            firstName: data.user.firstName,
+            lastName: data.user.lastName,
+            email: data.user.email
+          }
+        }));
         if (data?.user?.role) {
           dispatch(setRole(data.user.role));
         }

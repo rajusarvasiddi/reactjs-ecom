@@ -41,6 +41,7 @@ const Header: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const dispatch = useDispatch();
+  const { user } = useSelector((state: RootState) => state.auth);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -158,7 +159,9 @@ const Header: React.FC = () => {
           {/* Avatar */}
           <Tooltip title="Account settings">
             <IconButton onClick={handleClick} size="small" sx={{ ml: 1 }}>
-              <Avatar sx={{ width: 32, height: 32 }}>MK</Avatar>
+              <Avatar sx={{ width: 32, height: 32, fontSize: 14 }}>
+                {user ? `${user.firstName?.charAt(0) || ""}${user.lastName?.charAt(0) || ""}`.toUpperCase() : "MK"}
+              </Avatar>
             </IconButton>
           </Tooltip>
 

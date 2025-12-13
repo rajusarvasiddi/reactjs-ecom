@@ -23,6 +23,12 @@ type AuthState = {
   isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
+  token: string | null;
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string;
+  } | null;
 };
 type PersistedState = {
   cart: CartState;
