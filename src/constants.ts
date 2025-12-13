@@ -1,6 +1,12 @@
 export const SITE_URL = "https://www.ecom.com";
-export const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "https://reactjs-ecom-opal.vercel.app/api";
+
+
+const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+export const API_BASE_URL = isLocal
+  ? "http://localhost:4000/api"
+  : "https://gms-serverless.vercel.app/api";
+// export const API_BASE_URL = "https://gms-serverless.vercel.app/api";
+
 console.log("Current API_BASE_URL:", API_BASE_URL);
 export const SITE_TITLE = "eCom";
 export const PORTAL_TITLE = "GMS";
