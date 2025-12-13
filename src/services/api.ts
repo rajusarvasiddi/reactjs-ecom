@@ -20,7 +20,7 @@ api.interceptors.response.use(
         // Ignore refresh for these routes
         const skipRefresh =
             originalRequest.url?.includes("/auth/login") ||
-            originalRequest.url?.includes("/auth/signup") ||
+            originalRequest.url?.includes("/auth/register") ||
             originalRequest.url?.includes("/auth/logout");
 
         if (skipRefresh) {

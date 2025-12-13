@@ -1,7 +1,10 @@
 // src/App.tsx
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import PrivateRoute from "./routes/PrivateRoute";
+import { RootState } from "./store/store";
+
 const PublicLayout = lazy(() => import("./components/PublicLayout"));
 const PrivateLayout = lazy(() => import("./components/PrivateLayout"));
 // Lazy-loaded pages
@@ -32,10 +35,9 @@ const JobCardsList = lazy(
 );
 const Register = lazy(() => import("./pages/Register/Register"));
 
-// Mock auth check
-const isAuthenticated = true;
-
 function App() {
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
@@ -52,7 +54,7 @@ function App() {
         <Route
           path="/admin/*"
           element={
-            <PrivateRoute isAuthenticated={isAuthenticated}>
+            <PrivateRoute isAuthenticated={isAuthenticated} allowedRoles={['admin']}>
               <PrivateLayout />
             </PrivateRoute>
           }

@@ -6,6 +6,7 @@ import { Button, CircularProgress, Alert } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../services/authService";
 import { loginStart, loginSuccess, loginFailure, clearError } from "../../store/authSlice";
+import { setRole } from "../../store/roleSlice";
 import { RootState } from "../../store/store";
 
 const Login = () => {
@@ -53,8 +54,11 @@ const Login = () => {
     if (email && password) {
       dispatch(loginStart());
       try {
-        await login(email, password);
+        const data: any = await login(email, password);
         dispatch(loginSuccess());
+        if (data?.user?.role) {
+          dispatch(setRole(data.user.role));
+        }
         setFailedAttempts(0);
         setLockoutEndTime(null);
         navigate("/admin/dashboard");
