@@ -15,25 +15,23 @@ type SidebarState = {
   sidebarOpen: boolean;
 };
 
-type RoleState = {
-  role: "admin" | "garage-owner" | "customer" | null;
-};
+
 
 type AuthState = {
   isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
-  token: string | null;
   user: {
     firstName: string;
     lastName: string;
     email: string;
+    role: "admin" | "garage-owner" | "customer";
   } | null;
 };
 type PersistedState = {
   cart: CartState;
   sidebar: SidebarState;
-  role: RoleState;
+
   auth: AuthState;
 };
 

@@ -67,8 +67,7 @@ const Header: React.FC = () => {
 
   // const [role, setRole] = useState("admin");
 
-  const currentRole =
-    useSelector((state: RootState) => state.role.role) || "admin";
+  const currentRole = user?.role || "admin";
   // setRole(event.target.value as string);
 
   const navLinks: any[] = [

@@ -14,7 +14,8 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
   isAuthenticated,
   allowedRoles,
 }) => {
-  const { role } = useSelector((state: RootState) => state.role);
+  const { user } = useSelector((state: RootState) => state.auth);
+  const role = user?.role;
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;

@@ -68,7 +68,8 @@ const Sidebar: React.FC = () => {
   const mobileOpen = useSelector(
     (state: RootState) => state.sidebar.sidebarOpen
   );
-  const role = useSelector((state: RootState) => state.role.role);
+  const { user } = useSelector((state: RootState) => state.auth);
+  const role = user?.role;
 
   const filteredNavItems = navItems.filter((group) =>
     group.roles ? group.roles.includes(role || "") : true

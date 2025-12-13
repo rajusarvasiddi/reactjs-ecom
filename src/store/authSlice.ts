@@ -4,6 +4,7 @@ interface User {
     firstName: string;
     lastName: string;
     email: string;
+    role: "admin" | "garage-owner" | "customer";
 }
 
 interface AuthState {
@@ -44,6 +45,11 @@ const authSlice = createSlice({
             state.token = null;
             state.user = null;
         },
+        refreshTokenSuccess: (state, action: PayloadAction<string>) => {
+            state.token = action.payload;
+            state.isAuthenticated = true;
+            state.error = null;
+        },
         logout: (state) => {
             state.isAuthenticated = false;
             state.error = null;
@@ -56,5 +62,5 @@ const authSlice = createSlice({
     },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout, clearError } = authSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, logout, clearError, refreshTokenSuccess } = authSlice.actions;
 export default authSlice.reducer;

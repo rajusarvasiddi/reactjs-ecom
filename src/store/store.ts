@@ -2,7 +2,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import cartReducer from "./cartSlice";
 import sidebarReducer from "./sidebarSlice";
-import roleReducer from "./roleSlice";
+
 import authReducer from "./authSlice";
 import { replaceCart } from "../store/cartSlice";
 import { loadState, saveState } from "./localStorage";
@@ -10,7 +10,7 @@ import { loadState, saveState } from "./localStorage";
 const rootReducer = combineReducers({
   cart: cartReducer,
   sidebar: sidebarReducer,
-  role: roleReducer,
+
   auth: authReducer,
 });
 
@@ -31,8 +31,8 @@ store.subscribe(() => {
       saveState({
         cart: store.getState().cart,
         sidebar: store.getState().sidebar,
-        role: store.getState().role,
-        auth: store.getState().auth,
+
+        auth: (({ token, ...rest }) => rest)(store.getState().auth),
       }),
     DEBOUNCE_DELAY
   );

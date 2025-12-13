@@ -1,7 +1,7 @@
-export const SITE_URL = "https://www.ecom.com";
-export const API_BASE_URL = "https://gms-serverless.vercel.app/api";
-export const SITE_TITLE = "eCom";
-export const PORTAL_TITLE = "GMS";
+export const SITE_URL = process.env.REACT_APP_SITE_URL || "https://www.ecom.com";
+export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:3000/api";
+export const SITE_TITLE = process.env.REACT_APP_SITE_TITLE || "eCom";
+export const PORTAL_TITLE = process.env.REACT_APP_PORTAL_TITLE || "GMS";
 export const TOTAL_NO_OF_PAGES = 14;
 export const PRODUCTS_LIST = "https://dummyjson.com/products";
 export const COUNTRIES_LIST = `${API_BASE_URL}/countries`;

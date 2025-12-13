@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_BASE_URL } from "../constants";
 import { store } from "../store/store";
-import { logout } from "../store/authSlice";
+import { logout, refreshTokenSuccess } from "../store/authSlice";
 
 const api = axios.create({
     baseURL: API_BASE_URL,
@@ -47,7 +47,8 @@ api.interceptors.response.use(
 
             try {
                 // Attempt to refresh token
-                await api.post("/auth/refresh");
+                const { data } = await api.post("/auth/refresh");
+                store.dispatch(refreshTokenSuccess(data.access_token));
 
                 // Retry original request
                 return api(originalRequest);

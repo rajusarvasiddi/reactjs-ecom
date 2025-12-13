@@ -6,7 +6,6 @@ import { Button, CircularProgress, Alert } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../services/authService";
 import { loginStart, loginSuccess, loginFailure, clearError } from "../../store/authSlice";
-import { setRole } from "../../store/roleSlice";
 import { RootState } from "../../store/store";
 
 const Login = () => {
@@ -63,12 +62,10 @@ const Login = () => {
           user: {
             firstName: data.user.firstName,
             lastName: data.user.lastName,
-            email: data.user.email
+            email: data.user.email,
+            role: data.user.role
           }
         }));
-        if (data?.user?.role) {
-          dispatch(setRole(data.user.role));
-        }
         setFailedAttempts(0);
         setLockoutEndTime(null);
         navigate("/app/dashboard");
