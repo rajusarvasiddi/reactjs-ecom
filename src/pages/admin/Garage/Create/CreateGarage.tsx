@@ -1,5 +1,7 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography, Snackbar, Alert } from "@mui/material";
+import { useState } from "react";
 import axios from "axios";
+import api from "../../../../services/api";
 import { Form, Formik } from "formik";
 import { useCountries } from "../../../../shared/hooks/useCountries";
 import { useBusinessDocumentTypes } from "../../../../shared/hooks/useDocumentTypes";
@@ -19,22 +21,41 @@ const GarageCreate = () => {
 
   const { documentTypes, loading, error, retry } = useBusinessDocumentTypes();
 
-  const handleSubmit = async (values: FormValues) => {
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success" as "success" | "error",
+  });
+
+  const handleCloseSnackbar = () => {
+    setSnackbar({ ...snackbar, open: false });
+  };
+
+  const handleSubmit = async (values: FormValues, { resetForm }: any) => {
     console.log("Form submitted : ", values);
     try {
       const payload = {
         ...values,
         documents: {},
       };
-      const response = await axios.post(
-        "https://dummyjson.com/posts/add",
+      const response = await api.post(
+        "/garages",
         payload
       );
       console.log("Server response:", response.data);
-      alert("Garage created successfully!");
+      setSnackbar({
+        open: true,
+        message: "Garage created successfully!",
+        severity: "success",
+      });
+      resetForm();
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("Failed to create garage. Please try again.");
+      setSnackbar({
+        open: true,
+        message: "Failed to create garage. Please try again.",
+        severity: "error",
+      });
     }
   };
 
@@ -198,6 +219,20 @@ const GarageCreate = () => {
           </Form>
         )}
       </Formik>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </>
   );
 };

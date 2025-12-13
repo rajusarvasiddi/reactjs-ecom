@@ -21,7 +21,7 @@ interface Company {
 const GarageList = () => {
   const [age, setAge] = useState("");
   // const dispatch = useDispatch();
-  const currentRole = useSelector((state: any) => state.role.role);
+  const currentRole = useSelector((state: any) => state.auth.user?.role);
   const { companies, error, retry } = useCompanies() as {
     companies: Company[];
     error: string | null;
