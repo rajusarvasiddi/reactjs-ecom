@@ -12,6 +12,7 @@ const Login = lazy(() => import("./pages/Login/Login"));
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
+const CreateUser = lazy(() => import("./pages/admin/User/Create/CreateUser"));
 const JobCard = lazy(() => import("./pages/JobCard/Create/JobCard"));
 const GarageCreate = lazy(
   () => import("./pages/admin/Garage/Create/CreateGarage")
@@ -52,18 +53,26 @@ function App() {
 
         {/* Protected routes */}
         <Route
-          path="/admin/*"
+          path="/app/*"
           element={
-            <PrivateRoute isAuthenticated={isAuthenticated} allowedRoles={['admin']}>
+            <PrivateRoute isAuthenticated={isAuthenticated}>
               <PrivateLayout />
             </PrivateRoute>
           }
         >
           <Route path="my-account/*" element={<MyAccount />} />
+          <Route
+            path="create-user"
+            element={
+              <PrivateRoute isAuthenticated={isAuthenticated} allowedRoles={['admin']}>
+                <CreateUser />
+              </PrivateRoute>
+            }
+          />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="garage-create" element={<GarageCreate />} />
           <Route path="garage-list" element={<GarageList />} />
-          <Route path="mechanic-create" element={<MechanicCreate />}></Route>
+          <Route path="mechanic-create" element={<MechanicCreate />} />
           <Route path="mechanics" element={<MechanicList />} />
           <Route path="create-job-cards" element={<JobCard />} />
           <Route path="job-cards" element={<JobCardsList />} />

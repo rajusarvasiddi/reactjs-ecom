@@ -12,7 +12,7 @@ import { RootState } from "../../store/store";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state: RootState) => state.auth);
+  const { loading, error, isAuthenticated } = useSelector((state: RootState) => state.auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,8 +22,11 @@ const Login = () => {
   const [remainingTime, setRemainingTime] = useState(0);
 
   useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/app/dashboard", { replace: true });
+    }
     dispatch(clearError());
-  }, [dispatch]);
+  }, [dispatch, isAuthenticated, navigate]);
 
   // Countdown timer for lockout
   useEffect(() => {
@@ -55,13 +58,13 @@ const Login = () => {
       dispatch(loginStart());
       try {
         const data: any = await login(email, password);
-        dispatch(loginSuccess());
+        dispatch(loginSuccess(data.access_token));
         if (data?.user?.role) {
           dispatch(setRole(data.user.role));
         }
         setFailedAttempts(0);
         setLockoutEndTime(null);
-        navigate("/admin/dashboard");
+        navigate("/app/dashboard");
       } catch (err: any) {
         const errorMessage = err.response?.data?.message || err.message || "Login failed";
         dispatch(loginFailure(errorMessage));
@@ -80,6 +83,10 @@ const Login = () => {
       }
     }
   };
+
+  if (isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="login-container">

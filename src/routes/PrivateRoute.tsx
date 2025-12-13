@@ -21,7 +21,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
   }
 
   if (allowedRoles && role && !allowedRoles.includes(role)) {
-    return <Navigate to="/" replace />; // Redirect to home or unauthorized page
+    return <Navigate to="/app/dashboard" state={{ error: "Access Denied: You do not have permission to view this page." }} replace />;
   }
 
   return <>{children}</>;

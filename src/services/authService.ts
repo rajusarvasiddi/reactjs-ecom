@@ -23,3 +23,7 @@ export const register = async (email: string, password: string): Promise<void> =
 export const logout = async (): Promise<void> => {
   await api.post("/auth/logout");
 };
+
+export const createUser = async (userData: any): Promise<void> => {
+  await api.post("/auth/create-user", userData);
+};

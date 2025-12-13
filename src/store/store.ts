@@ -18,7 +18,7 @@ const preloadedState = loadState() || {};
 
 export const store = configureStore({
   reducer: rootReducer,
-  preloadedState,
+  preloadedState: preloadedState as any,
 });
 
 // Debounce saveState to avoid excessive localStorage writes
