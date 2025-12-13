@@ -1,6 +1,7 @@
 export const SITE_URL = "https://www.ecom.com";
 export const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL || "https://reactjs-ecom-opal.vercel.app/api";
+console.log("Current API_BASE_URL:", API_BASE_URL);
 export const SITE_TITLE = "eCom";
 export const PORTAL_TITLE = "GMS";
 export const TOTAL_NO_OF_PAGES = 14;
