@@ -26,7 +26,8 @@ const Register = () => {
         setEmail("");
         setPassword("");
       } catch (err: any) {
-        setError(err.message);
+        const errorMessage = err.response?.data?.message || err.message || "Registration failed";
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }

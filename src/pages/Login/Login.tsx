@@ -28,7 +28,8 @@ const Login = () => {
         dispatch(loginSuccess());
         navigate("/admin/dashboard");
       } catch (err: any) {
-        dispatch(loginFailure(err.message));
+        const errorMessage = err.response?.data?.message || err.message || "Login failed";
+        dispatch(loginFailure(errorMessage));
       }
     }
   };
