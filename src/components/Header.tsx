@@ -31,6 +31,8 @@ import {
 import { toggleSidebar } from "../store/sidebarSlice";
 import { RootState } from "../store/store";
 import { setRole } from "store/roleSlice";
+import { logout as logoutAction } from "../store/authSlice";
+import { logout as logoutService } from "../services/authService";
 
 // Type-safe NavLink for MuiLink-like usage
 const NavLinkBehavior = React.forwardRef<HTMLAnchorElement, RouterLinkProps>(
@@ -48,7 +50,18 @@ const Header: React.FC = () => {
   const handleClick = (e: React.MouseEvent<HTMLElement>) =>
     setAnchorEl(e.currentTarget);
   const handleClose = () => setAnchorEl(null);
-  const handleLogout = () => navigate("/login");
+
+  const handleLogout = async () => {
+    try {
+      await logoutService();
+    } catch (error) {
+      // Continue with logout even if API call fails
+      console.error("Logout error:", error);
+    } finally {
+      dispatch(logoutAction());
+      navigate("/login");
+    }
+  };
 
   const cartCount = useSelector((state: RootState) =>
     state.cart.items.reduce((sum, item) => sum + item.quantity, 0)

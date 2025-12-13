@@ -15,21 +15,64 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Rate limiting state
+  const [failedAttempts, setFailedAttempts] = useState(0);
+  const [lockoutEndTime, setLockoutEndTime] = useState<number | null>(null);
+  const [remainingTime, setRemainingTime] = useState(0);
+
   useEffect(() => {
     dispatch(clearError());
   }, [dispatch]);
 
+  // Countdown timer for lockout
+  useEffect(() => {
+    if (lockoutEndTime) {
+      const interval = setInterval(() => {
+        const now = Date.now();
+        const remaining = Math.max(0, Math.ceil((lockoutEndTime - now) / 1000));
+        setRemainingTime(remaining);
+
+        if (remaining === 0) {
+          setLockoutEndTime(null);
+          setFailedAttempts(0);
+        }
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }
+  }, [lockoutEndTime]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Check if locked out
+    if (lockoutEndTime && Date.now() < lockoutEndTime) {
+      return;
+    }
+
     if (email && password) {
       dispatch(loginStart());
       try {
         await login(email, password);
         dispatch(loginSuccess());
+        setFailedAttempts(0);
+        setLockoutEndTime(null);
         navigate("/admin/dashboard");
       } catch (err: any) {
         const errorMessage = err.response?.data?.message || err.message || "Login failed";
         dispatch(loginFailure(errorMessage));
+
+        // Rate limiting logic
+        const newAttempts = failedAttempts + 1;
+        setFailedAttempts(newAttempts);
+
+        // Exponential backoff: 30s, 60s, 120s, 300s
+        if (newAttempts >= 3) {
+          const lockoutDuration = Math.min(30 * Math.pow(2, newAttempts - 3), 300) * 1000;
+          setLockoutEndTime(Date.now() + lockoutDuration);
+          // Clear the error from Redux so only lockout warning shows
+          dispatch(clearError());
+        }
       }
     }
   };
@@ -54,6 +97,11 @@ const Login = () => {
           </Link>
           <p>Please login to continue</p>
           {error && <Alert severity="error" sx={{ mt: 2, width: '100%' }}>{error}</Alert>}
+          {lockoutEndTime && remainingTime > 0 && (
+            <Alert severity="warning" sx={{ mt: 2, width: '100%' }}>
+              Too many failed attempts. Please wait {remainingTime} seconds.
+            </Alert>
+          )}
         </div>
 
         <div className="form-group">
@@ -90,7 +138,7 @@ const Login = () => {
             minHeight: "24px", // or even 24px if you want ultra-compact
             lineHeight: 1,
           }}
-          disabled={loading}
+          disabled={loading || (lockoutEndTime !== null && remainingTime > 0)}
         >
           {loading ? <CircularProgress size={24} color="inherit" /> : "Login"}
         </Button>
