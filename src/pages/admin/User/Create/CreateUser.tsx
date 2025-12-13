@@ -113,8 +113,8 @@ const CreateUser = () => {
                                 onChange={handleChange}
                             >
                                 <MenuItem value="admin">Admin</MenuItem>
-                                <MenuItem value="editor">Editor</MenuItem>
-                                <MenuItem value="viewer">Viewer</MenuItem>
+                                <MenuItem value="garage-owner">Garage Owner</MenuItem>
+                                <MenuItem value="customer">Customer</MenuItem>
                             </Select>
                         </FormControl>
                         <Button

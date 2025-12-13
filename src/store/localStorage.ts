@@ -16,7 +16,7 @@ type SidebarState = {
 };
 
 type RoleState = {
-  role: "admin" | "mechanic" | "customer" | null | null;
+  role: "admin" | "garage-owner" | "customer" | null;
 };
 
 type AuthState = {

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface RoleState {
-  role: "admin" | "mechanic" | "customer" | null;
+  role: "admin" | "garage-owner" | "customer" | null;
 }
 
 const initialState: RoleState = {

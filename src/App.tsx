@@ -64,8 +64,8 @@ function App() {
           <Route
             path="create-user"
             element={
-              <PrivateRoute isAuthenticated={isAuthenticated} allowedRoles={['admin']}>
-                <CreateUser />
+              <PrivateRoute isAuthenticated={isAuthenticated} allowedRoles={['admin', 'garage-owner']}>
+                <MechanicList />
               </PrivateRoute>
             }
           />
