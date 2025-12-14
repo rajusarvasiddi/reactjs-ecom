@@ -16,6 +16,7 @@ import { NavLink } from "react-router-dom";
 import { WORDS } from "../constants";
 import { RootState } from "../store/store";
 import { closeSidebar } from "../store/sidebarSlice";
+import { useSnackbar } from "../context/SnackbarContext";
 
 const drawerWidth = 220;
 
@@ -66,8 +67,10 @@ const Sidebar: React.FC = () => {
     (state: RootState) => state.sidebar.sidebarOpen
   );
   const { user } = useSelector((state: RootState) => state.auth);
+  const { showSnackbar } = useSnackbar();
   const role = user?.role;
 
+  // Filter items based on role
   const filteredNavItems = navItems.filter((group) =>
     group.roles ? group.roles.includes(role || "") : true
   );
@@ -104,7 +107,15 @@ const Sidebar: React.FC = () => {
                   <NavLink
                     to={item.path}
                     style={{ textDecoration: "none", width: "100%" }}
-                    onClick={() => {
+                    onClick={(e) => {
+                      const isAllowed = group.roles ? group.roles.includes(role || "") : true;
+
+                      if (!isAllowed) {
+                        e.preventDefault();
+                        showSnackbar(`Access Denied: You don't have permission to view ${item.label}`, "error");
+                        return;
+                      }
+
                       if (isMobile) {
                         dispatch(closeSidebar());
                       }

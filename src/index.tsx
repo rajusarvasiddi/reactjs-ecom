@@ -11,6 +11,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 // import reportWebVitals from './reportWebVitals';
 
+import { SnackbarProvider } from "./context/SnackbarContext";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -22,7 +24,9 @@ root.render(
           <Analytics />
           <SpeedInsights />
           <CssBaseline />
-          <App />
+          <SnackbarProvider>
+            <App />
+          </SnackbarProvider>
         </ThemeProvider>
       </Provider>
     </BrowserRouter>
